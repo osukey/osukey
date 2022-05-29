@@ -3,9 +3,9 @@
 
 using Newtonsoft.Json;
 using NUnit.Framework;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 
-namespace osu.Game.Tournament.Tests.NonVisual
+namespace osu.Game.Misskey.Tests.NonVisual
 {
     [TestFixture]
     public class LadderInfoSerialisationTest

@@ -4,10 +4,10 @@
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Graphics;
-using osu.Game.Tournament.Screens.Gameplay.Components;
+using osu.Game.Misskey.Screens.Gameplay.Components;
 using osuTK;
 
-namespace osu.Game.Tournament.Tests.Components
+namespace osu.Game.Misskey.Tests.Components
 {
     public class TestSceneMatchHeader : TournamentTestScene
     {

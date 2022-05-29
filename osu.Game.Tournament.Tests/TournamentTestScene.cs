@@ -10,13 +10,13 @@ using osu.Framework.Utils;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Rulesets;
 using osu.Game.Tests.Visual;
-using osu.Game.Tournament.IO;
-using osu.Game.Tournament.IPC;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.IO;
+using osu.Game.Misskey.IPC;
+using osu.Game.Misskey.Models;
 using osu.Game.Users;
 using APIUser = osu.Game.Online.API.Requests.Responses.APIUser;
 
-namespace osu.Game.Tournament.Tests
+namespace osu.Game.Misskey.Tests
 {
     public abstract class TournamentTestScene : OsuTestScene
     {

@@ -2,10 +2,10 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using osu.Framework.Allocation;
-using osu.Game.Tournament.Models;
-using osu.Game.Tournament.Screens.Editors;
+using osu.Game.Misskey.Models;
+using osu.Game.Misskey.Screens.Editors;
 
-namespace osu.Game.Tournament.Tests.Screens
+namespace osu.Game.Misskey.Tests.Screens
 {
     public class TestSceneSeedingEditorScreen : TournamentTestScene
     {

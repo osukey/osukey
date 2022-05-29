@@ -12,7 +12,7 @@ using osu.Framework.Platform;
 using osu.Game.Rulesets;
 using osu.Game.Tests;
 
-namespace osu.Game.Tournament.Tests.NonVisual
+namespace osu.Game.Misskey.Tests.NonVisual
 {
     public class DataLoadTest : TournamentHostTest
     {

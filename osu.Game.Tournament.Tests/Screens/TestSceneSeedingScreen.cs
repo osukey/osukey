@@ -6,11 +6,11 @@ using NUnit.Framework;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Testing;
-using osu.Game.Tournament.Models;
-using osu.Game.Tournament.Screens.Ladder.Components;
-using osu.Game.Tournament.Screens.TeamIntro;
+using osu.Game.Misskey.Models;
+using osu.Game.Misskey.Screens.Ladder.Components;
+using osu.Game.Misskey.Screens.TeamIntro;
 
-namespace osu.Game.Tournament.Tests.Screens
+namespace osu.Game.Misskey.Tests.Screens
 {
     public class TestSceneSeedingScreen : TournamentTestScene
     {

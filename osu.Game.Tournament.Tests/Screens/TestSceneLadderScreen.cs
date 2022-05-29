@@ -4,9 +4,9 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Game.Graphics.Cursor;
-using osu.Game.Tournament.Screens.Ladder;
+using osu.Game.Misskey.Screens.Ladder;
 
-namespace osu.Game.Tournament.Tests.Screens
+namespace osu.Game.Misskey.Tests.Screens
 {
     public class TestSceneLadderScreen : TournamentTestScene
     {

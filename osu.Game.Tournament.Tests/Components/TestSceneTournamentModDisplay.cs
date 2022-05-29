@@ -8,10 +8,10 @@ using osu.Game.Online.API;
 using osu.Game.Online.API.Requests;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Rulesets;
-using osu.Game.Tournament.Components;
+using osu.Game.Misskey.Components;
 using osuTK;
 
-namespace osu.Game.Tournament.Tests.Components
+namespace osu.Game.Misskey.Tests.Components
 {
     public class TestSceneTournamentModDisplay : TournamentTestScene
     {

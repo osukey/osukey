@@ -45,10 +45,14 @@ namespace osu.Game.Tests.Visual.Online
             // No need to do anything, fetch is performed automatically.
         }
 
-        private List<APIUser> getUsers() => new List<APIUser>
+        private List<APIUser> getUsers()
         {
-            new APIUser
+
+
+            return new List<APIUser>
             {
+                new APIUser
+                {
                 Username = "flyte",
                 Id = 3103765,
                 IsOnline = true,
@@ -76,6 +80,8 @@ namespace osu.Game.Tests.Visual.Online
                 IsOnline = false,
                 LastVisit = DateTimeOffset.Now
             }
-        };
+            };
+
+        }
     }
 }

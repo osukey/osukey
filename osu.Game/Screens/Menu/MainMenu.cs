@@ -21,6 +21,7 @@ using osu.Game.Overlays;
 using osu.Game.Rulesets;
 using osu.Game.Screens.Backgrounds;
 using osu.Game.Screens.Edit;
+using osu.Game.Screens.Misskey;
 using osu.Game.Screens.OnlinePlay.Multiplayer;
 using osu.Game.Screens.OnlinePlay.Playlists;
 using osu.Game.Screens.Select;
@@ -111,6 +112,7 @@ namespace osu.Game.Screens.Menu
                             OnSolo = loadSoloSongSelect,
                             OnMultiplayer = () => this.Push(new Multiplayer()),
                             OnPlaylists = () => this.Push(new Playlists()),
+                            OnMisskey = () => this.Push(new MisskeyLogin()),
                             OnExit = confirmAndExit,
                         }
                     }

@@ -5,7 +5,7 @@ using osu.Framework.Testing;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Backgrounds;
 
-namespace osu.Game.Tournament.Tests
+namespace osu.Game.Misskey.Tests
 {
     public class TournamentTestBrowser : TournamentGameBase
     {
