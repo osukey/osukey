@@ -16,6 +16,7 @@ using osu.Game.Online.API;
 using osu.Game.Overlays.Settings;
 using osu.Game.Resources.Localisation.Web;
 using osuTK;
+using Realms.Logging;
 
 namespace osu.Game.Overlays.Login
 {
@@ -33,7 +34,8 @@ namespace osu.Game.Overlays.Login
         private void performLogin()
         {
             if (!string.IsNullOrEmpty(username.Text) && !string.IsNullOrEmpty(password.Text))
-                api?.Login(username.Text, password.Text);
+                // api?.Login(username.Text, password.Text);
+                shakeSignIn.Shake();
             else
                 shakeSignIn.Shake();
         }
@@ -96,15 +98,15 @@ namespace osu.Game.Overlays.Login
                         }
                     }
                 },
-                new SettingsButton
-                {
-                    Text = "Register",
-                    Action = () =>
-                    {
-                        RequestHide();
-                        accountCreation.Show();
-                    }
-                }
+                // new SettingsButton
+                // {
+                //     Text = "Register",
+                //     Action = () =>
+                //     {
+                //         RequestHide();
+                //         accountCreation.Show();
+                //     }
+                // }
             };
 
             password.OnCommit += (sender, newText) => performLogin();
