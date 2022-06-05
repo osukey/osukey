@@ -16,7 +16,6 @@ using osu.Game.Online.API;
 using osu.Game.Overlays.Settings;
 using osu.Game.Resources.Localisation.Web;
 using osuTK;
-using Realms.Logging;
 
 namespace osu.Game.Overlays.Login
 {

@@ -2,10 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using osu.Framework.Graphics;
-using osu.Game.Rulesets.Catch;
-using osu.Game.Rulesets.Mania;
 using osu.Game.Rulesets.Osu;
-using osu.Game.Rulesets.Taiko;
 using osu.Framework.Bindables;
 using osu.Game.Overlays;
 using osu.Game.Rulesets;

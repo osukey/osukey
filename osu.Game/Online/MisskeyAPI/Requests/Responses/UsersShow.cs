@@ -4,7 +4,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using JetBrains.Annotations;
 
 namespace osu.Game.Online.MisskeyAPI.Requests.Responses

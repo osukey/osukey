@@ -12,10 +12,7 @@ using osu.Game.Online.API;
 using osu.Game.Online.API.Requests;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Rulesets;
-using osu.Game.Rulesets.Catch;
-using osu.Game.Rulesets.Mania;
 using osu.Game.Rulesets.Osu;
-using osu.Game.Rulesets.Taiko;
 using osu.Game.Tests.Resources;
 using osu.Game.Users;
 

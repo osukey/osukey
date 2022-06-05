@@ -6,8 +6,6 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics;
-using osu.Game.Graphics.Containers;
-using osu.Game.Overlays.Login;
 using osuTK;
 using osuTK.Graphics;
 
