@@ -17,7 +17,7 @@ indent_size = 4
 trim_trailing_whitespace = true
 
 #license header
-file_header_template = Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.\nSee the LICENCE file in the repository root for full licence text.
+file_header_template = Copyright (c) ppy Pty Ltd <contact@ppy.sh>, sim1222 <kokt@sim1222.com>. Licensed under the MIT Licence.\nSee the LICENCE file in the repository root for full licence text.
 
 #Roslyn naming styles
 
@@ -198,4 +198,4 @@ indent_size = 2
 trim_trailing_whitespace = true
 
 dotnet_diagnostic.OLOC001.words_in_name = 5
-dotnet_diagnostic.OLOC001.license_header = // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.\n// See the LICENCE file in the repository root for full licence text.
+dotnet_diagnostic.OLOC001.license_header = // Copyright (c) ppy Pty Ltd <contact@ppy.sh>, sim1222 <kokt@sim1222.com>. Licensed under the MIT Licence.\n// See the LICENCE file in the repository root for full licence text.
