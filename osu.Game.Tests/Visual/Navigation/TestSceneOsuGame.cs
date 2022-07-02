@@ -1,6 +1,8 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
+#nullable disable
+
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -40,7 +42,7 @@ namespace osu.Game.Tests.Visual.Navigation
             typeof(DashboardOverlay),
             typeof(NewsOverlay),
             typeof(ChannelManager),
-            typeof(ChatOverlayV2),
+            typeof(ChatOverlay),
             typeof(SettingsOverlay),
             typeof(UserProfileOverlay),
             typeof(BeatmapSetOverlay),

@@ -12,8 +12,6 @@ using osu.Game.Rulesets;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Osu;
 
-#nullable enable
-
 namespace osu.Desktop.LegacyIpc
 {
     /// <summary>

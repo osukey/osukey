@@ -6,11 +6,11 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Graphics;
 using osu.Game.Online.API.Requests.Responses;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Models;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Misskey.Components
+namespace osu.Game.Tournament.Components
 {
     public class DrawableTeamWithPlayers : CompositeDrawable
     {

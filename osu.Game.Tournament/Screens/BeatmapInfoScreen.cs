@@ -6,10 +6,10 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Game.Beatmaps.Legacy;
 using osu.Game.Online.API.Requests.Responses;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.IPC;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.IPC;
 
-namespace osu.Game.Misskey.Screens
+namespace osu.Game.Tournament.Screens
 {
     public abstract class BeatmapInfoScreen : TournamentMatchScreen
     {

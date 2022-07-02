@@ -1,6 +1,8 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
+#nullable disable
+
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -242,8 +244,6 @@ namespace osu.Game.Overlays.BeatmapSet.Scores
                 modSelector.DeselectAll();
             else
                 getScores();
-
-            modSelector.FadeTo(userIsSupporter ? 1 : 0);
         }
 
         private void getScores()
@@ -260,7 +260,7 @@ namespace osu.Game.Overlays.BeatmapSet.Scores
                 return;
             }
 
-            if (scope.Value != BeatmapLeaderboardScope.Global && !userIsSupporter)
+            if ((scope.Value != BeatmapLeaderboardScope.Global || modSelector.SelectedMods.Count > 0) && !userIsSupporter)
             {
                 Scores = null;
                 notSupporterPlaceholder.Show();

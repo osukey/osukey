@@ -10,16 +10,16 @@ using osu.Framework.Input.Events;
 using osu.Framework.Threading;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Online.API.Requests.Responses;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.IPC;
-using osu.Game.Misskey.Models;
-using osu.Game.Misskey.Screens.Gameplay;
-using osu.Game.Misskey.Screens.Gameplay.Components;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.IPC;
+using osu.Game.Tournament.Models;
+using osu.Game.Tournament.Screens.Gameplay;
+using osu.Game.Tournament.Screens.Gameplay.Components;
 using osuTK;
 using osuTK.Graphics;
 using osuTK.Input;
 
-namespace osu.Game.Misskey.Screens.MapPool
+namespace osu.Game.Tournament.Screens.MapPool
 {
     public class MapPoolScreen : TournamentMatchScreen
     {

@@ -1,7 +1,7 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
-namespace osu.Game.Misskey.Screens.Editors
+namespace osu.Game.Tournament.Screens.Editors
 {
     /// <summary>
     /// Provides a mechanism to access a related model from a representing class.

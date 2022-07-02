@@ -1,6 +1,8 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
+#nullable disable
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,6 @@ using osu.Game.Online.API;
 using osu.Game.Online.API.Requests;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Overlays.Chat.Listing;
-using osu.Game.Overlays.Chat.Tabs;
 
 namespace osu.Game.Online.Chat
 {
@@ -62,8 +63,7 @@ namespace osu.Game.Online.Chat
         /// </summary>
         public IBindableList<Channel> AvailableChannels => availableChannels;
 
-        [Resolved]
-        private IAPIProvider api { get; set; }
+        private readonly IAPIProvider api;
 
         [Resolved]
         private UserLookupCache users { get; set; }
@@ -72,8 +72,9 @@ namespace osu.Game.Online.Chat
 
         private readonly IBindable<bool> isIdle = new BindableBool();
 
-        public ChannelManager()
+        public ChannelManager(IAPIProvider api)
         {
+            this.api = api;
             CurrentChannel.ValueChanged += currentChannelChanged;
         }
 
@@ -134,7 +135,7 @@ namespace osu.Game.Online.Chat
 
         private void currentChannelChanged(ValueChangedEvent<Channel> e)
         {
-            bool isSelectorChannel = e.NewValue is ChannelSelectorTabItem.ChannelSelectorTabChannel || e.NewValue is ChannelListing.ChannelListingChannel;
+            bool isSelectorChannel = e.NewValue is ChannelListing.ChannelListingChannel;
 
             if (!isSelectorChannel)
                 JoinChannel(e.NewValue);

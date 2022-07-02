@@ -7,9 +7,9 @@ using osu.Game.Online.API;
 using osu.Game.Online.API.Requests;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Tests.Visual;
-using osu.Game.Misskey.Components;
+using osu.Game.Tournament.Components;
 
-namespace osu.Game.Misskey.Tests.Components
+namespace osu.Game.Tournament.Tests.Components
 {
     public class TestSceneTournamentBeatmapPanel : TournamentTestScene
     {

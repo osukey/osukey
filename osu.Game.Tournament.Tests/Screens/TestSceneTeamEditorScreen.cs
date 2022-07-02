@@ -1,9 +1,9 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
-using osu.Game.Misskey.Screens.Editors;
+using osu.Game.Tournament.Screens.Editors;
 
-namespace osu.Game.Misskey.Tests.Screens
+namespace osu.Game.Tournament.Tests.Screens
 {
     public class TestSceneTeamEditorScreen : TournamentTestScene
     {
