@@ -10,9 +10,9 @@ using osu.Framework.Allocation;
 using osu.Framework.Platform;
 using osu.Framework.Testing;
 using osu.Game.Tests;
-using osu.Game.Misskey.Configuration;
+using osu.Game.Tournament.Configuration;
 
-namespace osu.Game.Misskey.Tests.NonVisual
+namespace osu.Game.Tournament.Tests.NonVisual
 {
     [TestFixture]
     public class CustomTourneyDirectoryTest : TournamentHostTest

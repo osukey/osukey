@@ -9,10 +9,10 @@ using NUnit.Framework;
 using osu.Framework.Allocation;
 using osu.Framework.Platform;
 using osu.Framework.Testing;
-using osu.Game.Misskey.IO;
-using osu.Game.Misskey.IPC;
+using osu.Game.Tournament.IO;
+using osu.Game.Tournament.IPC;
 
-namespace osu.Game.Misskey.Tests.NonVisual
+namespace osu.Game.Tournament.Tests.NonVisual
 {
     [TestFixture]
     public class IPCLocationTest : TournamentHostTest

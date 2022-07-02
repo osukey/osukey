@@ -19,11 +19,11 @@ using osu.Framework.Platform;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Cursor;
 using osu.Game.Graphics.UserInterface;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Models;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Misskey
+namespace osu.Game.Tournament
 {
     public class TournamentGame : TournamentGameBase
     {
@@ -137,7 +137,7 @@ namespace osu.Game.Misskey
                         heightWarning.Alpha = size.NewValue.Width < minWidth ? 1 : 0;
                     }), true);
 
-                    windowMode.BindValueChanged(mode => ScheduleAfterChildren(() =>
+                    windowMode.BindValueChanged(_ => ScheduleAfterChildren(() =>
                     {
                         windowMode.Value = WindowMode.Windowed;
                     }), true);

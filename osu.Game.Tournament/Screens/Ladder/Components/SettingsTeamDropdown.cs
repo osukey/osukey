@@ -9,9 +9,9 @@ using System.Linq;
 using osu.Framework.Bindables;
 using osu.Framework.Extensions.IEnumerableExtensions;
 using osu.Game.Overlays.Settings;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Models;
 
-namespace osu.Game.Misskey.Screens.Ladder.Components
+namespace osu.Game.Tournament.Screens.Ladder.Components
 {
     public class SettingsTeamDropdown : SettingsDropdown<TournamentTeam>
     {

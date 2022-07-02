@@ -8,7 +8,7 @@ using osu.Framework.Graphics;
 using osu.Game.Beatmaps.Legacy;
 using osu.Game.Tournament.Models;
 
-namespace osu.Game.Misskey.IPC
+namespace osu.Game.Tournament.IPC
 {
     public class MatchIPCInfo : Component
     {

@@ -5,7 +5,7 @@
 
 using osu.Framework.Bindables;
 
-namespace osu.Game.Misskey.Models
+namespace osu.Game.Tournament.Models
 {
     public class LadderEditorInfo
     {

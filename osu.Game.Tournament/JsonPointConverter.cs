@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using Newtonsoft.Json;
 
-namespace osu.Game.Misskey
+namespace osu.Game.Tournament
 {
     /// <summary>
     /// We made a change from using SixLabors.ImageSharp.Point to System.Drawing.Point at some stage.

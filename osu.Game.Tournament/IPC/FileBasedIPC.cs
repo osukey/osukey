@@ -18,9 +18,9 @@ using osu.Game.Online.API;
 using osu.Game.Online.API.Requests;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Rulesets;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Models;
 
-namespace osu.Game.Misskey.IPC
+namespace osu.Game.Tournament.IPC
 {
     public class FileBasedIPC : MatchIPCInfo
     {

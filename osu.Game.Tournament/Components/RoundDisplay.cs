@@ -6,9 +6,9 @@
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Graphics;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Models;
 
-namespace osu.Game.Misskey.Components
+namespace osu.Game.Tournament.Components
 {
     public class RoundDisplay : CompositeDrawable
     {

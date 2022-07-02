@@ -17,12 +17,14 @@ using osu.Framework.Threading;
 using osu.Framework.Utils;
 using osu.Game.Graphics.Sprites;
 using osu.Game.Rulesets.Judgements;
+using osu.Game.Rulesets.Mania.Scoring;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Osu;
 using osu.Game.Rulesets.Osu.Objects;
 using osu.Game.Rulesets.Osu.Scoring;
 using osu.Game.Rulesets.Scoring;
+using osu.Game.Rulesets.Taiko.Scoring;
 using osu.Game.Rulesets.UI;
 using osu.Game.Scoring;
 using osu.Game.Screens.Play.HUD.HitErrorMeters;
@@ -271,14 +273,14 @@ namespace osu.Game.Tests.Visual.Gameplay
 
             public override event Action<JudgementResult> NewResult
             {
-                add => throw new InvalidOperationException();
-                remove => throw new InvalidOperationException();
+                add => throw new InvalidOperationException($"{nameof(NewResult)} operations not supported in test context");
+                remove => throw new InvalidOperationException($"{nameof(NewResult)} operations not supported in test context");
             }
 
             public override event Action<JudgementResult> RevertResult
             {
-                add => throw new InvalidOperationException();
-                remove => throw new InvalidOperationException();
+                add => throw new InvalidOperationException($"{nameof(RevertResult)} operations not supported in test context");
+                remove => throw new InvalidOperationException($"{nameof(RevertResult)} operations not supported in test context");
             }
 
             public override Playfield Playfield { get; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using osu.Framework.Platform;
 
-namespace osu.Game.Misskey.Tests.NonVisual
+namespace osu.Game.Tournament.Tests.NonVisual
 {
     public abstract class TournamentHostTest
     {

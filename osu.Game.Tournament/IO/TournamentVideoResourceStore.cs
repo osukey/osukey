@@ -6,7 +6,7 @@
 using osu.Framework.IO.Stores;
 using osu.Framework.Platform;
 
-namespace osu.Game.Misskey.IO
+namespace osu.Game.Tournament.IO
 {
     public class TournamentVideoResourceStore : NamespacedResourceStore<byte[]>
     {

@@ -5,10 +5,10 @@
 
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.Models;
 
-namespace osu.Game.Misskey.Screens.Gameplay.Components
+namespace osu.Game.Tournament.Screens.Gameplay.Components
 {
     public class MatchRoundDisplay : TournamentSpriteTextWithBackground
     {

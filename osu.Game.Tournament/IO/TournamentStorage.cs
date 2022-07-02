@@ -9,9 +9,9 @@ using osu.Framework.Bindables;
 using osu.Framework.Logging;
 using osu.Framework.Platform;
 using osu.Game.IO;
-using osu.Game.Misskey.Configuration;
+using osu.Game.Tournament.Configuration;
 
-namespace osu.Game.Misskey.IO
+namespace osu.Game.Tournament.IO
 {
     public class TournamentStorage : MigratableStorage
     {

@@ -7,7 +7,7 @@ using System;
 using osu.Framework.Graphics;
 using osu.Game.Graphics.UserInterface;
 
-namespace osu.Game.Misskey.Screens.Setup
+namespace osu.Game.Tournament.Screens.Setup
 {
     internal class ResolutionSelector : ActionableInfo
     {

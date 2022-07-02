@@ -15,14 +15,14 @@ using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Input.Events;
 using osu.Game.Graphics;
 using osu.Game.Graphics.UserInterface;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.Models;
-using osu.Game.Misskey.Screens.Editors;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.Models;
+using osu.Game.Tournament.Screens.Editors;
 using osuTK;
 using osuTK.Graphics;
 using osuTK.Input;
 
-namespace osu.Game.Misskey.Screens.Ladder.Components
+namespace osu.Game.Tournament.Screens.Ladder.Components
 {
     public class DrawableMatchTeam : DrawableTournamentTeam, IHasContextMenu
     {

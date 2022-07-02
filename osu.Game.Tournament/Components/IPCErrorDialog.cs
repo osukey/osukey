@@ -6,7 +6,7 @@
 using osu.Framework.Graphics.Sprites;
 using osu.Game.Overlays.Dialog;
 
-namespace osu.Game.Misskey.Components
+namespace osu.Game.Tournament.Components
 {
     public class IPCErrorDialog : PopupDialog
     {

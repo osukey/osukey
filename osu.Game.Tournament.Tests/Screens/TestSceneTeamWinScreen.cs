@@ -6,9 +6,9 @@
 using System.Linq;
 using NUnit.Framework;
 using osu.Framework.Graphics;
-using osu.Game.Misskey.Screens.TeamWin;
+using osu.Game.Tournament.Screens.TeamWin;
 
-namespace osu.Game.Misskey.Tests.Screens
+namespace osu.Game.Tournament.Tests.Screens
 {
     public class TestSceneTeamWinScreen : TournamentTestScene
     {

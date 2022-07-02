@@ -8,10 +8,10 @@ using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Game.Beatmaps.Legacy;
 using osu.Game.Tests.Visual;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.Models;
 
-namespace osu.Game.Misskey.Tests.Components
+namespace osu.Game.Tournament.Tests.Components
 {
     [TestFixture]
     public class TestSceneSongBar : OsuTestScene

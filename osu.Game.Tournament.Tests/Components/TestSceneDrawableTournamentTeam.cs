@@ -6,13 +6,13 @@
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Game.Tests.Visual;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.Models;
-using osu.Game.Misskey.Screens.Drawings.Components;
-using osu.Game.Misskey.Screens.Gameplay.Components;
-using osu.Game.Misskey.Screens.Ladder.Components;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.Models;
+using osu.Game.Tournament.Screens.Drawings.Components;
+using osu.Game.Tournament.Screens.Gameplay.Components;
+using osu.Game.Tournament.Screens.Ladder.Components;
 
-namespace osu.Game.Misskey.Tests.Components
+namespace osu.Game.Tournament.Tests.Components
 {
     public class TestSceneDrawableTournamentTeam : OsuGridTestScene
     {

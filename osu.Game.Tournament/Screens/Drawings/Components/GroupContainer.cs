@@ -9,10 +9,10 @@ using System.Linq;
 using System.Text;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Models;
 using osuTK;
 
-namespace osu.Game.Misskey.Screens.Drawings.Components
+namespace osu.Game.Tournament.Screens.Drawings.Components
 {
     public class GroupContainer : Container
     {

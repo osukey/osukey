@@ -10,7 +10,7 @@ using osu.Framework.Graphics.Primitives;
 using osu.Framework.Input.Events;
 using osuTK;
 
-namespace osu.Game.Misskey.Screens.Ladder
+namespace osu.Game.Tournament.Screens.Ladder
 {
     public class LadderDragContainer : Container
     {

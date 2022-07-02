@@ -8,7 +8,7 @@ using osu.Framework.Bindables;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Overlays.Settings;
 
-namespace osu.Game.Misskey.Components
+namespace osu.Game.Tournament.Components
 {
     public class DateTextBox : SettingsTextBox
     {
@@ -30,7 +30,7 @@ namespace osu.Game.Misskey.Components
         {
             base.Current = new Bindable<string>(string.Empty);
 
-            ((OsuTextBox)Control).OnCommit += (sender, newText) =>
+            ((OsuTextBox)Control).OnCommit += (sender, _) =>
             {
                 try
                 {

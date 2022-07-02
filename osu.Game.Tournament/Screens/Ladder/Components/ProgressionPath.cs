@@ -8,7 +8,7 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Lines;
 using osuTK;
 
-namespace osu.Game.Misskey.Screens.Ladder.Components
+namespace osu.Game.Tournament.Screens.Ladder.Components
 {
     public class ProgressionPath : Path
     {

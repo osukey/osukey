@@ -4,8 +4,6 @@
 #nullable disable
 
 using System;
-using System.Net.Mime;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using osu.Framework.Allocation;
 using osu.Framework.Extensions.LocalisationExtensions;
 using osu.Framework.Graphics;
@@ -26,7 +24,6 @@ namespace osu.Game.Overlays.Login
 {
     public class LoginForm : FillFlowContainer
     {
-        private TextBox hostname;
         private TextBox username;
         private TextBox password;
         private ShakeContainer shakeSignIn;
@@ -57,12 +54,6 @@ namespace osu.Game.Overlays.Login
 
             Children = new Drawable[]
             {
-                hostname = new OsuTextBox()
-                {
-                    PlaceholderText = "instanceHostName",
-                    RelativeSizeAxes = Axes.X,
-                    TabbableContentContainer = this,
-                },
                 username = new OsuTextBox
                 {
                     PlaceholderText = UsersStrings.LoginUsername.ToLower(),
@@ -109,18 +100,18 @@ namespace osu.Game.Overlays.Login
                         }
                     }
                 },
-                // new SettingsButton
-                // {
-                //     Text = "Register",
-                //     Action = () =>
-                //     {
-                //         RequestHide();
-                //         accountCreation.Show();
-                //     }
-                // }
+                new SettingsButton
+                {
+                    Text = "Register",
+                    Action = () =>
+                    {
+                        RequestHide();
+                        accountCreation.Show();
+                    }
+                }
             };
 
-            password.OnCommit += (sender, newText) => performLogin();
+            password.OnCommit += (_, _) => performLogin();
 
             if (api?.LastLoginError?.Message is string error)
                 errorText.AddErrors(new[] { error });

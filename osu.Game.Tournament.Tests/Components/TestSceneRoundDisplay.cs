@@ -4,10 +4,10 @@
 #nullable disable
 
 using osu.Framework.Graphics;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.Models;
 
-namespace osu.Game.Misskey.Tests.Components
+namespace osu.Game.Tournament.Tests.Components
 {
     public class TestSceneRoundDisplay : TournamentTestScene
     {

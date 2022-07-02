@@ -5,11 +5,11 @@
 
 using NUnit.Framework;
 using osu.Game.Tests.Visual;
-using osu.Game.Misskey.Components;
+using osu.Game.Tournament.Components;
 using osuTK;
 using osuTK.Input;
 
-namespace osu.Game.Misskey.Tests.Components
+namespace osu.Game.Tournament.Tests.Components
 {
     public class TestSceneDateTextBox : OsuManualInputManagerTestScene
     {

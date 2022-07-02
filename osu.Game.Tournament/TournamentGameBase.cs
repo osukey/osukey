@@ -18,12 +18,12 @@ using osu.Framework.Platform;
 using osu.Game.Graphics;
 using osu.Game.Online.API.Requests;
 using osu.Game.Online.API.Requests.Responses;
-using osu.Game.Misskey.IO;
-using osu.Game.Misskey.IPC;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.IO;
+using osu.Game.Tournament.IPC;
+using osu.Game.Tournament.Models;
 using osuTK.Input;
 
-namespace osu.Game.Misskey
+namespace osu.Game.Tournament
 {
     [Cached(typeof(TournamentGameBase))]
     public class TournamentGameBase : OsuGameBase
@@ -62,7 +62,7 @@ namespace osu.Game.Misskey
 
             dependencies.Cache(new TournamentVideoResourceStore(storage));
 
-            Textures.AddStore(new TextureLoaderStore(new StorageBackedResourceStore(storage)));
+            Textures.AddTextureSource(new TextureLoaderStore(new StorageBackedResourceStore(storage)));
 
             dependencies.CacheAs(new StableInfo(storage));
         }
@@ -267,7 +267,7 @@ namespace osu.Game.Misskey
             }
             else
             {
-                req.Success += res => { populate(); };
+                req.Success += _ => { populate(); };
                 req.Failure += _ =>
                 {
                     user.OnlineID = 1;

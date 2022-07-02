@@ -10,10 +10,10 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Game.Rulesets;
 using osu.Game.Rulesets.UI;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Models;
 using osuTK;
 
-namespace osu.Game.Misskey.Components
+namespace osu.Game.Tournament.Components
 {
     /// <summary>
     /// Mod icon displayed in tournament usages, allowing user overridden graphics.

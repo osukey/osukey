@@ -16,12 +16,12 @@ using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics;
 using osu.Game.Online.API;
 using osu.Game.Overlays.Settings;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.Models;
 using osu.Game.Users;
 using osuTK;
 
-namespace osu.Game.Misskey.Screens.Editors
+namespace osu.Game.Tournament.Screens.Editors
 {
     public class TeamEditorScreen : TournamentEditorScreen<TeamEditorScreen.TeamRow, TournamentTeam>
     {

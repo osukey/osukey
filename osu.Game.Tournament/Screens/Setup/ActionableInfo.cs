@@ -11,7 +11,7 @@ using osu.Game.Graphics.UserInterfaceV2;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Misskey.Screens.Setup
+namespace osu.Game.Tournament.Screens.Setup
 {
     internal class ActionableInfo : LabelledDrawable<Drawable>
     {

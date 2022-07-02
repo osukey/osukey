@@ -5,7 +5,7 @@
 
 using osu.Framework.Allocation;
 
-namespace osu.Game.Misskey.Tests
+namespace osu.Game.Tournament.Tests
 {
     public class TestSceneTournamentSceneManager : TournamentTestScene
     {

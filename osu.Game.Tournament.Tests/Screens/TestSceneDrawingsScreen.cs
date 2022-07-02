@@ -8,9 +8,9 @@ using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Platform;
 using osu.Game.Graphics.Cursor;
-using osu.Game.Misskey.Screens.Drawings;
+using osu.Game.Tournament.Screens.Drawings;
 
-namespace osu.Game.Misskey.Tests.Screens
+namespace osu.Game.Tournament.Tests.Screens
 {
     public class TestSceneDrawingsScreen : TournamentTestScene
     {

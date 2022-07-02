@@ -11,11 +11,11 @@ using osu.Framework.Graphics.Effects;
 using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics;
 using osu.Game.Graphics.UserInterface;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Models;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Misskey.Screens.Gameplay.Components
+namespace osu.Game.Tournament.Screens.Gameplay.Components
 {
     public class TeamScore : CompositeDrawable
     {

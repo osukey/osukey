@@ -11,15 +11,15 @@ using osu.Framework.Graphics.Shapes;
 using osu.Framework.Threading;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Overlays.Settings;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.IPC;
-using osu.Game.Misskey.Models;
-using osu.Game.Misskey.Screens.Gameplay.Components;
-using osu.Game.Misskey.Screens.MapPool;
-using osu.Game.Misskey.Screens.TeamWin;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.IPC;
+using osu.Game.Tournament.Models;
+using osu.Game.Tournament.Screens.Gameplay.Components;
+using osu.Game.Tournament.Screens.MapPool;
+using osu.Game.Tournament.Screens.TeamWin;
 using osuTK.Graphics;
 
-namespace osu.Game.Misskey.Screens.Gameplay
+namespace osu.Game.Tournament.Screens.Gameplay
 {
     public class GameplayScreen : BeatmapInfoScreen, IProvideVideo
     {

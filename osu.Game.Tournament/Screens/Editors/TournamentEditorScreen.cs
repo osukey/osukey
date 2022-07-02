@@ -15,10 +15,10 @@ using osu.Game.Graphics.UserInterface;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Containers;
 using osu.Game.Overlays.Settings;
-using osu.Game.Misskey.Components;
+using osu.Game.Tournament.Components;
 using osuTK;
 
-namespace osu.Game.Misskey.Screens.Editors
+namespace osu.Game.Tournament.Screens.Editors
 {
     public abstract class TournamentEditorScreen<TDrawable, TModel> : TournamentScreen, IProvideVideo
         where TDrawable : Drawable, IModelBacked<TModel>

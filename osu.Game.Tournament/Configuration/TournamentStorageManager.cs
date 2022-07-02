@@ -6,7 +6,7 @@
 using osu.Framework.Configuration;
 using osu.Framework.Platform;
 
-namespace osu.Game.Misskey.Configuration
+namespace osu.Game.Tournament.Configuration
 {
     public class TournamentStorageManager : IniConfigManager<StorageConfig>
     {

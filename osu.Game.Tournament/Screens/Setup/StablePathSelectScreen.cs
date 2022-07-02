@@ -15,11 +15,11 @@ using osu.Game.Graphics.Sprites;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Graphics.UserInterfaceV2;
 using osu.Game.Overlays;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.IPC;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.IPC;
 using osuTK;
 
-namespace osu.Game.Misskey.Screens.Setup
+namespace osu.Game.Tournament.Screens.Setup
 {
     public class StablePathSelectScreen : TournamentScreen
     {

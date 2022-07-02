@@ -13,10 +13,10 @@ using osu.Framework.Graphics;
 using osu.Framework.Input.Events;
 using osu.Game.Overlays.Settings;
 using osu.Game.Screens.Play.PlayerSettings;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.Models;
 
-namespace osu.Game.Misskey.Screens.Ladder.Components
+namespace osu.Game.Tournament.Screens.Ladder.Components
 {
     public class LadderEditorSettings : PlayerSettingsGroup
     {

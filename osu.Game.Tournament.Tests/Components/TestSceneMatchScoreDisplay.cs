@@ -6,10 +6,10 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Utils;
-using osu.Game.Misskey.IPC;
-using osu.Game.Misskey.Screens.Gameplay.Components;
+using osu.Game.Tournament.IPC;
+using osu.Game.Tournament.Screens.Gameplay.Components;
 
-namespace osu.Game.Misskey.Tests.Components
+namespace osu.Game.Tournament.Tests.Components
 {
     public class TestSceneMatchScoreDisplay : TournamentTestScene
     {

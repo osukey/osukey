@@ -14,13 +14,13 @@ using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Input.Events;
 using osu.Framework.Input.States;
 using osu.Game.Graphics.UserInterface;
-using osu.Game.Misskey.Models;
-using osu.Game.Misskey.Screens.Ladder;
-using osu.Game.Misskey.Screens.Ladder.Components;
+using osu.Game.Tournament.Models;
+using osu.Game.Tournament.Screens.Ladder;
+using osu.Game.Tournament.Screens.Ladder.Components;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Misskey.Screens.Editors
+namespace osu.Game.Tournament.Screens.Editors
 {
     [Cached]
     public class LadderEditorScreen : LadderScreen, IHasContextMenu
@@ -44,7 +44,7 @@ namespace osu.Game.Misskey.Screens.Editors
 
             AddInternal(rightClickMessage = new WarningBox("Right click to place and link matches"));
 
-            LadderInfo.Matches.CollectionChanged += (_, __) => updateMessage();
+            LadderInfo.Matches.CollectionChanged += (_, _) => updateMessage();
             updateMessage();
         }
 

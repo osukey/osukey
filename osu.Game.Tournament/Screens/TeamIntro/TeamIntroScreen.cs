@@ -7,11 +7,11 @@ using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.Models;
 using osuTK;
 
-namespace osu.Game.Misskey.Screens.TeamIntro
+namespace osu.Game.Tournament.Screens.TeamIntro
 {
     public class TeamIntroScreen : TournamentMatchScreen, IProvideVideo
     {

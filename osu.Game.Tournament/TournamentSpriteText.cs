@@ -6,7 +6,7 @@
 using osu.Game.Graphics;
 using osu.Game.Graphics.Sprites;
 
-namespace osu.Game.Misskey
+namespace osu.Game.Tournament
 {
     public class TournamentSpriteText : OsuSpriteText
     {

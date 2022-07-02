@@ -8,7 +8,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using osu.Framework.Bindables;
 
-namespace osu.Game.Misskey.Models
+namespace osu.Game.Tournament.Models
 {
     /// <summary>
     /// A team representation. For official tournaments this is generally a country.
@@ -66,14 +66,14 @@ namespace osu.Game.Misskey.Models
             {
                 // use a sane default flag name based on acronym.
                 if (val.OldValue.StartsWith(FlagName.Value, StringComparison.InvariantCultureIgnoreCase))
-                    FlagName.Value = val.NewValue.Length >= 2 ? val.NewValue?.Substring(0, 2).ToUpper() : string.Empty;
+                    FlagName.Value = val.NewValue.Length >= 2 ? val.NewValue?.Substring(0, 2).ToUpperInvariant() : string.Empty;
             };
 
             FullName.ValueChanged += val =>
             {
                 // use a sane acronym based on full name.
                 if (val.OldValue.StartsWith(Acronym.Value, StringComparison.InvariantCultureIgnoreCase))
-                    Acronym.Value = val.NewValue.Length >= 3 ? val.NewValue?.Substring(0, 3).ToUpper() : string.Empty;
+                    Acronym.Value = val.NewValue.Length >= 3 ? val.NewValue?.Substring(0, 3).ToUpperInvariant() : string.Empty;
             };
         }
 

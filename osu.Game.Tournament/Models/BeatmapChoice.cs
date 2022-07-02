@@ -7,7 +7,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace osu.Game.Misskey.Models
+namespace osu.Game.Tournament.Models
 {
     /// <summary>
     /// A beatmap choice by a team from a tournament's map pool.

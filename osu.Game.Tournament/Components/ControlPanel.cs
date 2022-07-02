@@ -10,7 +10,7 @@ using osu.Game.Graphics;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Misskey.Components
+namespace osu.Game.Tournament.Components
 {
     /// <summary>
     /// An element anchored to the right-hand area of a screen that provides streamer level controls.

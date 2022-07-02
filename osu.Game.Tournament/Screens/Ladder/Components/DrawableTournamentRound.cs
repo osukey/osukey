@@ -8,9 +8,9 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Graphics;
-using osu.Game.Misskey.Models;
+using osu.Game.Tournament.Models;
 
-namespace osu.Game.Misskey.Screens.Ladder.Components
+namespace osu.Game.Tournament.Screens.Ladder.Components
 {
     public class DrawableTournamentRound : CompositeDrawable
     {
@@ -49,10 +49,10 @@ namespace osu.Game.Misskey.Screens.Ladder.Components
             };
 
             name = round.Name.GetBoundCopy();
-            name.BindValueChanged(n => textName.Text = ((losers ? "Losers " : "") + round.Name).ToUpper(), true);
+            name.BindValueChanged(_ => textName.Text = ((losers ? "Losers " : "") + round.Name).ToUpperInvariant(), true);
 
             description = round.Description.GetBoundCopy();
-            description.BindValueChanged(n => textDescription.Text = round.Description.Value?.ToUpper(), true);
+            description.BindValueChanged(_ => textDescription.Text = round.Description.Value?.ToUpperInvariant(), true);
         }
     }
 }

@@ -7,10 +7,10 @@ using System;
 using NUnit.Framework;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.Screens.Schedule;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.Screens.Schedule;
 
-namespace osu.Game.Misskey.Tests.Screens
+namespace osu.Game.Tournament.Tests.Screens
 {
     public class TestSceneScheduleScreen : TournamentTestScene
     {

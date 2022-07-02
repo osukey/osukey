@@ -30,6 +30,15 @@ jobs:
           if [[ "${{ github.event.comment.body }}" =~ "osu" ]] ; then
             MATRIX_PROJECTS_JSON+='{ "name": "osu", "id": 0 },'
           fi
+          if [[ "${{ github.event.comment.body }}" =~ "taiko" ]] ; then
+            MATRIX_PROJECTS_JSON+='{ "name": "taiko", "id": 1 },'
+          fi
+          if [[ "${{ github.event.comment.body }}" =~ "catch" ]] ; then
+            MATRIX_PROJECTS_JSON+='{ "name": "catch", "id": 2 },'
+          fi
+          if [[ "${{ github.event.comment.body }}" =~ "mania" ]] ; then
+            MATRIX_PROJECTS_JSON+='{ "name": "mania", "id": 3 },'
+          fi
 
           if [[ "${MATRIX_PROJECTS_JSON}" != "" ]]; then
             MATRIX_JSON="{ \"ruleset\": [ ${MATRIX_PROJECTS_JSON} ] }"

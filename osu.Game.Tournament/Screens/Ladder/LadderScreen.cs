@@ -11,13 +11,13 @@ using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Lines;
-using osu.Game.Misskey.Components;
-using osu.Game.Misskey.Models;
-using osu.Game.Misskey.Screens.Editors;
-using osu.Game.Misskey.Screens.Ladder.Components;
+using osu.Game.Tournament.Components;
+using osu.Game.Tournament.Models;
+using osu.Game.Tournament.Screens.Editors;
+using osu.Game.Tournament.Screens.Ladder.Components;
 using osuTK.Graphics;
 
-namespace osu.Game.Misskey.Screens.Ladder
+namespace osu.Game.Tournament.Screens.Ladder
 {
     public class LadderScreen : TournamentScreen, IProvideVideo
     {
@@ -75,7 +75,7 @@ namespace osu.Game.Misskey.Screens.Ladder
             foreach (var match in LadderInfo.Matches)
                 addMatch(match);
 
-            LadderInfo.Rounds.CollectionChanged += (_, __) => layout.Invalidate();
+            LadderInfo.Rounds.CollectionChanged += (_, _) => layout.Invalidate();
             LadderInfo.Matches.CollectionChanged += (_, args) =>
             {
                 switch (args.Action)

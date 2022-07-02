@@ -6,9 +6,9 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Game.Graphics.UserInterface;
-using osu.Game.Misskey.IO;
+using osu.Game.Tournament.IO;
 
-namespace osu.Game.Misskey.Screens.Setup
+namespace osu.Game.Tournament.Screens.Setup
 {
     internal class TournamentSwitcher : ActionableInfo
     {
@@ -27,7 +27,7 @@ namespace osu.Game.Misskey.Screens.Setup
             dropdown.Items = storage.ListTournaments();
             dropdown.Current.BindValueChanged(v => Button.Enabled.Value = v.NewValue != startupTournament, true);
 
-            Action = () => game.GracefullyExit();
+            Action = () => game.AttemptExit();
             folderButton.Action = () => storage.PresentExternally();
 
             ButtonText = "Close osu!";

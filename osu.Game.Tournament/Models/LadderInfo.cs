@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using osu.Framework.Bindables;
 using osu.Game.Rulesets;
 
-namespace osu.Game.Misskey.Models
+namespace osu.Game.Tournament.Models
 {
     /// <summary>
     /// Holds the complete data required to operate the tournament system.

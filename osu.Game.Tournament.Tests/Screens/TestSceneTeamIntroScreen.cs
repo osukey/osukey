@@ -6,10 +6,10 @@
 using System.Linq;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
-using osu.Game.Misskey.Models;
-using osu.Game.Misskey.Screens.TeamIntro;
+using osu.Game.Tournament.Models;
+using osu.Game.Tournament.Screens.TeamIntro;
 
-namespace osu.Game.Misskey.Tests.Screens
+namespace osu.Game.Tournament.Tests.Screens
 {
     public class TestSceneTeamIntroScreen : TournamentTestScene
     {

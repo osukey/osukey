@@ -4,10 +4,10 @@
 #nullable disable
 
 using osu.Framework.Allocation;
-using osu.Game.Misskey.Models;
-using osu.Game.Misskey.Screens.Editors;
+using osu.Game.Tournament.Models;
+using osu.Game.Tournament.Screens.Editors;
 
-namespace osu.Game.Misskey.Tests.Screens
+namespace osu.Game.Tournament.Tests.Screens
 {
     public class TestSceneSeedingEditorScreen : TournamentTestScene
     {
