@@ -2,6 +2,8 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using System.Net.Mime;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using osu.Framework.Allocation;
 using osu.Framework.Extensions.LocalisationExtensions;
 using osu.Framework.Graphics;
@@ -15,12 +17,14 @@ using osu.Game.Graphics.UserInterface;
 using osu.Game.Online.API;
 using osu.Game.Overlays.Settings;
 using osu.Game.Resources.Localisation.Web;
+using osu.Game.Screens.Misskey;
 using osuTK;
 
 namespace osu.Game.Overlays.Login
 {
     public class LoginForm : FillFlowContainer
     {
+        private TextBox hostname;
         private TextBox username;
         private TextBox password;
         private ShakeContainer shakeSignIn;
@@ -33,8 +37,8 @@ namespace osu.Game.Overlays.Login
         private void performLogin()
         {
             if (!string.IsNullOrEmpty(username.Text) && !string.IsNullOrEmpty(password.Text))
-                // api?.Login(username.Text, password.Text);
-                shakeSignIn.Shake();
+                api?.Login(username.Text, password.Text);
+                //shakeSignIn.Shake();
             else
                 shakeSignIn.Shake();
         }
@@ -51,6 +55,12 @@ namespace osu.Game.Overlays.Login
 
             Children = new Drawable[]
             {
+                hostname = new OsuTextBox()
+                {
+                    PlaceholderText = "instanceHostName",
+                    RelativeSizeAxes = Axes.X,
+                    TabbableContentContainer = this,
+                },
                 username = new OsuTextBox
                 {
                     PlaceholderText = UsersStrings.LoginUsername.ToLower(),

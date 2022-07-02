@@ -7,13 +7,10 @@ namespace osu.Game.Online.MisskeyAPI.Requests.Responses
 {
     public class Signin
     {
-
         [JsonProperty("id")]
         public string Id;
 
         [JsonProperty("i")]
         public string i;
-
-
     }
 }

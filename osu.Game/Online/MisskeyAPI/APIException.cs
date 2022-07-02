@@ -1,13 +1,15 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
+using System;
+
 namespace osu.Game.Online.MisskeyAPI
 {
-    public class Login
+    public class APIException : InvalidOperationException
     {
-        public void login(string username, string password)
+        public APIException(string message, Exception innerException)
+            : base(message, innerException)
         {
-
         }
     }
 }

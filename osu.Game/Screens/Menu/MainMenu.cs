@@ -112,7 +112,7 @@ namespace osu.Game.Screens.Menu
                             OnSolo = loadSoloSongSelect,
                             OnMultiplayer = () => this.Push(new Multiplayer()),
                             OnPlaylists = () => this.Push(new Playlists()),
-                            OnMisskey = () => this.Push(new MisskeyLogin()),
+                            OnMisskey = () => this.Push(new MisskeyScreenSelector()),
                             OnExit = confirmAndExit,
                         }
                     }

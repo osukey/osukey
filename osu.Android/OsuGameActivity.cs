@@ -65,8 +65,8 @@ namespace osu.Android
 
             Debug.Assert(Window != null);
 
-            Window.AddFlags(WindowManagerFlags.Fullscreen);
-            Window.AddFlags(WindowManagerFlags.KeepScreenOn);
+            // Window.AddFlags(WindowManagerFlags.Fullscreen);
+            // Window.AddFlags(WindowManagerFlags.KeepScreenOn);
 
             Debug.Assert(WindowManager?.DefaultDisplay != null);
             Debug.Assert(Resources?.DisplayMetrics != null);
@@ -76,7 +76,7 @@ namespace osu.Android
             float smallestWidthDp = Math.Min(displaySize.X, displaySize.Y) / Resources.DisplayMetrics.Density;
             bool isTablet = smallestWidthDp >= 600f;
 
-            RequestedOrientation = DefaultOrientation = isTablet ? ScreenOrientation.FullUser : ScreenOrientation.SensorLandscape;
+            RequestedOrientation = DefaultOrientation = isTablet ? ScreenOrientation.FullUser : ScreenOrientation.User;
         }
 
         protected override void OnNewIntent(Intent intent) => handleIntent(intent);
