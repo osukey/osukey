@@ -8,10 +8,10 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Input.Events;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 using osuTK.Input;
 
-namespace osu.Game.Tournament.Screens.Gameplay.Components
+namespace osu.Game.Misskey.Screens.Gameplay.Components
 {
     public class TeamScoreDisplay : CompositeDrawable
     {

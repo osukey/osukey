@@ -5,7 +5,7 @@
 
 using Newtonsoft.Json;
 
-namespace osu.Game.Tournament.Models
+namespace osu.Game.Misskey.Models
 {
     public class RoundBeatmap
     {

@@ -4,9 +4,9 @@
 #nullable disable
 
 using System.Collections.Generic;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 
-namespace osu.Game.Tournament.Screens.Drawings.Components
+namespace osu.Game.Misskey.Screens.Drawings.Components
 {
     public interface ITeamList
     {

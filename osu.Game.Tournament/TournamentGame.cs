@@ -19,11 +19,11 @@ using osu.Framework.Platform;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Cursor;
 using osu.Game.Graphics.UserInterface;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Tournament
+namespace osu.Game.Misskey
 {
     public class TournamentGame : TournamentGameBase
     {

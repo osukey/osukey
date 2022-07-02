@@ -7,9 +7,9 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 using osu.Framework.Platform;
-using osu.Game.Tournament.IO;
+using osu.Game.Misskey.IO;
 
-namespace osu.Game.Tournament.Models
+namespace osu.Game.Misskey.Models
 {
     /// <summary>
     /// Holds the path to locate the osu! stable cutting-edge installation.

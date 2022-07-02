@@ -6,7 +6,7 @@
 using System.Collections.Generic;
 using osu.Framework.Bindables;
 
-namespace osu.Game.Tournament.Models
+namespace osu.Game.Misskey.Models
 {
     public class SeedingResult
     {

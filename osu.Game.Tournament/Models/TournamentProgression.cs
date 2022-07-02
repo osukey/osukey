@@ -5,7 +5,7 @@
 
 using System;
 
-namespace osu.Game.Tournament.Models
+namespace osu.Game.Misskey.Models
 {
     /// <summary>
     /// A mapping between two <see cref="TournamentMatch"/>es.

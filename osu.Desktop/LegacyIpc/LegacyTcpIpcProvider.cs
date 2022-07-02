@@ -9,11 +9,8 @@ using osu.Framework.Platform;
 using osu.Game.Beatmaps;
 using osu.Game.Beatmaps.Legacy;
 using osu.Game.Rulesets;
-using osu.Game.Rulesets.Catch;
-using osu.Game.Rulesets.Mania;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Osu;
-using osu.Game.Rulesets.Taiko;
 
 namespace osu.Desktop.LegacyIpc
 {
@@ -100,15 +97,6 @@ namespace osu.Desktop.LegacyIpc
             {
                 case 0:
                     return new OsuRuleset();
-
-                case 1:
-                    return new TaikoRuleset();
-
-                case 2:
-                    return new CatchRuleset();
-
-                case 3:
-                    return new ManiaRuleset();
 
                 default:
                     throw new ArgumentException("Invalid ruleset id");

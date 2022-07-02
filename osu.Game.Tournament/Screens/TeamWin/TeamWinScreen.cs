@@ -8,11 +8,11 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Graphics;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.Models;
 using osuTK;
 
-namespace osu.Game.Tournament.Screens.TeamWin
+namespace osu.Game.Misskey.Screens.TeamWin
 {
     public class TeamWinScreen : TournamentMatchScreen, IProvideVideo
     {

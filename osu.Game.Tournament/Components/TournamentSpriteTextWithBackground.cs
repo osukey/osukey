@@ -8,7 +8,7 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics;
 
-namespace osu.Game.Tournament.Components
+namespace osu.Game.Misskey.Components
 {
     public class TournamentSpriteTextWithBackground : CompositeDrawable
     {

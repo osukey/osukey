@@ -9,9 +9,9 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using Newtonsoft.Json;
 using osu.Framework.Bindables;
-using osu.Game.Tournament.Screens.Ladder.Components;
+using osu.Game.Misskey.Screens.Ladder.Components;
 
-namespace osu.Game.Tournament.Models
+namespace osu.Game.Misskey.Models
 {
     /// <summary>
     /// A collection of two teams competing in a head-to-head match.

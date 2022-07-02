@@ -12,10 +12,10 @@ using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Sprites;
 using osu.Game.Graphics.UserInterface;
-using osu.Game.Tournament.IPC;
+using osu.Game.Misskey.IPC;
 using osuTK;
 
-namespace osu.Game.Tournament.Screens.Gameplay.Components
+namespace osu.Game.Misskey.Screens.Gameplay.Components
 {
     // TODO: Update to derive from osu-side class?
     public class TournamentMatchScoreDisplay : CompositeDrawable

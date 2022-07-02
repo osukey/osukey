@@ -9,7 +9,7 @@ using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics;
 using osuTK.Graphics;
 
-namespace osu.Game.Tournament
+namespace osu.Game.Misskey
 {
     internal class WarningBox : Container
     {

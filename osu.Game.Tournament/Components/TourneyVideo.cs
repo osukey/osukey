@@ -11,9 +11,9 @@ using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Video;
 using osu.Framework.Timing;
 using osu.Game.Graphics;
-using osu.Game.Tournament.IO;
+using osu.Game.Misskey.IO;
 
-namespace osu.Game.Tournament.Components
+namespace osu.Game.Misskey.Components
 {
     public class TourneyVideo : CompositeDrawable
     {

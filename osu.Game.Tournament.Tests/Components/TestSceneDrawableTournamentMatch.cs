@@ -5,10 +5,10 @@
 
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Game.Tournament.Models;
-using osu.Game.Tournament.Screens.Ladder.Components;
+using osu.Game.Misskey.Models;
+using osu.Game.Misskey.Screens.Ladder.Components;
 
-namespace osu.Game.Tournament.Tests.Components
+namespace osu.Game.Misskey.Tests.Components
 {
     public class TestSceneDrawableTournamentMatch : TournamentTestScene
     {

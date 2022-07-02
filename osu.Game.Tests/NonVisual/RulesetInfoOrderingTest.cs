@@ -6,7 +6,6 @@
 using System.Linq;
 using NUnit.Framework;
 using osu.Game.Rulesets;
-using osu.Game.Rulesets.Catch;
 using osu.Game.Rulesets.Osu;
 
 namespace osu.Game.Tests.NonVisual

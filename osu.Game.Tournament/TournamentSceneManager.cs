@@ -13,23 +13,23 @@ using osu.Framework.Input.Events;
 using osu.Framework.Threading;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Sprites;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.Screens;
-using osu.Game.Tournament.Screens.Drawings;
-using osu.Game.Tournament.Screens.Editors;
-using osu.Game.Tournament.Screens.Gameplay;
-using osu.Game.Tournament.Screens.Ladder;
-using osu.Game.Tournament.Screens.MapPool;
-using osu.Game.Tournament.Screens.Schedule;
-using osu.Game.Tournament.Screens.Setup;
-using osu.Game.Tournament.Screens.Showcase;
-using osu.Game.Tournament.Screens.TeamIntro;
-using osu.Game.Tournament.Screens.TeamWin;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.Screens;
+using osu.Game.Misskey.Screens.Drawings;
+using osu.Game.Misskey.Screens.Editors;
+using osu.Game.Misskey.Screens.Gameplay;
+using osu.Game.Misskey.Screens.Ladder;
+using osu.Game.Misskey.Screens.MapPool;
+using osu.Game.Misskey.Screens.Schedule;
+using osu.Game.Misskey.Screens.Setup;
+using osu.Game.Misskey.Screens.Showcase;
+using osu.Game.Misskey.Screens.TeamIntro;
+using osu.Game.Misskey.Screens.TeamWin;
 using osuTK;
 using osuTK.Graphics;
 using osuTK.Input;
 
-namespace osu.Game.Tournament
+namespace osu.Game.Misskey
 {
     [Cached]
     public class TournamentSceneManager : CompositeDrawable

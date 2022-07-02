@@ -18,13 +18,13 @@ using osu.Framework.Logging;
 using osu.Framework.Platform;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Containers;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.Models;
-using osu.Game.Tournament.Screens.Drawings.Components;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.Models;
+using osu.Game.Misskey.Screens.Drawings.Components;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Tournament.Screens.Drawings
+namespace osu.Game.Misskey.Screens.Drawings
 {
     public class DrawingsScreen : TournamentScreen
     {

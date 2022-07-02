@@ -13,12 +13,12 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Threading;
 using osu.Game.Graphics;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.Models;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Tournament.Screens.Drawings.Components
+namespace osu.Game.Misskey.Screens.Drawings.Components
 {
     public class ScrollingTeamContainer : Container
     {

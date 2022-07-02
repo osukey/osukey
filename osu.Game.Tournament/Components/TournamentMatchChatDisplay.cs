@@ -10,10 +10,10 @@ using osu.Framework.Graphics;
 using osu.Game.Online.API;
 using osu.Game.Online.Chat;
 using osu.Game.Overlays.Chat;
-using osu.Game.Tournament.IPC;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.IPC;
+using osu.Game.Misskey.Models;
 
-namespace osu.Game.Tournament.Components
+namespace osu.Game.Misskey.Components
 {
     public class TournamentMatchChatDisplay : StandAloneChatDisplay
     {

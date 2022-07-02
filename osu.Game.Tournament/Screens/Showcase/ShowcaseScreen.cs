@@ -7,12 +7,12 @@ using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Game.Tournament.Components;
+using osu.Game.Misskey.Components;
 using osu.Framework.Graphics.Shapes;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 using osuTK.Graphics;
 
-namespace osu.Game.Tournament.Screens.Showcase
+namespace osu.Game.Misskey.Screens.Showcase
 {
     public class ShowcaseScreen : BeatmapInfoScreen // IProvideVideo
     {

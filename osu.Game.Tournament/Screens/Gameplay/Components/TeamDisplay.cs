@@ -6,11 +6,11 @@
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.Models;
 using osuTK;
 
-namespace osu.Game.Tournament.Screens.Gameplay.Components
+namespace osu.Game.Misskey.Screens.Gameplay.Components
 {
     public class TeamDisplay : DrawableTournamentTeam
     {

@@ -6,7 +6,7 @@
 using osu.Framework.Configuration;
 using osu.Framework.Platform;
 
-namespace osu.Game.Tournament.Screens.Drawings.Components
+namespace osu.Game.Misskey.Screens.Drawings.Components
 {
     public class DrawingsConfigManager : IniConfigManager<DrawingsConfig>
     {

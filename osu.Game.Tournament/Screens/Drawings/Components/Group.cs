@@ -10,11 +10,11 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Tournament.Screens.Drawings.Components
+namespace osu.Game.Misskey.Screens.Drawings.Components
 {
     public class Group : Container
     {

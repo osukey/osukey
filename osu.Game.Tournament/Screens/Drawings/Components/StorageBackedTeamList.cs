@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.IO;
 using osu.Framework.Logging;
 using osu.Framework.Platform;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 
-namespace osu.Game.Tournament.Screens.Drawings.Components
+namespace osu.Game.Misskey.Screens.Drawings.Components
 {
     public class StorageBackedTeamList : ITeamList
     {

@@ -4,9 +4,9 @@
 #nullable disable
 
 using osu.Framework.Allocation;
-using osu.Game.Tournament.Screens.Showcase;
+using osu.Game.Misskey.Screens.Showcase;
 
-namespace osu.Game.Tournament.Tests.Screens
+namespace osu.Game.Misskey.Tests.Screens
 {
     public class TestSceneShowcaseScreen : TournamentTestScene
     {

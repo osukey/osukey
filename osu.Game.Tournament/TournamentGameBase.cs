@@ -18,12 +18,12 @@ using osu.Framework.Platform;
 using osu.Game.Graphics;
 using osu.Game.Online.API.Requests;
 using osu.Game.Online.API.Requests.Responses;
-using osu.Game.Tournament.IO;
-using osu.Game.Tournament.IPC;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.IO;
+using osu.Game.Misskey.IPC;
+using osu.Game.Misskey.Models;
 using osuTK.Input;
 
-namespace osu.Game.Tournament
+namespace osu.Game.Misskey
 {
     [Cached(typeof(TournamentGameBase))]
     public class TournamentGameBase : OsuGameBase

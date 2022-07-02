@@ -7,7 +7,7 @@ using System;
 using osu.Framework;
 using osu.Framework.Platform;
 
-namespace osu.Game.Tournament.Tests
+namespace osu.Game.Misskey.Tests
 {
     public static class TournamentTestRunner
     {

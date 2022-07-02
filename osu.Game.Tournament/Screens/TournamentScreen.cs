@@ -6,9 +6,9 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 
-namespace osu.Game.Tournament.Screens
+namespace osu.Game.Misskey.Screens
 {
     public abstract class TournamentScreen : CompositeDrawable
     {

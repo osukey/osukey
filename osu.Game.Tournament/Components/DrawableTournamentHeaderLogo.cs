@@ -9,7 +9,7 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 
-namespace osu.Game.Tournament.Components
+namespace osu.Game.Misskey.Components
 {
     public class DrawableTournamentHeaderLogo : CompositeDrawable
     {

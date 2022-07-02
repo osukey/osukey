@@ -8,7 +8,7 @@ using osu.Framework.Bindables;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Overlays.Settings;
 
-namespace osu.Game.Tournament.Components
+namespace osu.Game.Misskey.Components
 {
     public class DateTextBox : SettingsTextBox
     {

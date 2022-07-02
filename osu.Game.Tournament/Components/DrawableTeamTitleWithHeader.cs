@@ -5,10 +5,10 @@
 
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 using osuTK;
 
-namespace osu.Game.Tournament.Components
+namespace osu.Game.Misskey.Components
 {
     public class DrawableTeamTitleWithHeader : CompositeDrawable
     {

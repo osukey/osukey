@@ -14,11 +14,11 @@ using osu.Game.Online.API;
 using osu.Game.Online.API.Requests;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Overlays.Settings;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.Models;
 using osuTK;
 
-namespace osu.Game.Tournament.Screens.Editors
+namespace osu.Game.Misskey.Screens.Editors
 {
     public class SeedingEditorScreen : TournamentEditorScreen<SeedingEditorScreen.SeedingResultRow, SeedingResult>
     {

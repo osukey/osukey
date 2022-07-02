@@ -4,9 +4,9 @@
 #nullable disable
 
 using osu.Framework.Bindables;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 
-namespace osu.Game.Tournament.Screens
+namespace osu.Game.Misskey.Screens
 {
     public abstract class TournamentMatchScreen : TournamentScreen
     {

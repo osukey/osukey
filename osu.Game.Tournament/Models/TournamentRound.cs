@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using osu.Framework.Bindables;
 
-namespace osu.Game.Tournament.Models
+namespace osu.Game.Misskey.Models
 {
     /// <summary>
     /// A tournament round, containing many matches, generally executed in a short time period.

@@ -5,7 +5,7 @@
 
 using osu.Game.Graphics.UserInterface;
 
-namespace osu.Game.Tournament
+namespace osu.Game.Misskey
 {
     public class TourneyButton : OsuButton
     {

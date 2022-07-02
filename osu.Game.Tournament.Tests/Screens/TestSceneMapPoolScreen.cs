@@ -8,11 +8,11 @@ using NUnit.Framework;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Testing;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.Models;
-using osu.Game.Tournament.Screens.MapPool;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.Models;
+using osu.Game.Misskey.Screens.MapPool;
 
-namespace osu.Game.Tournament.Tests.Screens
+namespace osu.Game.Misskey.Tests.Screens
 {
     public class TestSceneMapPoolScreen : TournamentTestScene
     {

@@ -8,9 +8,9 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Graphics;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Models;
 
-namespace osu.Game.Tournament.Screens.Ladder.Components
+namespace osu.Game.Misskey.Screens.Ladder.Components
 {
     public class DrawableTournamentRound : CompositeDrawable
     {

@@ -11,13 +11,13 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.Models;
-using osu.Game.Tournament.Screens.Ladder.Components;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.Models;
+using osu.Game.Misskey.Screens.Ladder.Components;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Tournament.Screens.Schedule
+namespace osu.Game.Misskey.Screens.Schedule
 {
     public class ScheduleScreen : TournamentScreen // IProvidesVideo
     {

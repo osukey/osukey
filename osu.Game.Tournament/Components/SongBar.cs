@@ -20,7 +20,7 @@ using osu.Game.Tournament.Models;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Tournament.Components
+namespace osu.Game.Misskey.Components
 {
     public class SongBar : CompositeDrawable
     {

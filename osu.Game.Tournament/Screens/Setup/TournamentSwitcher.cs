@@ -6,9 +6,9 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Game.Graphics.UserInterface;
-using osu.Game.Tournament.IO;
+using osu.Game.Misskey.IO;
 
-namespace osu.Game.Tournament.Screens.Setup
+namespace osu.Game.Misskey.Screens.Setup
 {
     internal class TournamentSwitcher : ActionableInfo
     {

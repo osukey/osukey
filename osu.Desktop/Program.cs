@@ -12,7 +12,7 @@ using osu.Framework.Development;
 using osu.Framework.Logging;
 using osu.Framework.Platform;
 using osu.Game.IPC;
-using osu.Game.Tournament;
+using osu.Game.Misskey;
 using Squirrel;
 
 namespace osu.Desktop

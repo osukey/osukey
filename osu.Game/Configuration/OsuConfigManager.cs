@@ -165,6 +165,8 @@ namespace osu.Game.Configuration
             SetDefault(OsuSetting.DiscordRichPresence, DiscordRichPresenceMode.Full);
 
             SetDefault(OsuSetting.EditorWaveformOpacity, 0.25f);
+
+            SetDefault(OsuSetting.MisskeyToken, string.Empty);
         }
 
         public IDictionary<OsuSetting, string> GetLoggableState() =>
@@ -360,5 +362,9 @@ namespace osu.Game.Configuration
         DiscordRichPresence,
         AutomaticallyDownloadWhenSpectating,
         ShowOnlineExplicitContent,
+
+        //Misskey
+
+        MisskeyToken,
     }
 }

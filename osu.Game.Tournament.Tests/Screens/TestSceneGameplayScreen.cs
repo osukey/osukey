@@ -8,12 +8,12 @@ using NUnit.Framework;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Testing;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.IPC;
-using osu.Game.Tournament.Screens.Gameplay;
-using osu.Game.Tournament.Screens.Gameplay.Components;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.IPC;
+using osu.Game.Misskey.Screens.Gameplay;
+using osu.Game.Misskey.Screens.Gameplay.Components;
 
-namespace osu.Game.Tournament.Tests.Screens
+namespace osu.Game.Misskey.Tests.Screens
 {
     public class TestSceneGameplayScreen : TournamentTestScene
     {

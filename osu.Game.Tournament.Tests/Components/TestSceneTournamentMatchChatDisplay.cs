@@ -9,11 +9,11 @@ using osu.Framework.Graphics;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Online.Chat;
 using osu.Game.Tests.Visual;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.IPC;
-using osu.Game.Tournament.Models;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.IPC;
+using osu.Game.Misskey.Models;
 
-namespace osu.Game.Tournament.Tests.Components
+namespace osu.Game.Misskey.Tests.Components
 {
     public class TestSceneTournamentMatchChatDisplay : OsuTestScene
     {

@@ -8,7 +8,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using osu.Framework.Bindables;
 
-namespace osu.Game.Tournament.Models
+namespace osu.Game.Misskey.Models
 {
     /// <summary>
     /// A team representation. For official tournaments this is generally a country.

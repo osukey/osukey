@@ -12,12 +12,12 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Sprites;
-using osu.Game.Tournament.Components;
-using osu.Game.Tournament.Models;
-using osu.Game.Tournament.Screens.Ladder.Components;
+using osu.Game.Misskey.Components;
+using osu.Game.Misskey.Models;
+using osu.Game.Misskey.Screens.Ladder.Components;
 using osuTK;
 
-namespace osu.Game.Tournament.Screens.TeamIntro
+namespace osu.Game.Misskey.Screens.TeamIntro
 {
     public class SeedingScreen : TournamentMatchScreen, IProvideVideo
     {
