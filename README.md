@@ -2,6 +2,12 @@
 
 A Misskey client based on osu!lazer.
 
+## Goals
+- [ ] Misskey v12 API Implementation
+- [ ] Misskey's key features implemented
+- [ ] Push Notification Implementation
+- [ ] Optimization for touch devices
+
 ## Developing osukey(temporary)
 
 Please make sure you have the following prerequisites:
@@ -56,6 +62,7 @@ We have adopted some cross-platform, compiler integrated analyzers. They can pro
 
 JetBrains ReSharper InspectCode is also used for wider rule sets. You can run it from PowerShell with `.\InspectCode.ps1`. Alternatively, you can install ReSharper or use Rider to get inline support in your IDE of choice.
 
+<!--
 ## Contributing
 
 When it comes to contributing to the project, the two main things you can do to help out are reporting issues and submitting pull requests. Based on past experiences, we have prepared a [list of contributing guidelines](CONTRIBUTING.md) that should hopefully ease you into our collaboration process and answer the most frequently-asked questions.
@@ -65,6 +72,7 @@ Note that while we already have certain standards in place, nothing is set in st
 If you wish to help with localisation efforts, head over to [crowdin](https://crowdin.com/project/osu-web).
 
 For those interested, we love to reward quality contributions via [bounties](https://docs.google.com/spreadsheets/d/1jNXfj_S3Pb5PErA-czDdC9DUu4IgUbe1Lt8E7CYUJuE/view?&rm=minimal#gid=523803337), paid out via PayPal or osu!supporter tags. Don't hesitate to [request a bounty](https://docs.google.com/forms/d/e/1FAIpQLSet_8iFAgPMG526pBZ2Kic6HSh7XPM3fE8xPcnWNkMzINDdYg/viewform) for your work on this project.
+-->
 
 ## Licence
 
