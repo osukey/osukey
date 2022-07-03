@@ -199,8 +199,9 @@ namespace osu.Game.Online.MisskeyAPI
                         // The Success callback event is fired on the main thread, so we should wait for that to run before proceeding.
                         // Without this, we will end up circulating this Connecting loop multiple times and queueing up many web requests
                         // before actually going online.
-                        while (State.Value > APIState.Offline && State.Value < APIState.Online)
-                            Thread.Sleep(500);
+
+                        // while (State.Value > APIState.Offline && State.Value < APIState.Online)
+                        //     Thread.Sleep(500);
 
                         break;
                 }
@@ -263,11 +264,6 @@ namespace osu.Game.Online.MisskeyAPI
 
         // public IHubClientConnector GetHubConnector(string clientName, string endpoint, bool preferMessagePack) =>
         //     new HubClientConnector(clientName, endpoint, this, versionHash, preferMessagePack);
-
-        public IHubClientConnector GetHubConnector(string clientName, string endpoint, bool preferMessagePack = true)
-        {
-            throw new NotImplementedException();
-        }
 
         public RegistrationRequest.RegistrationRequestErrors CreateAccount(string email, string username, string password)
         {
@@ -398,11 +394,11 @@ namespace osu.Game.Online.MisskeyAPI
         {
             lock (queue)
             {
-                if (state.Value == APIState.Offline)
-                {
-                    request.Fail(new WebException(@"User not logged in"));
-                    return;
-                }
+                // if (state.Value == APIState.Offline)
+                // {
+                //     request.Fail(new WebException(@"User not logged in"));
+                //     return;
+                // }
 
                 queue.Enqueue(request);
             }

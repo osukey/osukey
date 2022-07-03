@@ -103,13 +103,13 @@ namespace osu.Game.Online.MisskeyAPI
         /// </summary>
         void Logout();
 
-        /// <summary>
-        /// Constructs a new <see cref="IHubClientConnector"/>. May be null if not supported.
-        /// </summary>
-        /// <param name="clientName">The name of the client this connector connects for, used for logging.</param>
-        /// <param name="endpoint">The endpoint to the hub.</param>
-        /// <param name="preferMessagePack">Whether to use MessagePack for serialisation if available on this platform.</param>
-        IHubClientConnector? GetHubConnector(string clientName, string endpoint, bool preferMessagePack = true);
+        // /// <summary>
+        // /// Constructs a new <see cref="IHubClientConnector"/>. May be null if not supported.
+        // /// </summary>
+        // /// <param name="clientName">The name of the client this connector connects for, used for logging.</param>
+        // /// <param name="endpoint">The endpoint to the hub.</param>
+        // /// <param name="preferMessagePack">Whether to use MessagePack for serialisation if available on this platform.</param>
+        // IHubClientConnector? GetHubConnector(string clientName, string endpoint, bool preferMessagePack = true);
 
         /// <summary>
         /// Create a new user account. This is a blocking operation.

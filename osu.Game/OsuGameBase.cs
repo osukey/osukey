@@ -40,6 +40,7 @@ using osu.Game.Input.Bindings;
 using osu.Game.IO;
 using osu.Game.Online;
 using osu.Game.Online.API;
+using osu.Game.Online.MisskeyAPI;
 using osu.Game.Online.Chat;
 using osu.Game.Online.Multiplayer;
 using osu.Game.Online.Spectator;
@@ -88,8 +89,10 @@ namespace osu.Game
 
         public virtual bool UseDevelopmentServer => DebugUtils.IsDebugBuild;
 
-        internal EndpointConfiguration CreateEndpoints() =>
+        internal Online.EndpointConfiguration CreateEndpoints() =>
             UseDevelopmentServer ? new DevelopmentEndpointConfiguration() : new ProductionEndpointConfiguration();
+
+        internal Online.MisskeyAPI.EndpointConfiguration CreateMisskeyEndpoints() => new osu.Game.Online.MisskeyAPI.DefaultEndpointConfigration();
 
         public virtual Version AssemblyVersion => Assembly.GetEntryAssembly()?.GetName().Version ?? new Version();
 
@@ -142,7 +145,9 @@ namespace osu.Game
 
         protected MusicController MusicController { get; private set; }
 
-        protected IAPIProvider API { get; set; }
+        protected Online.API.IAPIProvider API { get; set; }
+
+        protected Online.MisskeyAPI.IAPIProvider MisskeyAPI { get; set; }
 
         protected Storage Storage { get; set; }
 
@@ -257,11 +262,13 @@ namespace osu.Game
             dependencies.Cache(SkinManager = new SkinManager(Storage, realm, Host, Resources, Audio, Scheduler));
             dependencies.CacheAs<ISkinSource>(SkinManager);
 
-            EndpointConfiguration endpoints = CreateEndpoints();
+            Online.EndpointConfiguration endpoints = CreateEndpoints();
+            osu.Game.Online.MisskeyAPI.EndpointConfiguration misskeyendpoints = CreateMisskeyEndpoints();
 
             MessageFormatter.WebsiteRootUrl = endpoints.WebsiteRootUrl;
 
-            dependencies.CacheAs(API ??= new APIAccess(LocalConfig, endpoints, VersionHash));
+            dependencies.CacheAs(API ??= new Online.API.APIAccess(LocalConfig, endpoints, VersionHash));
+            dependencies.CacheAs(MisskeyAPI ??= new Online.MisskeyAPI.APIAccess(LocalConfig, misskeyendpoints, VersionHash));
 
             dependencies.CacheAs(spectatorClient = new OnlineSpectatorClient(endpoints));
             dependencies.CacheAs(multiplayerClient = new OnlineMultiplayerClient(endpoints));
@@ -314,8 +321,10 @@ namespace osu.Game
             dependencies.CacheAs(Beatmap);
 
             // add api components to hierarchy.
-            if (API is APIAccess apiAccess)
+            if (API is Online.API.APIAccess apiAccess)
                 AddInternal(apiAccess);
+            if (MisskeyAPI is Online.MisskeyAPI.APIAccess misskeyAPIAccess)
+                AddInternal(misskeyAPIAccess);
             AddInternal(spectatorClient);
             AddInternal(multiplayerClient);
 

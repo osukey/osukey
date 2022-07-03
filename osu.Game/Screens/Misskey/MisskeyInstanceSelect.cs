@@ -11,12 +11,15 @@ using osu.Framework.Graphics.Containers;
 using osu.Game.Graphics;
 using osuTK.Graphics;
 using osu.Framework.Graphics.Shapes;
+using osu.Framework.Graphics.Sprites;
 using osu.Framework.Logging;
 using osu.Game.Graphics.Sprites;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Online.MisskeyAPI;
 using osu.Game.Online.MisskeyAPI.Requests;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
+using osu.Game.Overlays;
+using osu.Game.Overlays.Notifications;
 using osuTK;
 using Meta = osu.Game.Online.MisskeyAPI.Requests.Meta;
 
@@ -34,13 +37,17 @@ namespace osu.Game.Screens.Misskey
         // [Resolved]
         private IAPIProvider api { get; set; }
 
-        // private Meta getMeta;
+        private Online.MisskeyAPI.Requests.Meta request;
+
+        [Resolved]
+        private INotificationOverlay notificationOverlay { get; set; }
+
 
         [Resolved]
         private OsuColour colours { get; set; }
 
         [BackgroundDependencyLoader(true)]
-        private void load()
+        private void load(IAPIProvider api, INotificationOverlay notifications)
         {
             InternalChild = contentContainer = new Container
             {
@@ -104,14 +111,22 @@ namespace osu.Game.Screens.Misskey
 
         private void insetanceFetch()
         {
-            var getMeta = new Meta(searchTextBox.Text);
+            request = new Meta();
 
-            getMeta.Success += response =>
+            request.Success += () =>
             {
-                Logger.Log($"{response}");
             };
 
-            api.Queue(getMeta);
+            request.Failure += e =>
+            {
+                notificationOverlay?.Post(new SimpleNotification
+                {
+                    Text = e.Message,
+                    Icon = FontAwesome.Solid.Times,
+                });
+            };
+
+            api.Queue(request);
         }
     }
 }
