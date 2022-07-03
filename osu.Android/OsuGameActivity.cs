@@ -67,7 +67,7 @@ namespace osu.Android
 
             Debug.Assert(Window != null);
 
-            // Window.AddFlags(WindowManagerFlags.Fullscreen);
+            Window.ClearFlags(WindowManagerFlags.Fullscreen);
             // Window.AddFlags(WindowManagerFlags.KeepScreenOn);
 
             Debug.Assert(WindowManager?.DefaultDisplay != null);
