@@ -6,11 +6,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using osu.Framework.Extensions.ObjectExtensions;
+using osu.Framework.Logging;
 using osu.Framework.Platform;
+using osu.Framework.Threading;
 using osu.Game.Database;
 using osu.Game.Online.API;
 using osu.Game.Rulesets.Objects;
-using Realms;
 
 namespace osu.Game.Beatmaps
 {
@@ -20,38 +21,45 @@ namespace osu.Game.Beatmaps
     public class BeatmapUpdater : IDisposable
     {
         private readonly IWorkingBeatmapCache workingBeatmapCache;
-        private readonly BeatmapOnlineLookupQueue onlineLookupQueue;
+
         private readonly BeatmapDifficultyCache difficultyCache;
+
+        private readonly BeatmapUpdaterMetadataLookup metadataLookup;
+
+        private const int update_queue_request_concurrency = 4;
+
+        private readonly ThreadedTaskScheduler updateScheduler = new ThreadedTaskScheduler(update_queue_request_concurrency, nameof(BeatmapUpdaterMetadataLookup));
 
         public BeatmapUpdater(IWorkingBeatmapCache workingBeatmapCache, BeatmapDifficultyCache difficultyCache, IAPIProvider api, Storage storage)
         {
             this.workingBeatmapCache = workingBeatmapCache;
             this.difficultyCache = difficultyCache;
 
-            onlineLookupQueue = new BeatmapOnlineLookupQueue(api, storage);
+            metadataLookup = new BeatmapUpdaterMetadataLookup(api, storage);
         }
 
         /// <summary>
         /// Queue a beatmap for background processing.
         /// </summary>
-        public void Queue(Live<BeatmapSetInfo> beatmap)
+        /// <param name="beatmapSet">The managed beatmap set to update. A transaction will be opened to apply changes.</param>
+        /// <param name="preferOnlineFetch">Whether metadata from an online source should be preferred. If <c>true</c>, the local cache will be skipped to ensure the freshest data state possible.</param>
+        public void Queue(Live<BeatmapSetInfo> beatmapSet, bool preferOnlineFetch = false)
         {
-            // For now, just fire off a task.
-            // TODO: Add actual queueing probably.
-            Task.Factory.StartNew(() => beatmap.PerformRead(Process));
+            Logger.Log($"Queueing change for local beatmap {beatmapSet}");
+            Task.Factory.StartNew(() => beatmapSet.PerformRead(b => Process(b, preferOnlineFetch)), default, TaskCreationOptions.HideScheduler | TaskCreationOptions.RunContinuationsAsynchronously, updateScheduler);
         }
 
         /// <summary>
         /// Run all processing on a beatmap immediately.
         /// </summary>
-        public void Process(BeatmapSetInfo beatmapSet) => beatmapSet.Realm.Write(r => Process(beatmapSet, r));
-
-        public void Process(BeatmapSetInfo beatmapSet, Realm realm)
+        /// <param name="beatmapSet">The managed beatmap set to update. A transaction will be opened to apply changes.</param>
+        /// <param name="preferOnlineFetch">Whether metadata from an online source should be preferred. If <c>true</c>, the local cache will be skipped to ensure the freshest data state possible.</param>
+        public void Process(BeatmapSetInfo beatmapSet, bool preferOnlineFetch = false) => beatmapSet.Realm.Write(r =>
         {
             // Before we use below, we want to invalidate.
             workingBeatmapCache.Invalidate(beatmapSet);
 
-            onlineLookupQueue.Update(beatmapSet);
+            metadataLookup.Update(beatmapSet, preferOnlineFetch);
 
             foreach (var beatmap in beatmapSet.Beatmaps)
             {
@@ -71,7 +79,7 @@ namespace osu.Game.Beatmaps
 
             // And invalidate again afterwards as re-fetching the most up-to-date database metadata will be required.
             workingBeatmapCache.Invalidate(beatmapSet);
-        }
+        });
 
         private double calculateLength(IBeatmap b)
         {
@@ -91,8 +99,11 @@ namespace osu.Game.Beatmaps
 
         public void Dispose()
         {
-            if (onlineLookupQueue.IsNotNull())
-                onlineLookupQueue.Dispose();
+            if (metadataLookup.IsNotNull())
+                metadataLookup.Dispose();
+
+            if (updateScheduler.IsNotNull())
+                updateScheduler.Dispose();
         }
 
         #endregion

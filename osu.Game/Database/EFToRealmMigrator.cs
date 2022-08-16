@@ -132,11 +132,12 @@ namespace osu.Game.Database
             {
                 try
                 {
-                    realm.CreateBackup(Path.Combine(backup_folder, $"client.{backupSuffix}.realm"), realmBlockOperations);
+                    realm.CreateBackup(Path.Combine(backup_folder, $"client.{backupSuffix}.realm"));
                 }
                 finally
                 {
-                    // Above call will dispose of the blocking token when done.
+                    // Once the backup is created, we need to stop blocking operations so the migration can complete.
+                    realmBlockOperations.Dispose();
                     // Clean up here so we don't accidentally dispose twice.
                     realmBlockOperations = null;
                 }
@@ -442,7 +443,6 @@ namespace osu.Game.Database
                             TotalScore = score.TotalScore,
                             MaxCombo = score.MaxCombo,
                             Accuracy = score.Accuracy,
-                            HasReplay = ((IScoreInfo)score).HasReplay,
                             Date = score.Date,
                             PP = score.PP,
                             Rank = score.Rank,
