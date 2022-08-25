@@ -7,11 +7,8 @@ using NUnit.Framework;
 using osu.Framework.Allocation;
 using osu.Game.Configuration;
 using osu.Game.Rulesets;
-using osu.Game.Rulesets.Catch;
-using osu.Game.Rulesets.Mania;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Osu;
-using osu.Game.Rulesets.Taiko;
 using osu.Game.Screens.Play;
 
 namespace osu.Game.Tests.Visual.Gameplay
@@ -36,14 +33,14 @@ namespace osu.Game.Tests.Visual.Gameplay
         [Test]
         public void TestOsu() => runForRuleset(new OsuRuleset().RulesetInfo);
 
-        [Test]
-        public void TestTaiko() => runForRuleset(new TaikoRuleset().RulesetInfo);
-
-        [Test]
-        public void TestCatch() => runForRuleset(new CatchRuleset().RulesetInfo);
-
-        [Test]
-        public void TestMania() => runForRuleset(new ManiaRuleset().RulesetInfo);
+        // [Test]
+        // public void TestTaiko() => runForRuleset(new TaikoRuleset().RulesetInfo);
+        //
+        // [Test]
+        // public void TestCatch() => runForRuleset(new CatchRuleset().RulesetInfo);
+        //
+        // [Test]
+        // public void TestMania() => runForRuleset(new ManiaRuleset().RulesetInfo);
 
         private void runForRuleset(RulesetInfo ruleset)
         {

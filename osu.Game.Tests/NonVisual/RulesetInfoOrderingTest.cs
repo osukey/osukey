@@ -6,7 +6,6 @@
 using System.Linq;
 using NUnit.Framework;
 using osu.Game.Rulesets;
-using osu.Game.Rulesets.Catch;
 using osu.Game.Rulesets.Osu;
 
 namespace osu.Game.Tests.NonVisual
@@ -23,7 +22,6 @@ namespace osu.Game.Tests.NonVisual
                 new OsuRuleset().RulesetInfo,
                 new RulesetInfo("custom3", "Custom Ruleset 3", string.Empty, -1),
                 new RulesetInfo("custom2", "Custom Ruleset 2", string.Empty, -1),
-                new CatchRuleset().RulesetInfo,
                 new RulesetInfo("custom3", "Custom Ruleset 3", string.Empty, -1),
             };
 

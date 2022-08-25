@@ -92,7 +92,8 @@ namespace osu.Game
         internal Online.EndpointConfiguration CreateEndpoints() =>
             UseDevelopmentServer ? new DevelopmentEndpointConfiguration() : new ProductionEndpointConfiguration();
 
-        internal Online.MisskeyAPI.EndpointConfiguration CreateMisskeyEndpoints() => new osu.Game.Online.MisskeyAPI.DefaultEndpointConfigration();
+        internal Online.MisskeyAPI.EndpointConfiguration CreateMisskeyEndpoints() =>
+            new osu.Game.Online.MisskeyAPI.DefaultEndpointConfigration();
 
         public virtual Version AssemblyVersion => Assembly.GetEntryAssembly()?.GetName().Version ?? new Version();
 

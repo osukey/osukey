@@ -7,7 +7,7 @@ namespace osu.Game.Online.MisskeyAPI
     {
         public DefaultEndpointConfigration()
         {
-            APIEndpointUrl = "https://misskey.io";
+            APIEndpointUrl = "https://simkey.net";
         }
     }
 }

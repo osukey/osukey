@@ -4,7 +4,9 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection.Metadata.Ecma335;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using osu.Framework.IO.Network;
@@ -21,8 +23,12 @@ namespace osu.Game.Online.MisskeyAPI
     {
         protected override WebRequest CreateWebRequest() => new JsonWebRequest<T>(Uri);
 
+
+
+
         /// <summary>
         /// The deserialised response object. May be null if the request or deserialisation failed.
+        /// 逆シリアル化された応答オブジェクト。リクエストまたは逆シリアル化が失敗した場合、null になることがあります。
         /// </summary>
         [CanBeNull]
         public T Response { get; private set; }
@@ -30,6 +36,7 @@ namespace osu.Game.Online.MisskeyAPI
         /// <summary>
         /// Invoked on successful completion of an API request.
         /// This will be scheduled to the API's internal scheduler (run on update thread automatically).
+        /// API リクエストが正常に完了すると呼び出されます。これは、API の内部スケジューラにスケジュールされます (更新スレッドで自動的に実行されます)。
         /// </summary>
         public new event APISuccessHandler<T> Success;
 
@@ -62,13 +69,17 @@ namespace osu.Game.Online.MisskeyAPI
 
     /// <summary>
     /// AN API request with no specified response type.
+    /// 応答タイプが指定されていない API 要求。
     /// </summary>
     public abstract class APIRequest
     {
+        // ターゲット指定
         protected abstract string Target { get; }
 
+        // リクエスト
         protected virtual WebRequest CreateWebRequest() => new WebRequest(Uri);
 
+        // リクエストURI
         protected virtual string Uri => $@"{API.APIEndpointUrl}/api/{Target}";
 
         protected APIAccess API;
@@ -77,17 +88,19 @@ namespace osu.Game.Online.MisskeyAPI
         //// <summary>
         //// The currently logged in user. Note that this will only be populated during <see cref="Perform"/>.
         //// </summary>
-        // protected APIUser User { get; private set; }
+        protected I User { get; private set; }
 
         /// <summary>
         /// Invoked on successful completion of an API request.
         /// This will be scheduled to the API's internal scheduler (run on update thread automatically).
+        /// API リクエストが正常に完了すると呼び出されます。これは、API の内部スケジューラにスケジュールされます (更新スレッドで自動的に実行されます)。
         /// </summary>
         public event APISuccessHandler Success;
 
         /// <summary>
         /// Invoked on failure to complete an API request.
         /// This will be scheduled to the API's internal scheduler (run on update thread automatically).
+        /// API リクエストの完了に失敗したときに呼び出されます。これは、API の内部スケジューラにスケジュールされます (更新スレッドで自動的に実行されます)。
         /// </summary>
         public event APIFailureHandler Failure;
 
@@ -96,9 +109,18 @@ namespace osu.Game.Online.MisskeyAPI
         /// <summary>
         /// The state of this request, from an outside perspective.
         /// This is used to ensure correct notification events are fired.
+        /// 外部から見たこのリクエストの状態。これは、正しい通知イベントが確実に発生するようにするために使用されます。
         /// </summary>
         public APIRequestCompletionState CompletionState { get; private set; }
 
+        /// <summary>
+        /// ここには、MisskeyのAPIのリクエストが入ります。
+        /// iは自動挿入されます
+        /// </summary>
+        [CanBeNull]
+        public Dictionary<string, string> Body { get; set; } = new Dictionary<string, string>();
+
+        // 実行部分
         public void Perform(IAPIProvider api)
         {
             if (!(api is APIAccess apiAccess))
@@ -108,7 +130,7 @@ namespace osu.Game.Online.MisskeyAPI
             }
 
             API = apiAccess;
-            //User = apiAccess.LocalUser.Value;
+            User = apiAccess.LocalUser.Value;
 
             if (isFailing) return;
 
@@ -118,8 +140,11 @@ namespace osu.Game.Online.MisskeyAPI
 
             WebRequest.AddHeader("x-api-version", API.APIVersion.ToString(CultureInfo.InvariantCulture));
 
+            Body ??= new Dictionary<string, string>();
+
             if (!string.IsNullOrEmpty(API.AccessToken))
-                // WebRequest.AddRaw("i", $"{API.AccessToken}");
+                Body.Add("i", API.AccessToken);
+            WebRequest.AddRaw(JsonConvert.SerializeObject(Body));
 
             if (isFailing) return;
 
@@ -143,6 +168,7 @@ namespace osu.Game.Online.MisskeyAPI
 
         /// <summary>
         /// Perform any post-processing actions after a successful request.
+        /// リクエストが成功した後、後処理アクションを実行します。
         /// </summary>
         protected virtual void PostProcess()
         {
@@ -192,16 +218,19 @@ namespace osu.Game.Online.MisskeyAPI
                 WebRequest?.Abort();
 
                 // in the case of a cancellation we don't care about whether there's an error in the response.
+                // キャンセルの場合、応答にエラーがあるかどうかは気にしません。
                 if (!(e is OperationCanceledException))
                 {
                     string responseString = WebRequest?.GetResponseString();
 
                     // naive check whether there's an error in the response to avoid unnecessary JSON deserialisation.
+                    // 不必要な JSON の逆シリアル化を避けるために、応答にエラーがあるかどうかを素朴にチェックします。
                     if (!string.IsNullOrEmpty(responseString) && responseString.Contains(@"""error"""))
                     {
                         try
                         {
                             // attempt to decode a displayable error string.
+                            // 表示可能なエラー文字列のデコードを試みます。
                             var error = JsonConvert.DeserializeObject<DisplayableError>(responseString);
                             if (error != null)
                                 e = new APIException(error.ErrorMessage, e);
@@ -219,6 +248,7 @@ namespace osu.Game.Online.MisskeyAPI
 
         /// <summary>
         /// Whether this request is in a failing or failed state.
+        /// このリクエストが失敗または失敗した状態にあるかどうか。
         /// </summary>
         private bool isFailing
         {

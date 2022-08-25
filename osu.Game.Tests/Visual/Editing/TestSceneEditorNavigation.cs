@@ -8,7 +8,6 @@ using osu.Framework.Extensions.IEnumerableExtensions;
 using osu.Framework.Extensions.ObjectExtensions;
 using osu.Game.Beatmaps;
 using osu.Game.Database;
-using osu.Game.Rulesets.Mania;
 using osu.Game.Rulesets.Osu;
 using osu.Game.Screens.Edit;
 using osu.Game.Screens.Edit.GameplayTest;
@@ -32,7 +31,7 @@ namespace osu.Game.Tests.Visual.Editing
                 () => Game.Beatmap.Value.BeatmapSetInfo.Equals(beatmapSet)
                       && Game.ScreenStack.CurrentScreen is PlaySongSelect songSelect
                       && songSelect.IsLoaded);
-            AddStep("switch ruleset", () => Game.Ruleset.Value = new ManiaRuleset().RulesetInfo);
+            // AddStep("switch ruleset", () => Game.Ruleset.Value = new ManiaRuleset().RulesetInfo);
 
             AddStep("open editor", () => ((PlaySongSelect)Game.ScreenStack.CurrentScreen).Edit(beatmapSet.Beatmaps.First(beatmap => beatmap.Ruleset.OnlineID == 0)));
             AddUntilStep("wait for editor open", () => Game.ScreenStack.CurrentScreen is Editor editor && editor.ReadyForUse);
@@ -51,7 +50,7 @@ namespace osu.Game.Tests.Visual.Editing
 
             AddStep("exit to song select", () => Game.PerformFromScreen(_ => { }, typeof(PlaySongSelect).Yield()));
             AddUntilStep("wait for song select", () => Game.ScreenStack.CurrentScreen is PlaySongSelect);
-            AddAssert("previous ruleset restored", () => Game.Ruleset.Value.Equals(new ManiaRuleset().RulesetInfo));
+            // AddAssert("previous ruleset restored", () => Game.Ruleset.Value.Equals(new ManiaRuleset().RulesetInfo));
         }
     }
 }

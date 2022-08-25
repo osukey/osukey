@@ -7,6 +7,7 @@ using osu.Framework.Allocation;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Cursor;
 using osu.Framework.Graphics.Effects;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
@@ -28,6 +29,7 @@ namespace osu.Game.Screens.Misskey
     {
         private Container carouselContainer;
         private IconButton aboutButton;
+        private OsuMenu menu;
 
         [BackgroundDependencyLoader(true)]
         private void load()
@@ -120,8 +122,23 @@ namespace osu.Game.Screens.Misskey
                                 Margin = new MarginPadding(20),
                                 Position = new Vector2(0),
                                 Icon = FontAwesome.Solid.EllipsisH,
-                                // Action = () => OsuMenu.Empty()
+                                Action = () => menu.Show(),
+
                                 // TODO: コンテキストメニューの実装
+                            },
+                            menu = new OsuMenu(Direction.Vertical, true)
+                            {
+                                State = MenuState.Closed,
+                                Origin = Anchor.TopRight,
+                                Anchor = Anchor.TopRight,
+                                Margin = new MarginPadding(30),
+                                Position = new Vector2(0),
+                                Items = new[]
+                                {
+                                    new OsuMenuItem("インスタンス情報"),
+                                    new OsuMenuItem("Misskeyについて"),
+                                    new OsuMenuItem("ヘルプ"),
+                                }
                             },
                             new OsuSpriteText()
                             {
@@ -174,6 +191,7 @@ namespace osu.Game.Screens.Misskey
                 }
             };
         }
+
         public override void OnResuming(ScreenTransitionEvent e)
         {
             base.OnResuming(e);
@@ -181,7 +199,6 @@ namespace osu.Game.Screens.Misskey
             this.FadeIn(250);
 
             this.ScaleTo(1, 250, Easing.OutSine);
-
         }
     }
 }

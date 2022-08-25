@@ -12,6 +12,7 @@ using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Screens;
 using osu.Game.Graphics;
 using osu.Game.Graphics.UserInterface;
+using osu.Game.Graphics.Containers;
 using osu.Game.Overlays.Dashboard.Friends;
 using osuTK;
 using osuTK.Graphics;
@@ -22,7 +23,6 @@ namespace osu.Game.Screens.Misskey
     {
         private Box background;
         private Container contentContainer;
-
 
         [Resolved]
         private OsuGameBase game { get; set; }
@@ -46,8 +46,8 @@ namespace osu.Game.Screens.Misskey
                     new Container
                     {
                         Name = "List",
-                        RelativeSizeAxes = Axes.X,
-                        AutoSizeAxes = Axes.Y,
+                        // RelativeSizeAxes = Axes.X,
+                        Size = new Vector2(1000, 500f),
                         Anchor = Anchor.Centre,
                         Origin = Anchor.Centre,
                         Children = new Drawable[]
@@ -57,50 +57,64 @@ namespace osu.Game.Screens.Misskey
                                 RelativeSizeAxes = Axes.Both,
                                 Colour = colours.Gray9
                             },
-                            new FillFlowContainer
+
+                            new OsuScrollContainer()
                             {
-                                RelativeSizeAxes = Axes.X,
-                                AutoSizeAxes = Axes.Y,
-                                Margin = new MarginPadding { Bottom = 20 },
-                                Children = new Drawable[]
+                                RelativeSizeAxes = Axes.Both,
+                                Child = new FillFlowContainer
                                 {
-                                    //ここに足す
-                                    new Container
+                                    Size = new Vector2(1000f),
+                                    Children = new Drawable[]
                                     {
-                                        RelativeSizeAxes = Axes.X,
-                                        AutoSizeAxes = Axes.Y,
-                                        Padding = new MarginPadding
-                                        {
-                                            Horizontal = 40,
-                                            Vertical = 20
-                                        },
-                                        Child = new OsuButton()
+                                        new OsuButton()
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
                                             Size = new Vector2(500f, 50f),
                                             Text = "MisskeyInstanceSelect",
                                             Action = () => this.Push(new MisskeyInstanceSelect())
-                                        }
-                                    },
-                                    new Container
-                                    {
-                                        RelativeSizeAxes = Axes.X,
-                                        AutoSizeAxes = Axes.Y,
-                                        Padding = new MarginPadding
-                                        {
-                                            Horizontal = 40,
-                                            Vertical = 20
                                         },
-                                        Child = new OsuButton()
+                                        new OsuButton()
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
                                             Size = new Vector2(500f, 50f),
                                             Text = "Welcome",
                                             Action = () => this.Push(new Welcome())
-                                        }
-                                    },
+                                        },
+                                        new OsuButton()
+                                        {
+                                            Anchor = Anchor.Centre,
+                                            Origin = Anchor.Centre,
+                                            Size = new Vector2(500f, 50f),
+                                            Text = "Components",
+                                            Action = () => this.Push(new MisskeyComponents())
+                                        },
+                                        new OsuButton()
+                                        {
+                                            Anchor = Anchor.Centre,
+                                            Origin = Anchor.Centre,
+                                            Size = new Vector2(500f, 50f),
+                                            Text = "MisskeyLogin",
+                                            Action = () => this.Push(new MisskeyLogin())
+                                        },
+                                        new OsuButton()
+                                        {
+                                            Anchor = Anchor.Centre,
+                                            Origin = Anchor.Centre,
+                                            Size = new Vector2(500f, 50f),
+                                            Text = "MisskeyInstanceSelect",
+                                            Action = () => this.Push(new MisskeyInstanceSelect())
+                                        },
+                                        new OsuButton()
+                                        {
+                                            Anchor = Anchor.Centre,
+                                            Origin = Anchor.Centre,
+                                            Size = new Vector2(500f, 50f),
+                                            Text = "Welcome",
+                                            Action = () => this.Push(new Welcome())
+                                        },
+                                    }
                                 }
                             }
                         }

@@ -8,7 +8,8 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
-
+using osu.Framework.Bindables;
+using osu.Game.Users;
 
 namespace osu.Game.Online.MisskeyAPI.Requests.Responses
 {
@@ -19,6 +20,9 @@ namespace osu.Game.Online.MisskeyAPI.Requests.Responses
         /// A user ID which can be used to represent any system user which is not attached to a user profile.
         /// </summary>
         public const string SYSTEM_USER_ID = "system";
+
+        public readonly Bindable<UserStatus> Status = new Bindable<UserStatus>();
+
 
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
         public class Channel
@@ -352,8 +356,8 @@ namespace osu.Game.Online.MisskeyAPI.Requests.Responses
         [JsonProperty("updatedAt")]
         public DateTime UpdatedAt;
 
-        [JsonProperty("lastFetchedAt")]
-        public DateTime LastFetchedAt;
+        // [JsonProperty("lastFetchedAt")]
+        // public DateTime LastFetchedAt;
 
         [JsonProperty("bannerUrl")]
         public string BannerUrl;

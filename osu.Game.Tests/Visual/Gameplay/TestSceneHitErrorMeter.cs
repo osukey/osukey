@@ -17,14 +17,12 @@ using osu.Framework.Threading;
 using osu.Framework.Utils;
 using osu.Game.Graphics.Sprites;
 using osu.Game.Rulesets.Judgements;
-using osu.Game.Rulesets.Mania.Scoring;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Osu;
 using osu.Game.Rulesets.Osu.Objects;
 using osu.Game.Rulesets.Osu.Scoring;
 using osu.Game.Rulesets.Scoring;
-using osu.Game.Rulesets.Taiko.Scoring;
 using osu.Game.Rulesets.UI;
 using osu.Game.Scoring;
 using osu.Game.Screens.Play.HUD.HitErrorMeters;
@@ -84,19 +82,19 @@ namespace osu.Game.Tests.Visual.Gameplay
             AddStep("OD 10", () => recreateDisplay(new OsuHitWindows(), 10));
         }
 
-        [Test]
-        public void TestTaiko()
-        {
-            AddStep("OD 1", () => recreateDisplay(new TaikoHitWindows(), 1));
-            AddStep("OD 10", () => recreateDisplay(new TaikoHitWindows(), 10));
-        }
-
-        [Test]
-        public void TestMania()
-        {
-            AddStep("OD 1", () => recreateDisplay(new ManiaHitWindows(), 1));
-            AddStep("OD 10", () => recreateDisplay(new ManiaHitWindows(), 10));
-        }
+        // [Test]
+        // public void TestTaiko()
+        // {
+        //     AddStep("OD 1", () => recreateDisplay(new TaikoHitWindows(), 1));
+        //     AddStep("OD 10", () => recreateDisplay(new TaikoHitWindows(), 10));
+        // }
+        //
+        // [Test]
+        // public void TestMania()
+        // {
+        //     AddStep("OD 1", () => recreateDisplay(new ManiaHitWindows(), 1));
+        //     AddStep("OD 10", () => recreateDisplay(new ManiaHitWindows(), 10));
+        // }
 
         [Test]
         public void TestEmpty()

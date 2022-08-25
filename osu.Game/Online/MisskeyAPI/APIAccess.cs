@@ -45,13 +45,9 @@ namespace osu.Game.Online.MisskeyAPI
         private string password;
 
         public IBindable<Requests.Responses.I> LocalUser => localUser;
-        //public IBindableList<I> Friends => friends;
         public IBindable<UserActivity> Activity => activity;
 
         private Bindable<Requests.Responses.I> localUser { get; } = new Bindable<Requests.Responses.I>(createGuestUser());
-
-        //private BindableList<I> friends { get; } = new BindableList<I>();
-
         private Bindable<UserActivity> activity { get; } = new Bindable<UserActivity>();
 
         protected bool HasLogin => authentication.Token.Value != null || (!string.IsNullOrEmpty(ProvidedUsername) && !string.IsNullOrEmpty(password));
@@ -92,6 +88,7 @@ namespace osu.Game.Online.MisskeyAPI
 
         /// <summary>
         /// Number of consecutive requests which failed due to network issues.
+        /// ネットワークの問題が原因で失敗した連続したリクエストの数。
         /// </summary>
         private int failureCount;
 
@@ -119,6 +116,7 @@ namespace osu.Game.Online.MisskeyAPI
                     case APIState.Offline:
                     case APIState.Connecting:
                         // work to restore a connection...
+                        // 接続を復元する作業...
                         if (!HasLogin)
                         {
                             state.Value = APIState.Offline;
@@ -129,6 +127,7 @@ namespace osu.Game.Online.MisskeyAPI
                         state.Value = APIState.Connecting;
 
                         // save the username at this point, if the user requested for it to be.
+                        // ユーザーが要求した場合は、この時点でユーザー名を保存します。
                         config.SetValue(OsuSetting.Username, config.Get<bool>(OsuSetting.SaveUsername) ? ProvidedUsername : string.Empty);
 
                         if (!authentication.HasValidAccessToken)
@@ -167,7 +166,8 @@ namespace osu.Game.Online.MisskeyAPI
                             localUser.Value = u;
 
                             // todo: save/pull from settings
-                            // localUser.Value.Status.Value = new UserStatusOnline();
+                            localUser.Value.Status.Value = new UserStatusOnline();
+                            state.Value = APIState.Online;
 
                             failureCount = 0;
                         };
@@ -178,35 +178,20 @@ namespace osu.Game.Online.MisskeyAPI
                             continue;
                         }
 
-                        // getting user's friends is considered part of the connection process.
-                        // var friendsReq = new GetFriendsRequest();
-                        //
-                        // friendsReq.Failure += _ => failConnectionProcess();
-                        // friendsReq.Success += res =>
-                        // {
-                        //     friends.AddRange(res);
-                        //
-                        //     //we're connected!
-                        //     state.Value = APIState.Online;
-                        // };
-                        //
-                        // if (!handleRequest(friendsReq))
-                        // {
-                        //     failConnectionProcess();
-                        //     continue;
-                        // }
-
                         // The Success callback event is fired on the main thread, so we should wait for that to run before proceeding.
                         // Without this, we will end up circulating this Connecting loop multiple times and queueing up many web requests
                         // before actually going online.
+                        // Success コールバック イベントはメイン スレッドで発生するため、続行する前にそれが実行されるのを待つ必要があります。
+                        // これがないと、実際にオンラインになる前に、この接続ループを何度も循環させ、多くの Web 要求をキューに入れることになります。
 
-                        // while (State.Value > APIState.Offline && State.Value < APIState.Online)
-                        //     Thread.Sleep(500);
+                        while (State.Value > APIState.Offline && State.Value < APIState.Online)
+                            Thread.Sleep(500);
 
                         break;
                 }
 
                 // hard bail if we can't get a valid access token.
+                // 有効なアクセス トークンを取得できない場合はハード ベイルします。
                 if (authentication.RequestAccessToken() == null)
                 {
                     Logout();
@@ -233,6 +218,7 @@ namespace osu.Game.Online.MisskeyAPI
             void failConnectionProcess()
             {
                 // if something went wrong during the connection process, we want to reset the state (but only if still connecting).
+                // 接続プロセス中に何か問題が発生した場合は、状態をリセットします (ただし、まだ接続している場合のみ)。
                 if (State.Value == APIState.Connecting)
                     state.Value = APIState.Failing;
             }
@@ -291,6 +277,7 @@ namespace osu.Game.Online.MisskeyAPI
                 catch
                 {
                     // if we couldn't deserialize the error message let's throw the original exception outwards.
+                    // エラー メッセージをデシリアライズできなかった場合は、元の例外を外側にスローしましょう。
                     e.Rethrow();
                 }
             }
@@ -301,6 +288,7 @@ namespace osu.Game.Online.MisskeyAPI
         /// <summary>
         /// Handle a single API request.
         /// Ensures all exceptions are caught and dealt with correctly.
+        /// 単一の API リクエストを処理します。すべての例外がキャッチされ、正しく処理されるようにします。
         /// </summary>
         /// <param name="req">The request.</param>
         /// <returns>true if the request succeeded.</returns>
@@ -314,6 +302,7 @@ namespace osu.Game.Online.MisskeyAPI
                     return false;
 
                 // we could still be in initialisation, at which point we don't want to say we're Online yet.
+                // まだ初期化中の可能性がありますが、その時点ではまだオンラインであるとは言いたくありません。
                 if (IsLoggedIn) state.Value = APIState.Online;
                 failureCount = 0;
                 return true;
@@ -347,6 +336,7 @@ namespace osu.Game.Online.MisskeyAPI
 
         /// <summary>
         /// The current connectivity state of the API.
+        /// API の現在の接続状態。
         /// </summary>
         public IBindable<APIState> State => state;
 
@@ -356,6 +346,7 @@ namespace osu.Game.Online.MisskeyAPI
                                         ?? (we.Status == WebExceptionStatus.UnknownError ? HttpStatusCode.NotAcceptable : HttpStatusCode.RequestTimeout);
 
             // special cases for un-typed but useful message responses.
+            // タイプされていないが有用なメッセージ応答の特殊なケース。
             switch (we.Message)
             {
                 case "Unauthorized":
@@ -394,11 +385,11 @@ namespace osu.Game.Online.MisskeyAPI
         {
             lock (queue)
             {
-                // if (state.Value == APIState.Offline)
-                // {
-                //     request.Fail(new WebException(@"User not logged in"));
-                //     return;
-                // }
+                if (state.Value == APIState.Offline)
+                {
+                    request.Fail(new WebException(@"User not logged in"));
+                    return;
+                }
 
                 queue.Enqueue(request);
             }
@@ -426,6 +417,7 @@ namespace osu.Game.Online.MisskeyAPI
             authentication.Clear();
 
             // Scheduled prior to state change such that the state changed event is invoked with the correct user and their friends present
+            // 正しいユーザーとその友人が存在する状態で状態変更イベントが呼び出されるように、状態変更の前にスケジュールされます
             Schedule(() =>
             {
                 localUser.Value = createGuestUser();
@@ -460,21 +452,25 @@ namespace osu.Game.Online.MisskeyAPI
     {
         /// <summary>
         /// We cannot login (not enough credentials).
+        /// ログインできません (資格情報が不足しています)。
         /// </summary>
         Offline,
 
         /// <summary>
         /// We are having connectivity issues.
+        /// 接続に問題があります。
         /// </summary>
         Failing,
 
         /// <summary>
         /// We are in the process of (re-)connecting.
+        /// 私たちは（再）接続の過程にあります。
         /// </summary>
         Connecting,
 
         /// <summary>
         /// We are online.
+        /// 私たちはオンラインです。
         /// </summary>
         Online
     }

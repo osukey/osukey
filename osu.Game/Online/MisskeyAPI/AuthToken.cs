@@ -13,47 +13,32 @@ namespace osu.Game.Online.MisskeyAPI
     public class AuthToken
     {
         /// <summary>
-        /// OAuth 2.0 access token.
+        /// Misskey access token.
         /// </summary>
-        [JsonProperty(@"access_token")]
+        [JsonProperty(@"i")]
         public string AccessToken;
 
-        [JsonProperty(@"expires_in")]
+        [JsonProperty(@"id")]
+        public string MyUserId;
+
         public long ExpiresIn
         {
             get => AccessTokenExpiry - DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             set => AccessTokenExpiry = DateTimeOffset.Now.AddSeconds(value).ToUnixTimeSeconds();
         }
 
-        public bool IsValid => !string.IsNullOrEmpty(AccessToken) && ExpiresIn > 30;
+        public bool IsValid => !string.IsNullOrEmpty(AccessToken) && ExpiresIn < 30;
 
         public long AccessTokenExpiry;
 
-        /// <summary>
-        /// OAuth 2.0 refresh token.
-        /// </summary>
-        [JsonProperty(@"refresh_token")]
-        public string RefreshToken;
-
-        public override string ToString() => $@"{AccessToken}|{AccessTokenExpiry.ToString(NumberFormatInfo.InvariantInfo)}|{RefreshToken}";
+        public override string ToString() => $@"{AccessToken}";
 
         public static AuthToken Parse(string value)
         {
-            try
+            return new AuthToken
             {
-                string[] parts = value.Split('|');
-                return new AuthToken
-                {
-                    AccessToken = parts[0],
-                    AccessTokenExpiry = long.Parse(parts[1], NumberFormatInfo.InvariantInfo),
-                    RefreshToken = parts[2]
-                };
-            }
-            catch
-            {
-            }
-
-            return null;
+                AccessToken = value
+            };
         }
     }
 }

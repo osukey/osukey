@@ -11,7 +11,7 @@ using osuTK.Graphics;
 using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.Cursor;
-using osu.Game.Overlays.Login;
+using osu.Game.Misskey.Overlays.Login;
 using osuTK;
 
 namespace osu.Game.Screens.Misskey

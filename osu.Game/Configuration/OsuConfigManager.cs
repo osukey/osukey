@@ -375,5 +375,7 @@ namespace osu.Game.Configuration
         DiscordRichPresence,
         AutomaticallyDownloadWhenSpectating,
         ShowOnlineExplicitContent,
+        LastProcessedMetadataId,
+        MisskeyToken,
     }
 }

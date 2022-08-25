@@ -24,8 +24,6 @@ using osu.Game.Overlays.Mods;
 using osu.Game.Rulesets;
 using osu.Game.Rulesets.Osu;
 using osu.Game.Rulesets.Osu.Mods;
-using osu.Game.Rulesets.Taiko;
-using osu.Game.Rulesets.Taiko.Mods;
 using osu.Game.Rulesets.UI;
 using osu.Game.Screens.Menu;
 using osu.Game.Screens.OnlinePlay;

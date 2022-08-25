@@ -12,7 +12,7 @@ using osu.Game.Configuration;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.UserInterface;
-using osu.Game.Online.API;
+using osu.Game.Online.MisskeyAPI;
 using osu.Game.Overlays.Settings;
 using osu.Game.Resources.Localisation.Web;
 using osu.Game.Screens.Misskey;
@@ -116,7 +116,7 @@ namespace osu.Game.Overlays.Login
                 }
             };
 
-            forgottenPaswordLink.AddLink(LayoutStrings.PopupLoginLoginForgot, $"{api.WebsiteRootUrl}/home/password-reset");
+            forgottenPaswordLink.AddLink(LayoutStrings.PopupLoginLoginForgot, $"https://simkey.net/about");
 
             password.OnCommit += (_, _) => performLogin();
 

@@ -4,10 +4,7 @@
 #nullable disable
 
 using osu.Framework.Graphics;
-using osu.Game.Rulesets.Catch;
-using osu.Game.Rulesets.Mania;
 using osu.Game.Rulesets.Osu;
-using osu.Game.Rulesets.Taiko;
 using osu.Framework.Bindables;
 using osu.Game.Overlays;
 using osu.Game.Rulesets;
@@ -63,14 +60,14 @@ namespace osu.Game.Tests.Visual.UserInterface
             AddStep("Select osu!", () => ruleset.Value = new OsuRuleset().RulesetInfo);
             AddAssert("Check osu! selected", () => selector.Current.Value.Equals(new OsuRuleset().RulesetInfo));
 
-            AddStep("Select mania", () => ruleset.Value = new ManiaRuleset().RulesetInfo);
-            AddAssert("Check mania selected", () => selector.Current.Value.Equals(new ManiaRuleset().RulesetInfo));
-
-            AddStep("Select taiko", () => ruleset.Value = new TaikoRuleset().RulesetInfo);
-            AddAssert("Check taiko selected", () => selector.Current.Value.Equals(new TaikoRuleset().RulesetInfo));
-
-            AddStep("Select catch", () => ruleset.Value = new CatchRuleset().RulesetInfo);
-            AddAssert("Check catch selected", () => selector.Current.Value.Equals(new CatchRuleset().RulesetInfo));
+            // AddStep("Select mania", () => ruleset.Value = new ManiaRuleset().RulesetInfo);
+            // AddAssert("Check mania selected", () => selector.Current.Value.Equals(new ManiaRuleset().RulesetInfo));
+            //
+            // AddStep("Select taiko", () => ruleset.Value = new TaikoRuleset().RulesetInfo);
+            // AddAssert("Check taiko selected", () => selector.Current.Value.Equals(new TaikoRuleset().RulesetInfo));
+            //
+            // AddStep("Select catch", () => ruleset.Value = new CatchRuleset().RulesetInfo);
+            // AddAssert("Check catch selected", () => selector.Current.Value.Equals(new CatchRuleset().RulesetInfo));
         }
     }
 }

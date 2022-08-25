@@ -43,7 +43,7 @@ namespace osu.Game.Online.MisskeyAPI
 
             var accessTokenRequest = new AccessTokenRequestPassword(username, password)
             {
-                Url = $@"{endpoint}/oauth/token",
+                Url = $@"{endpoint}/api/signin",
                 Method = HttpMethod.Post,
                 // ClientId = clientId
             };
@@ -78,53 +78,58 @@ namespace osu.Game.Online.MisskeyAPI
             }
         }
 
-        internal bool AuthenticateWithRefresh(string refresh)
-        {
-            try
-            {
-                var refreshRequest = new AccessTokenRequestRefresh(refresh)
-                {
-                    Url = $@"{endpoint}/oauth/token",
-                    Method = HttpMethod.Post,
-                    // ClientId = clientId
-                };
-
-                using (refreshRequest)
-                {
-                    refreshRequest.Perform();
-
-                    Token.Value = refreshRequest.ResponseObject;
-                    return true;
-                }
-            }
-            catch
-            {
-                //todo: potentially only kill the refresh token on certain exception types.
-                Token.Value = null;
-                return false;
-            }
-        }
+        // internal bool AuthenticateWithRefresh(string refresh)
+        // {
+        //     try
+        //     {
+        //         var refreshRequest = new AccessTokenRequestRefresh(refresh)
+        //         {
+        //             Url = $@"{endpoint}/api/signin",
+        //             Method = HttpMethod.Post,
+        //             // ClientId = clientId
+        //         };
+        //
+        //         using (refreshRequest)
+        //         {
+        //             refreshRequest.Perform();
+        //
+        //             Token.Value = refreshRequest.ResponseObject;
+        //             return true;
+        //         }
+        //     }
+        //     catch
+        //     {
+        //         //todo: potentially only kill the refresh token on certain exception types.
+        //         Token.Value = null;
+        //         return false;
+        //     }
+        // }
 
         private static readonly object access_token_retrieval_lock = new object();
 
         /// <summary>
         /// Should be run before any API request to make sure we have a valid key.
+        /// 有効なキーがあることを確認するために、API リクエストの前に実行する必要があります。
         /// </summary>
         private bool ensureAccessToken()
         {
             // if we already have a valid access token, let's use it.
+            // 有効なアクセス トークンが既にある場合は、それを使用しましょう。
             if (accessTokenValid) return true;
 
             // we want to ensure only a single authentication update is happening at once.
+            // 一度に 1 つの認証更新のみが行われるようにする必要があります。
             lock (access_token_retrieval_lock)
             {
                 // re-check if valid, in case another request completed and revalidated our access.
+                // 別のリクエストが完了し、アクセスが再検証された場合に備えて、有効かどうかを再確認してください。
                 if (accessTokenValid) return true;
 
                 // if not, let's try using our refresh token to request a new access token.
-                if (!string.IsNullOrEmpty(Token.Value?.RefreshToken))
-                    // ReSharper disable once PossibleNullReferenceException
-                    AuthenticateWithRefresh(Token.Value.RefreshToken);
+                // そうでない場合は、更新トークンを使用して新しいアクセス トークンをリクエストしてみましょう。
+                // if (!string.IsNullOrEmpty(Token.Value?.RefreshToken))
+                //     // ReSharper disable once PossibleNullReferenceException
+                //     AuthenticateWithRefresh(Token.Value.RefreshToken);
 
                 return accessTokenValid;
             }
@@ -178,8 +183,13 @@ namespace osu.Game.Online.MisskeyAPI
 
             protected override void PrePerform()
             {
-                AddParameter("username", Username);
-                AddParameter("password", Password);
+                object body = new
+                {
+                    username = Username,
+                    password = Password
+                };
+
+                AddRaw(JsonConvert.SerializeObject(body));
 
                 base.PrePerform();
             }
@@ -193,9 +203,9 @@ namespace osu.Game.Online.MisskeyAPI
 
             protected override void PrePerform()
             {
-                AddParameter("grant_type", GrantType);
+                // AddParameter("grant_type", GrantType);
                 // AddParameter("client_id", ClientId);
-                AddParameter("scope", "*");
+                // AddParameter("scope", "*");
 
                 base.PrePerform();
             }

@@ -156,27 +156,27 @@ namespace osu.Game.Overlays.Login
                         },
                     };
 
-                    panel.Status.BindTo(api.LocalUser.Value.Status);
-                    panel.Activity.BindTo(api.LocalUser.Value.Activity);
+                    // panel.Status.BindTo(api.LocalUser.Value.Status);
+                    // panel.Activity.BindTo(api.LocalUser.Value.Activity);
 
                     dropdown.Current.BindValueChanged(action =>
                     {
                         switch (action.NewValue)
                         {
-                            case UserAction.Online:
-                                api.LocalUser.Value.Status.Value = new UserStatusOnline();
-                                dropdown.StatusColour = colours.Green;
-                                break;
-
-                            case UserAction.DoNotDisturb:
-                                api.LocalUser.Value.Status.Value = new UserStatusDoNotDisturb();
-                                dropdown.StatusColour = colours.Red;
-                                break;
-
-                            case UserAction.AppearOffline:
-                                api.LocalUser.Value.Status.Value = new UserStatusOffline();
-                                dropdown.StatusColour = colours.Gray7;
-                                break;
+                            // case UserAction.Online:
+                            //     api.LocalUser.Value.Status.Value = new UserStatusOnline();
+                            //     dropdown.StatusColour = colours.Green;
+                            //     break;
+                            //
+                            // case UserAction.DoNotDisturb:
+                            //     api.LocalUser.Value.Status.Value = new UserStatusDoNotDisturb();
+                            //     dropdown.StatusColour = colours.Red;
+                            //     break;
+                            //
+                            // case UserAction.AppearOffline:
+                            //     api.LocalUser.Value.Status.Value = new UserStatusOffline();
+                            //     dropdown.StatusColour = colours.Gray7;
+                            //     break;
 
                             case UserAction.SignOut:
                                 api.Logout();

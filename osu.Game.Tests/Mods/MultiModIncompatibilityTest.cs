@@ -6,11 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using osu.Game.Rulesets;
-using osu.Game.Rulesets.Catch;
-using osu.Game.Rulesets.Mania;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Osu;
-using osu.Game.Rulesets.Taiko;
 using osu.Game.Utils;
 
 namespace osu.Game.Tests.Mods
@@ -22,9 +19,6 @@ namespace osu.Game.Tests.Mods
         /// Ensures that all mods grouped into <see cref="MultiMod"/>s, as declared by the default rulesets, are pairwise incompatible with each other.
         /// </summary>
         [TestCase(typeof(OsuRuleset))]
-        [TestCase(typeof(TaikoRuleset))]
-        [TestCase(typeof(CatchRuleset))]
-        [TestCase(typeof(ManiaRuleset))]
         public void TestAllMultiModsFromRulesetAreIncompatible(Type rulesetType)
         {
             var ruleset = Activator.CreateInstance(rulesetType) as Ruleset;

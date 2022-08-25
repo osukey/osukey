@@ -2,15 +2,20 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System.Net.Http;
+using Newtonsoft.Json;
 using osu.Framework.IO.Network;
 
 namespace osu.Game.Online.MisskeyAPI.Requests
 {
+
     public class I : APIRequest<MisskeyAPI.Requests.Responses.I>
     {
+
         public I()
         {
         }
+
+
 
         protected override WebRequest CreateWebRequest()
         {
@@ -19,6 +24,6 @@ namespace osu.Game.Online.MisskeyAPI.Requests
             return req;
         }
 
-        protected override string Target => @"meta";
+        protected override string Target => @"i";
     }
 }

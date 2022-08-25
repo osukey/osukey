@@ -16,7 +16,6 @@ using osu.Game.Beatmaps.ControlPoints;
 using osu.Game.Database;
 using osu.Game.Overlays.Dialog;
 using osu.Game.Rulesets;
-using osu.Game.Rulesets.Catch;
 using osu.Game.Rulesets.Osu;
 using osu.Game.Rulesets.Osu.Objects;
 using osu.Game.Rulesets.Osu.UI;
@@ -189,7 +188,7 @@ namespace osu.Game.Tests.Visual.Editing
             });
             AddAssert("can save again", () => Editor.Save());
 
-            AddStep("create new difficulty", () => Editor.CreateNewDifficulty(sameRuleset ? new OsuRuleset().RulesetInfo : new CatchRuleset().RulesetInfo));
+            // AddStep("create new difficulty", () => Editor.CreateNewDifficulty(sameRuleset ? new OsuRuleset().RulesetInfo : new CatchRuleset().RulesetInfo));
 
             if (sameRuleset)
             {
@@ -371,7 +370,7 @@ namespace osu.Game.Tests.Visual.Editing
                 return set != null && set.PerformRead(s => s.Beatmaps.Count == 1 && s.Files.Count == 1);
             });
 
-            AddStep("create new difficulty", () => Editor.CreateNewDifficulty(sameRuleset ? new OsuRuleset().RulesetInfo : new CatchRuleset().RulesetInfo));
+            // AddStep("create new difficulty", () => Editor.CreateNewDifficulty(sameRuleset ? new OsuRuleset().RulesetInfo : new CatchRuleset().RulesetInfo));
 
             if (sameRuleset)
             {
