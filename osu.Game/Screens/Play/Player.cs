@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -77,7 +78,7 @@ namespace osu.Game.Screens.Play
         /// </summary>
         protected virtual bool PauseOnFocusLost => true;
 
-        public Action RestartRequested;
+        public Action<bool> RestartRequested;
 
         private bool isRestarting;
 
@@ -267,7 +268,7 @@ namespace osu.Game.Screens.Play
                 FailOverlay = new FailOverlay
                 {
                     SaveReplay = prepareAndImportScore,
-                    OnRetry = Restart,
+                    OnRetry = () => Restart(),
                     OnQuit = () => PerformExit(true),
                 },
                 new HotkeyExitOverlay
@@ -294,7 +295,7 @@ namespace osu.Game.Screens.Play
                         if (!this.IsCurrentScreen()) return;
 
                         fadeOut(true);
-                        Restart();
+                        Restart(true);
                     },
                 });
             }
@@ -371,6 +372,9 @@ namespace osu.Game.Screens.Play
 
             IsBreakTime.BindTo(breakTracker.IsBreakTime);
             IsBreakTime.BindValueChanged(onBreakTimeChanged, true);
+
+            if (Configuration.AutomaticallySkipIntro)
+                skipIntroOverlay.SkipWhenReady();
         }
 
         protected virtual GameplayClockContainer CreateGameplayClockContainer(WorkingBeatmap beatmap, double gameplayStart) => new MasterGameplayClockContainer(beatmap, gameplayStart);
@@ -441,7 +445,7 @@ namespace osu.Game.Screens.Play
                     {
                         OnResume = Resume,
                         Retries = RestartCount,
-                        OnRetry = Restart,
+                        OnRetry = () => Restart(),
                         OnQuit = () => PerformExit(true),
                     },
                 },
@@ -637,8 +641,7 @@ namespace osu.Game.Screens.Play
             bool wasFrameStable = DrawableRuleset.FrameStablePlayback;
             DrawableRuleset.FrameStablePlayback = false;
 
-            GameplayClockContainer.StartTime = time;
-            GameplayClockContainer.Reset();
+            GameplayClockContainer.Reset(time);
 
             // Delay resetting frame-stable playback for one frame to give the FrameStabilityContainer a chance to seek.
             frameStablePlaybackResetDelegate = ScheduleAfterChildren(() => DrawableRuleset.FrameStablePlayback = wasFrameStable);
@@ -648,7 +651,8 @@ namespace osu.Game.Screens.Play
         /// Restart gameplay via a parent <see cref="PlayerLoader"/>.
         /// <remarks>This can be called from a child screen in order to trigger the restart process.</remarks>
         /// </summary>
-        public void Restart()
+        /// <param name="quickRestart">Whether a quick restart was requested (skipping intro etc.).</param>
+        public void Restart(bool quickRestart = false)
         {
             if (!Configuration.AllowRestart)
                 return;
@@ -660,7 +664,7 @@ namespace osu.Game.Screens.Play
             musicController.Stop();
 
             sampleRestart?.Play();
-            RestartRequested?.Invoke();
+            RestartRequested?.Invoke(quickRestart);
 
             PerformExit(false);
         }
@@ -824,8 +828,16 @@ namespace osu.Game.Screens.Play
 
         private bool onFail()
         {
+            // Failing after the quit sequence has started may cause weird side effects with the fail animation / effects.
+            if (GameplayState.HasQuit)
+                return false;
+
             if (!CheckModsAllowFailure())
                 return false;
+
+            Debug.Assert(!GameplayState.HasFailed);
+            Debug.Assert(!GameplayState.HasPassed);
+            Debug.Assert(!GameplayState.HasQuit);
 
             GameplayState.HasFailed = true;
 
@@ -840,7 +852,7 @@ namespace osu.Game.Screens.Play
             failAnimationLayer.Start();
 
             if (GameplayState.Mods.OfType<IApplicableFailOverride>().Any(m => m.RestartOnFail))
-                Restart();
+                Restart(true);
 
             return true;
         }
@@ -1008,7 +1020,7 @@ namespace osu.Game.Screens.Play
             if (GameplayClockContainer.IsRunning)
                 throw new InvalidOperationException($"{nameof(StartGameplay)} should not be called when the gameplay clock is already running");
 
-            GameplayClockContainer.Reset(true);
+            GameplayClockContainer.Reset(startClock: true);
         }
 
         public override void OnSuspending(ScreenTransitionEvent e)
