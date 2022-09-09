@@ -118,6 +118,28 @@ namespace osu.Game.Tests.Visual.Multiplayer
         //     AddAssert("ruleset not changed", () => Ruleset.Value.Equals(new TaikoRuleset().RulesetInfo));
         //     AddAssert("mods not changed", () => SelectedMods.Value.Single() is TaikoModDoubleTime);
         // }
+        // [Test]
+        // public void TestBeatmapConfirmed()
+        // {
+        //     BeatmapInfo selectedBeatmap = null;
+        //
+        //     AddStep("change ruleset", () => Ruleset.Value = new TaikoRuleset().RulesetInfo);
+        //     AddStep("select beatmap",
+        //         () => songSelect.Carousel.SelectBeatmap(selectedBeatmap = beatmaps.First(beatmap => beatmap.Ruleset.OnlineID == new TaikoRuleset().LegacyID)));
+        //
+        //     AddUntilStep("wait for selection", () => Beatmap.Value.BeatmapInfo.Equals(selectedBeatmap));
+        //     AddUntilStep("wait for ongoing operation to complete", () => !OnlinePlayDependencies.OngoingOperationTracker.InProgress.Value);
+        //
+        //     AddStep("set mods", () => SelectedMods.Value = new[] { new TaikoModDoubleTime() });
+        //
+        //     AddStep("confirm selection", () => songSelect.FinaliseSelection());
+        //
+        //     AddUntilStep("song select exited", () => !songSelect.IsCurrentScreen());
+        //
+        //     AddAssert("beatmap not changed", () => Beatmap.Value.BeatmapInfo.Equals(selectedBeatmap));
+        //     AddAssert("ruleset not changed", () => Ruleset.Value.Equals(new TaikoRuleset().RulesetInfo));
+        //     AddAssert("mods not changed", () => SelectedMods.Value.Single() is TaikoModDoubleTime);
+        // }
 
         [TestCase(typeof(OsuModHidden), typeof(OsuModHidden))] // Same mod.
         [TestCase(typeof(OsuModHidden), typeof(OsuModTraceable))] // Incompatible.
@@ -149,8 +171,8 @@ namespace osu.Game.Tests.Visual.Multiplayer
 
             public new BeatmapCarousel Carousel => base.Carousel;
 
-            public TestMultiplayerMatchSongSelect(Room room, WorkingBeatmap beatmap = null, RulesetInfo ruleset = null)
-                : base(room, null, beatmap, ruleset)
+            public TestMultiplayerMatchSongSelect(Room room)
+                : base(room)
             {
             }
         }
