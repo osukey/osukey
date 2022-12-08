@@ -24,7 +24,7 @@ using osu.Game.Tests.Beatmaps;
 
 namespace osu.Game.Tests.Visual.Gameplay
 {
-    public class TestScenePlayerScoreSubmission : PlayerTestScene
+    public partial class TestScenePlayerScoreSubmission : PlayerTestScene
     {
         protected override bool AllowFail => allowFail;
 
@@ -343,7 +343,7 @@ namespace osu.Game.Tests.Visual.Gameplay
             });
         }
 
-        protected class FakeImportingPlayer : TestPlayer
+        protected partial class FakeImportingPlayer : TestPlayer
         {
             public bool ScoreImportStarted { get; set; }
             public SemaphoreSlim AllowImportCompletion { get; }

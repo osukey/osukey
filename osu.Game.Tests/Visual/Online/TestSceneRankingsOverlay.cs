@@ -13,7 +13,7 @@ using osu.Game.Users;
 
 namespace osu.Game.Tests.Visual.Online
 {
-    public class TestSceneRankingsOverlay : OsuTestScene
+    public partial class TestSceneRankingsOverlay : OsuTestScene
     {
         protected override bool UseOnlineAPI => true;
 
@@ -67,7 +67,7 @@ namespace osu.Game.Tests.Visual.Online
             };
         }
 
-        private class TestRankingsOverlay : RankingsOverlay
+        private partial class TestRankingsOverlay : RankingsOverlay
         {
             public new Bindable<CountryCode> Country => base.Country;
         }

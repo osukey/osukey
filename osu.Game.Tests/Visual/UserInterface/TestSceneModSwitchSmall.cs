@@ -19,7 +19,7 @@ using osuTK;
 namespace osu.Game.Tests.Visual.UserInterface
 {
     [TestFixture]
-    public class TestSceneModSwitchSmall : OsuTestScene
+    public partial class TestSceneModSwitchSmall : OsuTestScene
     {
         [Test]
         public void TestOsu() => createSwitchTestFor(new OsuRuleset());
