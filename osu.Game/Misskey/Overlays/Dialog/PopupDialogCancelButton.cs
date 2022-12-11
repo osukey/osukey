@@ -9,7 +9,7 @@ using osu.Game.Graphics.UserInterface;
 
 namespace osu.Game.Misskey.Overlays.Dialog
 {
-    public class PopupDialogCancelButton : PopupDialogButton
+    public partial class PopupDialogCancelButton : PopupDialogButton
     {
         [BackgroundDependencyLoader]
         private void load(OsuColour colours)

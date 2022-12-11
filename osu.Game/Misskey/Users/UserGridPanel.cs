@@ -13,7 +13,7 @@ using osuTK;
 
 namespace osu.Game.Misskey.Users
 {
-    public class UserGridPanel : ExtendedUserPanel
+    public partial class UserGridPanel : ExtendedUserPanel
     {
         private const int margin = 10;
 

@@ -13,7 +13,7 @@ using osu.Game.Users;
 
 namespace osu.Game.Online.MisskeyAPI
 {
-    public class DummyAPIAccess : Component//, IAPIProvider
+    public partial class DummyAPIAccess : Component//, IAPIProvider
     {
         public const string DUMMY_USER_ID = "1001";
 

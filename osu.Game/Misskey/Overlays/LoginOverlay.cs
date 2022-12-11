@@ -15,7 +15,7 @@ using osu.Game.Misskey.Overlays.Login;
 
 namespace osu.Game.Misskey.Overlays
 {
-    public class LoginOverlay : OsuFocusedOverlayContainer
+    public partial class LoginOverlay : OsuFocusedOverlayContainer
     {
         private LoginPanel panel;
 

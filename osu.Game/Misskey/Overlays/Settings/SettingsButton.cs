@@ -16,7 +16,7 @@ using osu.Game.Overlays;
 
 namespace osu.Game.Misskey.Overlays.Settings
 {
-    public class SettingsButton : RoundedButton, IHasTooltip
+    public partial class SettingsButton : RoundedButton, IHasTooltip
     {
         public SettingsButton()
         {

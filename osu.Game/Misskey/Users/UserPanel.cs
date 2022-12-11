@@ -20,7 +20,7 @@ using osu.Game.Online.MisskeyAPI.Requests.Responses;
 
 namespace osu.Game.Misskey.Users
 {
-    public abstract class UserPanel : OsuClickableContainer, IHasContextMenu
+    public abstract partial class UserPanel : OsuClickableContainer, IHasContextMenu
     {
         public readonly I User;
 

@@ -25,7 +25,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Screens.Misskey
 {
-    public class Welcome : OsuScreen
+    public partial class Welcome : OsuScreen
     {
         private Container carouselContainer;
         private IconButton aboutButton;

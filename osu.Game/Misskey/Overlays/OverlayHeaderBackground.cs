@@ -11,7 +11,7 @@ using osu.Framework.Graphics.Textures;
 
 namespace osu.Game.Misskey.Overlays
 {
-    public class OverlayHeaderBackground : CompositeDrawable
+    public partial class OverlayHeaderBackground : CompositeDrawable
     {
         public OverlayHeaderBackground(string textureName)
         {
@@ -21,7 +21,7 @@ namespace osu.Game.Misskey.Overlays
             InternalChild = new Background(textureName);
         }
 
-        private class Background : Sprite
+        private partial class Background : Sprite
         {
             private readonly string textureName;
 

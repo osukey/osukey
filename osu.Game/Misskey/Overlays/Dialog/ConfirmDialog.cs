@@ -12,7 +12,7 @@ namespace osu.Game.Misskey.Overlays.Dialog
     /// <summary>
     /// A dialog which confirms a user action.
     /// </summary>
-    public class ConfirmDialog : PopupDialog
+    public partial class ConfirmDialog : PopupDialog
     {
         /// <summary>
         /// Construct a new confirmation dialog.

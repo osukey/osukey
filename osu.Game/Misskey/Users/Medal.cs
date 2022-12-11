@@ -5,7 +5,7 @@
 
 namespace osu.Game.Misskey.Users
 {
-    public class Medal
+    public partial class Medal
     {
         public string Name { get; set; }
         public string InternalName { get; set; }

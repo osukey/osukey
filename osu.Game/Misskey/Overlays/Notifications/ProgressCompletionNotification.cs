@@ -10,7 +10,7 @@ using osu.Framework.Graphics.Sprites;
 
 namespace osu.Game.Misskey.Overlays.Notifications
 {
-    public class ProgressCompletionNotification : SimpleNotification
+    public partial class ProgressCompletionNotification : SimpleNotification
     {
         public ProgressCompletionNotification()
         {

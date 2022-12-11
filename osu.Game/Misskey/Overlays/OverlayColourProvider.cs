@@ -9,7 +9,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Misskey.Overlays
 {
-    public class OverlayColourProvider
+    public partial class OverlayColourProvider
     {
         private readonly OverlayColourScheme colourScheme;
 

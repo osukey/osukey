@@ -11,16 +11,29 @@ namespace osu.Game.Online.MisskeyAPI.Requests
     public class I : APIRequest<MisskeyAPI.Requests.Responses.I>
     {
 
-        public I()
+        private string i;
+
+        public I(string i)
         {
+            this.i = i;
         }
 
+        private class ReqBody
+        {
+            public string? i;
+        };
 
 
         protected override WebRequest CreateWebRequest()
         {
             var req = base.CreateWebRequest();
             req.Method = HttpMethod.Post;
+            var body = new ReqBody()
+            {
+                i = i
+            };
+            var json = JsonConvert.SerializeObject(body);
+            req.AddRaw(json);
             return req;
         }
 

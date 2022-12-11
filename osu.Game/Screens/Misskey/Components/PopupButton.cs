@@ -10,7 +10,7 @@ using osuTK;
 
 namespace osu.Game.Screens.Misskey.Components
 {
-    public class PopupButton : IconButton
+    public partial class PopupButton : IconButton
     {
         public PopupButton()
         {

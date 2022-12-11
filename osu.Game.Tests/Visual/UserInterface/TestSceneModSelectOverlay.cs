@@ -17,7 +17,6 @@ using osu.Game.Graphics.UserInterface;
 using osu.Game.Overlays.Mods;
 using osu.Game.Overlays.Settings;
 using osu.Game.Rulesets;
-using osu.Game.Rulesets.Catch.Mods;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Osu;
 using osu.Game.Rulesets.Osu.Mods;

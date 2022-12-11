@@ -17,7 +17,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Screens.Misskey
 {
-    public class MisskeyComponents : OsuScreen
+    public partial class MisskeyComponents : OsuScreen
     {
         private Container contentContainer;
         private Drawable avatar;
@@ -59,7 +59,7 @@ namespace osu.Game.Screens.Misskey
                                 {
                                     RelativeSizeAxes = Axes.Both,
                                 })
-                        }
+                        },
                     }
                 }
             };

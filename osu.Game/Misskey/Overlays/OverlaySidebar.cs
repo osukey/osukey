@@ -12,7 +12,7 @@ using osu.Game.Graphics.Containers;
 
 namespace osu.Game.Misskey.Overlays
 {
-    public abstract class OverlaySidebar : CompositeDrawable
+    public abstract partial class OverlaySidebar : CompositeDrawable
     {
         private readonly Box sidebarBackground;
         private readonly Box scrollbarBackground;

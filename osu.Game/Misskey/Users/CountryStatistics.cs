@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace osu.Game.Misskey.Users
 {
-    public class CountryStatistics
+    public partial class CountryStatistics
     {
         [JsonProperty(@"code")]
         public CountryCode Code;

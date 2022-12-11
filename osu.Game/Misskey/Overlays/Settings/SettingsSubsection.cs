@@ -18,7 +18,7 @@ using osu.Game.Overlays;
 namespace osu.Game.Misskey.Overlays.Settings
 {
     [ExcludeFromDynamicCompile]
-    public abstract class SettingsSubsection : FillFlowContainer, IHasFilterableChildren
+    public abstract partial class SettingsSubsection : FillFlowContainer, IFilterable
     {
         protected override Container<Drawable> Content => FlowContent;
 

@@ -12,7 +12,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Misskey.Overlays
 {
-    public abstract class OverlayHeader : Container
+    public abstract partial class OverlayHeader : Container
     {
         public OverlayTitle Title { get; }
 

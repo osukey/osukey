@@ -25,7 +25,7 @@ using Meta = osu.Game.Online.MisskeyAPI.Requests.Meta;
 
 namespace osu.Game.Screens.Misskey
 {
-    public class MisskeyInstanceSelect : OsuScreen
+    public partial class MisskeyInstanceSelect : OsuScreen
     {
         private Container contentContainer;
 

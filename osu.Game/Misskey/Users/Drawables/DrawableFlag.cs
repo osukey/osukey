@@ -13,7 +13,7 @@ using osu.Framework.Localisation;
 
 namespace osu.Game.Misskey.Users.Drawables
 {
-    public class DrawableFlag : Sprite, IHasTooltip
+    public partial class DrawableFlag : Sprite, IHasTooltip
     {
         private readonly CountryCode countryCode;
 

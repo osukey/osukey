@@ -16,6 +16,7 @@
       <Pack>True</Pack>
       <PackagePath>icon.png</PackagePath>
     </None>
+    <None Remove="Screens\Misskey\Timeline.csss" />
   </ItemGroup>
   <ItemGroup Label="Package References">
     <PackageReference Include="AutoMapper" Version="11.0.1" />

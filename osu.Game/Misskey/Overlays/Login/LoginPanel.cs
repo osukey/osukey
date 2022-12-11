@@ -22,7 +22,7 @@ using Container = osu.Framework.Graphics.Containers.Container;
 
 namespace osu.Game.Misskey.Overlays.Login
 {
-    public class LoginPanel : FillFlowContainer
+    public partial class LoginPanel : FillFlowContainer
     {
         private bool bounding = true;
         private LoginForm form;

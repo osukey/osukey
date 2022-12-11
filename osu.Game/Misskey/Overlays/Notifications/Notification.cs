@@ -21,7 +21,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Misskey.Overlays.Notifications
 {
-    public abstract class Notification : Container
+    public abstract partial class Notification : Container
     {
         /// <summary>
         /// User requested close.
@@ -169,7 +169,7 @@ namespace osu.Game.Misskey.Overlays.Notifications
             Expire();
         }
 
-        private class CloseButton : OsuClickableContainer
+        private partial class CloseButton : OsuClickableContainer
         {
             private Color4 hoverColour;
 
@@ -209,7 +209,7 @@ namespace osu.Game.Misskey.Overlays.Notifications
             }
         }
 
-        public class NotificationLight : Container
+        public partial class NotificationLight : Container
         {
             private bool pulsate;
             private Container pulsateLayer;

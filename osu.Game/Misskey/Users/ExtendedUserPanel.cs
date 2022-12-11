@@ -18,7 +18,7 @@ using osu.Game.Online.MisskeyAPI.Requests.Responses;
 
 namespace osu.Game.Misskey.Users
 {
-    public abstract class ExtendedUserPanel : UserPanel
+    public abstract partial class ExtendedUserPanel : UserPanel
     {
         public readonly Bindable<UserStatus> Status = new Bindable<UserStatus>();
 

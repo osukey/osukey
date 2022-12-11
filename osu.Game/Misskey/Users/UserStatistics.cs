@@ -12,7 +12,7 @@ using osu.Game.Utils;
 
 namespace osu.Game.Misskey.Users
 {
-    public class UserStatistics
+    public partial class UserStatistics
     {
         [JsonProperty]
         public APIUser User;

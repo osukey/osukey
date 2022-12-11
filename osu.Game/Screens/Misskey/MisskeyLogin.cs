@@ -16,7 +16,7 @@ using osuTK;
 
 namespace osu.Game.Screens.Misskey
 {
-    public class MisskeyLogin : OsuScreen
+    public partial class MisskeyLogin : OsuScreen
     {
         private LoginPanel panel;
 

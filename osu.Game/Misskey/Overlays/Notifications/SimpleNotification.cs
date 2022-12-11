@@ -16,7 +16,7 @@ using osuTK;
 
 namespace osu.Game.Misskey.Overlays.Notifications
 {
-    public class SimpleNotification : Notification
+    public partial class SimpleNotification : Notification
     {
         private LocalisableString text;
 

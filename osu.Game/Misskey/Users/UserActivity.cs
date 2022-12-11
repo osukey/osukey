@@ -11,23 +11,23 @@ using osuTK.Graphics;
 
 namespace osu.Game.Misskey.Users
 {
-    public abstract class UserActivity
+    public abstract partial class UserActivity
     {
         public abstract string Status { get; }
         public virtual Color4 GetAppropriateColour(OsuColour colours) => colours.GreenDarker;
 
-        public class Modding : UserActivity
+        public partial class Modding : UserActivity
         {
             public override string Status => "Modding a map";
             public override Color4 GetAppropriateColour(OsuColour colours) => colours.PurpleDark;
         }
 
-        public class ChoosingBeatmap : UserActivity
+        public partial class ChoosingBeatmap : UserActivity
         {
             public override string Status => "Choosing a beatmap";
         }
 
-        public abstract class InGame : UserActivity
+        public abstract partial class InGame : UserActivity
         {
             public IBeatmapInfo BeatmapInfo { get; }
 
@@ -42,7 +42,7 @@ namespace osu.Game.Misskey.Users
             public override string Status => Ruleset.CreateInstance().PlayingVerb;
         }
 
-        public class InMultiplayerGame : InGame
+        public partial class InMultiplayerGame : InGame
         {
             public InMultiplayerGame(IBeatmapInfo beatmapInfo, IRulesetInfo ruleset)
                 : base(beatmapInfo, ruleset)
@@ -52,7 +52,7 @@ namespace osu.Game.Misskey.Users
             public override string Status => $@"{base.Status} with others";
         }
 
-        public class SpectatingMultiplayerGame : InGame
+        public partial class SpectatingMultiplayerGame : InGame
         {
             public SpectatingMultiplayerGame(IBeatmapInfo beatmapInfo, IRulesetInfo ruleset)
                 : base(beatmapInfo, ruleset)
@@ -62,7 +62,7 @@ namespace osu.Game.Misskey.Users
             public override string Status => $"Watching others {base.Status.ToLowerInvariant()}";
         }
 
-        public class InPlaylistGame : InGame
+        public partial class InPlaylistGame : InGame
         {
             public InPlaylistGame(IBeatmapInfo beatmapInfo, IRulesetInfo ruleset)
                 : base(beatmapInfo, ruleset)
@@ -70,7 +70,7 @@ namespace osu.Game.Misskey.Users
             }
         }
 
-        public class InSoloGame : InGame
+        public partial class InSoloGame : InGame
         {
             public InSoloGame(IBeatmapInfo beatmapInfo, IRulesetInfo ruleset)
                 : base(beatmapInfo, ruleset)
@@ -78,7 +78,7 @@ namespace osu.Game.Misskey.Users
             }
         }
 
-        public class Editing : UserActivity
+        public partial class Editing : UserActivity
         {
             public IBeatmapInfo BeatmapInfo { get; }
 
@@ -90,17 +90,17 @@ namespace osu.Game.Misskey.Users
             public override string Status => @"Editing a beatmap";
         }
 
-        public class Spectating : UserActivity
+        public partial class Spectating : UserActivity
         {
             public override string Status => @"Spectating a game";
         }
 
-        public class SearchingForLobby : UserActivity
+        public partial class SearchingForLobby : UserActivity
         {
             public override string Status => @"Looking for a lobby";
         }
 
-        public class InLobby : UserActivity
+        public partial class InLobby : UserActivity
         {
             public override string Status => @"In a lobby";
 

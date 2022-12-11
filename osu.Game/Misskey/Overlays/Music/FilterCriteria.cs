@@ -9,7 +9,7 @@ using osu.Game.Database;
 
 namespace osu.Game.Misskey.Overlays.Music
 {
-    public class FilterCriteria
+    public partial class FilterCriteria
     {
         /// <summary>
         /// The search text.

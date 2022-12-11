@@ -13,7 +13,7 @@ using osu.Game.Graphics.Containers.Markdown;
 
 namespace osu.Game.Misskey.Overlays.Wiki.Markdown
 {
-    public class WikiMarkdownContainer : OsuMarkdownContainer
+    public partial class WikiMarkdownContainer : OsuMarkdownContainer
     {
         public string CurrentPath
         {
@@ -44,7 +44,7 @@ namespace osu.Game.Misskey.Overlays.Wiki.Markdown
 
         public override MarkdownTextFlowContainer CreateTextFlow() => new WikiMarkdownTextFlowContainer();
 
-        private class WikiMarkdownTextFlowContainer : OsuMarkdownTextFlowContainer
+        private partial class WikiMarkdownTextFlowContainer : OsuMarkdownTextFlowContainer
         {
             protected override void AddImage(LinkInline linkInline) => AddDrawable(new WikiMarkdownImage(linkInline));
         }

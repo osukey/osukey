@@ -13,7 +13,7 @@ using osu.Game.Online.MisskeyAPI.Requests.Responses;
 namespace osu.Game.Misskey.Users.Drawables
 {
     [LongRunningLoad]
-    public class DrawableAvatar : Sprite
+    public partial class DrawableAvatar : Sprite
     {
         private readonly I user;
 

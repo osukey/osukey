@@ -19,7 +19,7 @@ namespace osu.Game.Misskey.Overlays.News.Displays
     /// <summary>
     /// Lists articles in a vertical flow for a specified year.
     /// </summary>
-    public class ArticleListing : CompositeDrawable
+    public partial class ArticleListing : CompositeDrawable
     {
         private readonly Action fetchMorePosts;
 

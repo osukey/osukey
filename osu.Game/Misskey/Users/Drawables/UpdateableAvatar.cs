@@ -14,7 +14,7 @@ namespace osu.Game.Misskey.Users.Drawables
     /// <summary>
     /// An avatar which can update to a new user when needed.
     /// </summary>
-    public class UpdateableAvatar : ModelBackedDrawable<I>
+    public partial class UpdateableAvatar : ModelBackedDrawable<I>
     {
         public I User
         {

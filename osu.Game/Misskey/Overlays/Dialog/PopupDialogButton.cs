@@ -8,7 +8,7 @@ using osu.Game.Graphics.UserInterface;
 
 namespace osu.Game.Misskey.Overlays.Dialog
 {
-    public class PopupDialogButton : DialogButton
+    public partial class PopupDialogButton : DialogButton
     {
         public PopupDialogButton(HoverSampleSet sampleSet = HoverSampleSet.Button)
             : base(sampleSet)

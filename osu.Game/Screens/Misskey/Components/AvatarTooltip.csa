@@ -14,7 +14,7 @@ using osuTK;
 
 namespace osu.Game.Screens.Misskey.Components
 {
-    public class AvatarTooltip : VisibilityContainer
+    public partial class AvatarTooltip : VisibilityContainer
     {
         private OsuSpriteText difficultyName;
         private StarRatingDisplay starRating;

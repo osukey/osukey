@@ -15,7 +15,7 @@ using osu.Game.Misskey.Overlays.News.Sidebar;
 
 namespace osu.Game.Misskey.Overlays
 {
-    public class NewsOverlay : OnlineOverlay<NewsHeader>
+    public partial class NewsOverlay : OnlineOverlay<NewsHeader>
     {
         private readonly Bindable<string> article = new Bindable<string>();
 

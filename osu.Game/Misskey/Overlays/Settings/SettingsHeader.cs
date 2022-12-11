@@ -14,7 +14,7 @@ using osu.Game.Overlays.Toolbar;
 
 namespace osu.Game.Misskey.Overlays.Settings
 {
-    public class SettingsHeader : Container
+    public partial class SettingsHeader : Container
     {
         private readonly LocalisableString heading;
         private readonly LocalisableString subheading;

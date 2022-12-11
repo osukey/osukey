@@ -19,7 +19,7 @@ using osuTK;
 
 namespace osu.Game.Misskey.Overlays.Notifications
 {
-    public class NotificationSection : AlwaysUpdateFillFlowContainer<Drawable>
+    public partial class NotificationSection : AlwaysUpdateFillFlowContainer<Drawable>
     {
         private OsuSpriteText countDrawable;
 
@@ -136,7 +136,7 @@ namespace osu.Game.Misskey.Overlays.Notifications
             return count;
         }
 
-        private class ClearAllButton : OsuClickableContainer
+        private partial class ClearAllButton : OsuClickableContainer
         {
             private readonly OsuSpriteText text;
 
@@ -163,7 +163,7 @@ namespace osu.Game.Misskey.Overlays.Notifications
         }
     }
 
-    public class AlwaysUpdateFillFlowContainer<T> : FillFlowContainer<T>
+    public partial class AlwaysUpdateFillFlowContainer<T> : FillFlowContainer<T>
         where T : Drawable
     {
         // this is required to ensure correct layout and scheduling on children.

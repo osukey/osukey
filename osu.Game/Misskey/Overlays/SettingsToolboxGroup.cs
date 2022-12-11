@@ -21,7 +21,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Misskey.Overlays
 {
-    public class SettingsToolboxGroup : Container, IExpandable
+    public partial class SettingsToolboxGroup : Container, IExpandable
     {
         public const int CONTAINER_WIDTH = 270;
 

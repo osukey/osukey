@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace osu.Game.Misskey.Users
 {
-    public class Badge
+    public partial class Badge
     {
         [JsonProperty("awarded_at")]
         public DateTimeOffset AwardedAt;

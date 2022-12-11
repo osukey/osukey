@@ -18,7 +18,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Misskey.Users
 {
-    public class UserCoverBackground : ModelBackedDrawable<I>
+    public partial class UserCoverBackground : ModelBackedDrawable<I>
     {
         public I User
         {
@@ -39,7 +39,7 @@ namespace osu.Game.Misskey.Users
             => new DelayedLoadUnloadWrapper(createContentFunc, timeBeforeLoad, UnloadDelay);
 
         [LongRunningLoad]
-        private class Cover : CompositeDrawable
+        private partial class Cover : CompositeDrawable
         {
             private readonly I user;
 

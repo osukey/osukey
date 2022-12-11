@@ -16,7 +16,7 @@ using osu.Game.Overlays.Profile.Header.Components;
 
 namespace osu.Game.Misskey.Users
 {
-    public class UserListPanel : ExtendedUserPanel
+    public partial class UserListPanel : ExtendedUserPanel
     {
         public UserListPanel(I user)
             : base(user)

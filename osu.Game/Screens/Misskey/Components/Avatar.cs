@@ -17,7 +17,7 @@ using osu.Framework.Graphics.Textures;
 namespace osu.Game.Screens.Misskey.Components
 {
     [LongRunningLoad]
-    public class Avatar : Sprite
+    public partial class Avatar : Sprite
     {
         // private readonly APIUser user;
 

@@ -19,7 +19,7 @@ using osuTK.Graphics;
 
 namespace osu.Game.Screens.Misskey
 {
-    public class MisskeyScreenSelector : OsuScreen
+    public partial class MisskeyScreenSelector : OsuScreen
     {
         private Box background;
         private Container contentContainer;
@@ -98,21 +98,21 @@ namespace osu.Game.Screens.Misskey
                                             Text = "MisskeyLogin",
                                             Action = () => this.Push(new MisskeyLogin())
                                         },
+                                        // new OsuButton()
+                                        // {
+                                        //     Anchor = Anchor.Centre,
+                                        //     Origin = Anchor.Centre,
+                                        //     Size = new Vector2(500f, 50f),
+                                        //     Text = "Timeline",
+                                        //     Action = () => this.Push(new Timeline())
+                                        // },
                                         new OsuButton()
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
                                             Size = new Vector2(500f, 50f),
-                                            Text = "MisskeyInstanceSelect",
-                                            Action = () => this.Push(new MisskeyInstanceSelect())
-                                        },
-                                        new OsuButton()
-                                        {
-                                            Anchor = Anchor.Centre,
-                                            Origin = Anchor.Centre,
-                                            Size = new Vector2(500f, 50f),
-                                            Text = "Welcome",
-                                            Action = () => this.Push(new Welcome())
+                                            Text = "MisskeyPost",
+                                            Action = () => this.Push(new MisskeyPost())
                                         },
                                     }
                                 }

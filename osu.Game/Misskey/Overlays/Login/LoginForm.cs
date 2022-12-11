@@ -21,7 +21,7 @@ using osuTK;
 
 namespace osu.Game.Misskey.Overlays.Login
 {
-    public class LoginForm : FillFlowContainer
+    public partial class LoginForm : FillFlowContainer
     {
         private TextBox username = null!;
         private TextBox password = null!;

@@ -21,7 +21,7 @@ using Realms;
 
 namespace osu.Game.Misskey.Overlays.Music
 {
-    public class PlaylistOverlay : VisibilityContainer
+    public partial class PlaylistOverlay : VisibilityContainer
     {
         private const float transition_duration = 600;
         private const float playlist_height = 510;
