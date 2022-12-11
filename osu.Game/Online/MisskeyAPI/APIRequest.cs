@@ -23,9 +23,6 @@ namespace osu.Game.Online.MisskeyAPI
     {
         protected override WebRequest CreateWebRequest() => new JsonWebRequest<T>(Uri);
 
-
-
-
         /// <summary>
         /// The deserialised response object. May be null if the request or deserialisation failed.
         /// 逆シリアル化された応答オブジェクト。リクエストまたは逆シリアル化が失敗した場合、null になることがあります。
@@ -140,11 +137,11 @@ namespace osu.Game.Online.MisskeyAPI
 
             WebRequest.AddHeader("x-api-version", API.APIVersion.ToString(CultureInfo.InvariantCulture));
 
-            Body ??= new Dictionary<string, string>();
-
-            if (!string.IsNullOrEmpty(API.AccessToken))
-                Body.Add("i", API.AccessToken);
-            WebRequest.AddRaw(JsonConvert.SerializeObject(Body));
+            // Body ??= new Dictionary<string, string>();
+            //
+            // if (!string.IsNullOrEmpty(API.AccessToken))
+            //     Body.Add("i", API.AccessToken);
+            // WebRequest.AddRaw(JsonConvert.SerializeObject(Body));
 
             if (isFailing) return;
 

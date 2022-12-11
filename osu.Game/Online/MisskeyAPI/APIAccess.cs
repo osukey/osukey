@@ -24,7 +24,7 @@ using osu.Game.Users;
 
 namespace osu.Game.Online.MisskeyAPI
 {
-    public class APIAccess : Component, IAPIProvider
+    public partial class APIAccess : Component, IAPIProvider
     {
         private readonly OsuConfigManager config;
 
@@ -108,7 +108,7 @@ namespace osu.Game.Online.MisskeyAPI
                         if (queue.Count == 0)
                         {
                             log.Add(@"Queueing a ping request");
-                            Queue(new Requests.I());
+                            Queue(new Requests.I(AccessToken));
                         }
 
                         break;
@@ -149,7 +149,7 @@ namespace osu.Game.Online.MisskeyAPI
                             }
                         }
 
-                        var userReq = new Requests.I();
+                        var userReq = new Requests.I(AccessToken);
 
                         userReq.Failure += ex =>
                         {
