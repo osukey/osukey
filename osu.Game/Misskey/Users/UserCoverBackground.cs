@@ -14,19 +14,20 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 using osuTK.Graphics;
 
 namespace osu.Game.Misskey.Users
 {
-    public partial class UserCoverBackground : ModelBackedDrawable<I>
+    public partial class UserCoverBackground : ModelBackedDrawable<User>
     {
-        public I User
+        public User User
         {
             get => Model;
             set => Model = value;
         }
 
-        protected override Drawable CreateDrawable(I user) => new Cover(user);
+        protected override Drawable CreateDrawable(User user) => new Cover(user);
 
         protected override double LoadDelay => 300;
 
@@ -41,9 +42,9 @@ namespace osu.Game.Misskey.Users
         [LongRunningLoad]
         private partial class Cover : CompositeDrawable
         {
-            private readonly I user;
+            private readonly User user;
 
-            public Cover(I user)
+            public Cover(User user)
             {
                 this.user = user;
 

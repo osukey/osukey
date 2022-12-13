@@ -15,6 +15,7 @@ using osu.Game.Misskey.Users.Drawables;
 using osu.Framework.Input.Events;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 
 namespace osu.Game.Misskey.Users
 {
@@ -29,7 +30,7 @@ namespace osu.Game.Misskey.Users
         private SpriteIcon statusIcon;
         private OsuSpriteText statusMessage;
 
-        protected ExtendedUserPanel(I user)
+        protected ExtendedUserPanel(User user)
             : base(user)
         {
         }

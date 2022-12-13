@@ -7,19 +7,20 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Localisation;
 using osu.Game.Beatmaps.Drawables.Cards;
-using osu.Game.Beatmaps.Drawables.Cards.Statistics;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.Sprites;
-using osu.Game.Online.API.Requests.Responses;
+using osu.Game.Online.MisskeyAPI;
 using osu.Game.Overlays;
 using osu.Game.Overlays.BeatmapSet;
-using osuTK;
 using osu.Game.Resources.Localisation.Web;
+using osu.Game.Screens.Misskey.Components.Note.Cards.Statistics;
+using osu.Game.Skinning.Components;
+using osuTK;
 
-namespace osu.Game.Screens.Misskey.Components
+namespace osu.Game.Screens.Misskey.Components.Note.Cards
 {
-    public partial class NoteCardNormal : DrawableNoteCard
+    public partial class NoteCardNormal : NoteCard
     {
         protected override Drawable IdleContent => idleBottomContent;
         protected override Drawable DownloadInProgressContent => downloadProgressBar;
@@ -27,23 +28,27 @@ namespace osu.Game.Screens.Misskey.Components
         private const float height = 100;
 
         [Cached]
-        private readonly BeatmapCardContent content;
+        private readonly NoteCardContent content;
 
-        private BeatmapCardThumbnail thumbnail = null!;
-        private CollapsibleButtonContainer buttonContainer = null!;
+        private NoteCardAvatar thumbnail = null!;
+        // private CollapsibleButtonContainer buttonContainer = null!;
 
-        private FillFlowContainer<BeatmapCardStatistic> statisticsContainer = null!;
+        // private FillFlowContainer<BeatmapCardStatistic> statisticsContainer = null!;
+        private TextFlowContainer noteText = null!;
 
         private FillFlowContainer idleBottomContent = null!;
         private BeatmapCardDownloadProgressBar downloadProgressBar = null!;
 
         [Resolved]
-        private OverlayColourProvider colourProvider { get; set; } = null!;
+        private IAPIProvider api { get; set; } = null!;
 
-        public NoteCardNormal(APIBeatmapSet beatmapSet, bool allowExpansion = true)
-            : base(beatmapSet, allowExpansion)
+        // [Resolved]
+        // private OverlayColourProvider colourProvider { get; set; } = null!;
+
+        public NoteCardNormal(Online.MisskeyAPI.Responses.Types.Note note, bool allowExpansion = true)
+            : base(note, allowExpansion)
         {
-            content = new BeatmapCardContent(height);
+            content = new NoteCardContent(height);
         }
 
         [BackgroundDependencyLoader]
@@ -56,6 +61,9 @@ namespace osu.Game.Screens.Misskey.Components
             FillFlowContainer titleBadgeArea = null!;
             GridContainer artistContainer = null!;
 
+            // LinkFlowContainer titleText = null!;
+            LinkFlowContainer artistText = null!;
+
             Child = content.With(c =>
             {
                 c.MainContent = new Container
@@ -63,11 +71,11 @@ namespace osu.Game.Screens.Misskey.Components
                     RelativeSizeAxes = Axes.Both,
                     Children = new Drawable[]
                     {
-                        thumbnail = new BeatmapCardThumbnail(BeatmapSet)
+                        thumbnail = new NoteCardAvatar(Note)
                         {
                             Name = @"Left (icon) area",
-                            Size = new Vector2(height),
-                            Padding = new MarginPadding { Right = CORNER_RADIUS },
+                            Size = new Vector2(height - 10),
+                            // Padding = new MarginPadding { Right = CORNER_RADIUS },
                             Child = leftIconArea = new FillFlowContainer
                             {
                                 Margin = new MarginPadding(5),
@@ -76,17 +84,19 @@ namespace osu.Game.Screens.Misskey.Components
                                 Spacing = new Vector2(1)
                             }
                         },
-                        buttonContainer = new CollapsibleButtonContainer(BeatmapSet)
-                        {
-                            X = height - CORNER_RADIUS,
-                            Width = WIDTH - height + CORNER_RADIUS,
-                            FavouriteState = { BindTarget = FavouriteState },
-                            ButtonsCollapsedWidth = CORNER_RADIUS,
-                            ButtonsExpandedWidth = 30,
-                            Children = new Drawable[]
-                            {
+                        // buttonContainer = new CollapsibleButtonContainer(Note)
+                        // {
+                        //     X = height - CORNER_RADIUS,
+                        //     Width = WIDTH - height + CORNER_RADIUS,
+                        //     // FavouriteState = { BindTarget = FavouriteState },
+                        //     ButtonsCollapsedWidth = CORNER_RADIUS,
+                        //     ButtonsExpandedWidth = 30,
+                        //     Children = new Drawable[]
+                        //     {
                                 new FillFlowContainer
                                 {
+                                    // X = height - CORNER_RADIUS,
+                                    X = height,
                                     RelativeSizeAxes = Axes.Both,
                                     Direction = FillDirection.Vertical,
                                     Children = new Drawable[]
@@ -108,12 +118,14 @@ namespace osu.Game.Screens.Misskey.Components
                                             {
                                                 new Drawable[]
                                                 {
-                                                    new OsuSpriteText
+                                                    new OsuSpriteText()
                                                     {
-                                                        Text = new RomanisableString(BeatmapSet.TitleUnicode, BeatmapSet.Title),
+                                                        Text = new RomanisableString(Note.User.Name, Note.User.Username),
                                                         Font = OsuFont.Default.With(size: 22.5f, weight: FontWeight.SemiBold),
                                                         RelativeSizeAxes = Axes.X,
                                                         Truncate = true
+                                                        // Padding = new MarginPadding { Left = SettingsPanel.CONTENT_MARGINS },
+                                                        // AutoSizeAxes = Axes.Y,
                                                     },
                                                     titleBadgeArea = new FillFlowContainer
                                                     {
@@ -142,28 +154,28 @@ namespace osu.Game.Screens.Misskey.Components
                                             {
                                                 new[]
                                                 {
-                                                    new OsuSpriteText
+                                                    artistText = new LinkFlowContainer()
                                                     {
-                                                        Text = createArtistText(),
-                                                        Font = OsuFont.Default.With(size: 17.5f, weight: FontWeight.SemiBold),
+                                                        // Text = createArtistText(),
+                                                        // Font = OsuFont.Default.With(size: 17.5f, weight: FontWeight.SemiBold),
                                                         RelativeSizeAxes = Axes.X,
-                                                        Truncate = true
+                                                        // Truncate = true
+                                                        AutoSizeAxes = Axes.Y,
                                                     },
                                                     Empty()
                                                 },
                                             }
                                         },
-                                        new LinkFlowContainer(s =>
+                                        noteText = new TextFlowContainer
                                         {
-                                            s.Shadow = false;
-                                            s.Font = OsuFont.GetFont(size: 14, weight: FontWeight.SemiBold);
-                                        }).With(d =>
+                                            RelativeSizeAxes = Axes.X,
+                                            AutoSizeAxes = Axes.Y,
+                                            Alpha = 1,
+                                            AlwaysPresent = true,
+                                        }.With(flow =>
                                         {
-                                            d.AutoSizeAxes = Axes.Both;
-                                            d.Margin = new MarginPadding { Top = 2 };
-                                            d.AddText("mapped by ", t => t.Colour = colourProvider.Content2);
-                                            d.AddUserLink(BeatmapSet.Author);
-                                        }),
+                                            flow.AddText(Note.Text, t => t.Font = OsuFont.Default.With(size: 15));
+                                        })
                                     }
                                 },
                                 new Container
@@ -184,104 +196,97 @@ namespace osu.Game.Screens.Misskey.Components
                                             AlwaysPresent = true,
                                             Children = new Drawable[]
                                             {
-                                                statisticsContainer = new FillFlowContainer<BeatmapCardStatistic>
-                                                {
-                                                    RelativeSizeAxes = Axes.X,
-                                                    AutoSizeAxes = Axes.Y,
-                                                    Direction = FillDirection.Horizontal,
-                                                    Spacing = new Vector2(10, 0),
-                                                    Alpha = 0,
-                                                    AlwaysPresent = true,
-                                                    ChildrenEnumerable = createStatistics()
-                                                },
-                                                new BeatmapCardExtraInfoRow(BeatmapSet)
+                                                // statisticsContainer = new FillFlowContainer<BeatmapCardStatistic>
+                                                // {
+                                                //     RelativeSizeAxes = Axes.X,
+                                                //     AutoSizeAxes = Axes.Y,
+                                                //     Direction = FillDirection.Horizontal,
+                                                //     Spacing = new Vector2(10, 0),
+                                                //     Alpha = 0,
+                                                //     AlwaysPresent = true,
+                                                //     ChildrenEnumerable = createStatistics()
+                                                // },
+
                                             }
-                                        },
-                                        downloadProgressBar = new BeatmapCardDownloadProgressBar
-                                        {
-                                            RelativeSizeAxes = Axes.X,
-                                            Height = 6,
-                                            Anchor = Anchor.Centre,
-                                            Origin = Anchor.Centre,
-                                            State = { BindTarget = DownloadTracker.State },
-                                            Progress = { BindTarget = DownloadTracker.Progress }
                                         }
                                     }
                                 }
-                            }
-                        }
+                        //     }
+                        // }
                     }
                 };
-                c.ExpandedContent = new Container
-                {
-                    RelativeSizeAxes = Axes.X,
-                    AutoSizeAxes = Axes.Y,
-                    Padding = new MarginPadding { Horizontal = 10, Vertical = 13 },
-                    Child = new BeatmapCardDifficultyList(BeatmapSet)
-                };
+                // c.ExpandedContent = new Container
+                // {
+                //     RelativeSizeAxes = Axes.X,
+                //     AutoSizeAxes = Axes.Y,
+                //     Padding = new MarginPadding { Horizontal = 10, Vertical = 13 },
+                //     Child = new BeatmapCardDifficultyList(BeatmapSet)
+                // };
                 c.Expanded.BindTarget = Expanded;
+                // titleText.AddLink(Note.User.Name, $"{api.APIEndpointUrl}@{Note.User.Username}@{Note.User.Host}");
+                artistText.AddLink($"@{Note.User.Username}@{Note.User.Host}", $"{api.APIEndpointUrl}/@{Note.User.Username}@{Note.User.Host}");
             });
 
-            if (BeatmapSet.HasVideo)
-                leftIconArea.Add(new VideoIconPill { IconSize = new Vector2(20) });
+            // if (BeatmapSet.HasVideo)
+            //     leftIconArea.Add(new VideoIconPill { IconSize = new Vector2(20) });
+            //
+            // if (BeatmapSet.HasStoryboard)
+            //     leftIconArea.Add(new StoryboardIconPill { IconSize = new Vector2(20) });
+            //
+            // if (BeatmapSet.FeaturedInSpotlight)
+            // {
+            //     titleBadgeArea.Add(new SpotlightBeatmapBadge
+            //     {
+            //         Anchor = Anchor.BottomRight,
+            //         Origin = Anchor.BottomRight,
+            //         Margin = new MarginPadding { Left = 5 }
+            //     });
+            // }
 
-            if (BeatmapSet.HasStoryboard)
-                leftIconArea.Add(new StoryboardIconPill { IconSize = new Vector2(20) });
+            // if (BeatmapSet.HasExplicitContent)
+            // {
+            //     titleBadgeArea.Add(new ExplicitContentBeatmapBadge
+            //     {
+            //         Anchor = Anchor.BottomRight,
+            //         Origin = Anchor.BottomRight,
+            //         Margin = new MarginPadding { Left = 5 }
+            //     });
+            // }
 
-            if (BeatmapSet.FeaturedInSpotlight)
-            {
-                titleBadgeArea.Add(new SpotlightBeatmapBadge
-                {
-                    Anchor = Anchor.BottomRight,
-                    Origin = Anchor.BottomRight,
-                    Margin = new MarginPadding { Left = 5 }
-                });
-            }
-
-            if (BeatmapSet.HasExplicitContent)
-            {
-                titleBadgeArea.Add(new ExplicitContentBeatmapBadge
-                {
-                    Anchor = Anchor.BottomRight,
-                    Origin = Anchor.BottomRight,
-                    Margin = new MarginPadding { Left = 5 }
-                });
-            }
-
-            if (BeatmapSet.TrackId != null)
-            {
-                artistContainer.Content[0][1] = new FeaturedArtistBeatmapBadge
-                {
-                    Anchor = Anchor.BottomRight,
-                    Origin = Anchor.BottomRight,
-                    Margin = new MarginPadding { Left = 5 }
-                };
-            }
+            // if (BeatmapSet.TrackId != null)
+            // {
+            //     artistContainer.Content[0][1] = new FeaturedArtistBeatmapBadge
+            //     {
+            //         Anchor = Anchor.BottomRight,
+            //         Origin = Anchor.BottomRight,
+            //         Margin = new MarginPadding { Left = 5 }
+            //     };
+            // }
         }
 
         private LocalisableString createArtistText()
         {
-            var romanisableArtist = new RomanisableString(BeatmapSet.ArtistUnicode, BeatmapSet.Artist);
-            return BeatmapsetsStrings.ShowDetailsByArtist(romanisableArtist);
+            var romanisableArtist = new RomanisableString(Note.User.Username + "@" + Note.User.Host, Note.User.Username + "@" + Note.User.Host);
+            return romanisableArtist;
         }
 
-        private IEnumerable<BeatmapCardStatistic> createStatistics()
-        {
-            var hypesStatistic = HypesStatistic.CreateFor(BeatmapSet);
-            if (hypesStatistic != null)
-                yield return hypesStatistic;
-
-            var nominationsStatistic = NominationsStatistic.CreateFor(BeatmapSet);
-            if (nominationsStatistic != null)
-                yield return nominationsStatistic;
-
-            yield return new FavouritesStatistic(BeatmapSet) { Current = FavouriteState };
-            yield return new PlayCountStatistic(BeatmapSet);
-
-            var dateStatistic = BeatmapCardDateStatistic.CreateFor(BeatmapSet);
-            if (dateStatistic != null)
-                yield return dateStatistic;
-        }
+        // private IEnumerable<BeatmapCardStatistic> createStatistics()
+        // {
+        //     var hypesStatistic = HypesStatistic.CreateFor(BeatmapSet);
+        //     if (hypesStatistic != null)
+        //         yield return hypesStatistic;
+        //
+        //     var nominationsStatistic = NominationsStatistic.CreateFor(BeatmapSet);
+        //     if (nominationsStatistic != null)
+        //         yield return nominationsStatistic;
+        //
+        //     yield return new FavouritesStatistic(BeatmapSet) { Current = FavouriteState };
+        //     yield return new PlayCountStatistic(BeatmapSet);
+        //
+        //     var dateStatistic = BeatmapCardDateStatistic.CreateFor(BeatmapSet);
+        //     if (dateStatistic != null)
+        //         yield return dateStatistic;
+        // }
 
         protected override void UpdateState()
         {
@@ -289,10 +294,10 @@ namespace osu.Game.Screens.Misskey.Components
 
             bool showDetails = IsHovered || Expanded.Value;
 
-            buttonContainer.ShowDetails.Value = showDetails;
+            // buttonContainer.ShowDetails.Value = showDetails;
             thumbnail.Dimmed.Value = showDetails;
 
-            statisticsContainer.FadeTo(showDetails ? 1 : 0, TRANSITION_DURATION, Easing.OutQuint);
+            // statisticsContainer.FadeTo(showDetails ? 1 : 0, TRANSITION_DURATION, Easing.OutQuint);
         }
     }
 }

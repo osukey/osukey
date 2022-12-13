@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using osu.Framework.IO.Network;
 using osu.Framework.Logging;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 
 namespace osu.Game.Online.MisskeyAPI
 {
@@ -85,7 +86,7 @@ namespace osu.Game.Online.MisskeyAPI
         //// <summary>
         //// The currently logged in user. Note that this will only be populated during <see cref="Perform"/>.
         //// </summary>
-        protected I User { get; private set; }
+        protected User User { get; private set; }
 
         /// <summary>
         /// Invoked on successful completion of an API request.

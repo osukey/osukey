@@ -18,9 +18,12 @@ using osu.Framework.Extensions.ObjectExtensions;
 using osu.Framework.Graphics;
 using osu.Framework.Logging;
 using osu.Game.Configuration;
+using osu.Game.Misskey.Users;
 using osu.Game.Online.MisskeyAPI.Requests;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
-using osu.Game.Users;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
+using User = osu.Game.Online.MisskeyAPI.Responses.Types.User;
+using UserActivity = osu.Game.Users.UserActivity;
 
 namespace osu.Game.Online.MisskeyAPI
 {
@@ -44,10 +47,10 @@ namespace osu.Game.Online.MisskeyAPI
 
         private string password;
 
-        public IBindable<Requests.Responses.I> LocalUser => localUser;
+        public IBindable<User> LocalUser => localUser;
         public IBindable<UserActivity> Activity => activity;
 
-        private Bindable<Requests.Responses.I> localUser { get; } = new Bindable<Requests.Responses.I>(createGuestUser());
+        private Bindable<User> localUser { get; } = new Bindable<User>(createGuestUser());
         private Bindable<UserActivity> activity { get; } = new Bindable<UserActivity>();
 
         protected bool HasLogin => authentication.Token.Value != null || (!string.IsNullOrEmpty(ProvidedUsername) && !string.IsNullOrEmpty(password));
@@ -108,7 +111,7 @@ namespace osu.Game.Online.MisskeyAPI
                         if (queue.Count == 0)
                         {
                             log.Add(@"Queueing a ping request");
-                            Queue(new Requests.I(AccessToken));
+                            Queue(new Requests.User(AccessToken));
                         }
 
                         break;
@@ -149,7 +152,7 @@ namespace osu.Game.Online.MisskeyAPI
                             }
                         }
 
-                        var userReq = new Requests.I(AccessToken);
+                        var userReq = new Requests.User(AccessToken);
 
                         userReq.Failure += ex =>
                         {
@@ -428,7 +431,7 @@ namespace osu.Game.Online.MisskeyAPI
             flushQueue();
         }
 
-        private static Requests.Responses.I createGuestUser() => new GuestUser();
+        private static User createGuestUser() => new GuestUser();
 
         protected override void Dispose(bool isDisposing)
         {
@@ -439,7 +442,7 @@ namespace osu.Game.Online.MisskeyAPI
         }
     }
 
-    internal class GuestUser : Requests.Responses.I
+    internal class GuestUser : User
     {
         public GuestUser()
         {

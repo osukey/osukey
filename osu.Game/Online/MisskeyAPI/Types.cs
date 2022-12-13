@@ -6,6 +6,9 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using osu.Framework.Bindables;
+using osu.Game.Misskey.Users;
+using UserStatusOnline = osu.Game.Users.UserStatusOnline;
 
 namespace osu.Game.Online.MisskeyAPI.Responses.Types
 {
@@ -79,7 +82,7 @@ namespace osu.Game.Online.MisskeyAPI.Responses.Types
         public class Choice
         {
             [JsonProperty("isVoted")]
-            public bool Id { get; set; }
+            public bool IsVoted { get; set; }
 
             [JsonProperty("text")]
             public string Text { get; set; }
@@ -96,7 +99,7 @@ namespace osu.Game.Online.MisskeyAPI.Responses.Types
         public bool Multiple { get; set; }
 
         [JsonProperty("choices")]
-        public Choice Choices { get; set; }
+        public Choice[] Choices { get; set; }
     }
 
     public class Note // https://github.com/misskey-dev/misskey.js/blob/c89374c321aeb1cca2582922d4a9a9be059c691e/src/entities.ts#L128
@@ -715,6 +718,13 @@ namespace osu.Game.Online.MisskeyAPI.Responses.Types
 
     public class UserLite // https://github.com/misskey-dev/misskey.js/blob/c89374c321aeb1cca2582922d4a9a9be059c691e/src/entities.ts#L9
     {
+        /// <summary>
+        /// A user ID which can be used to represent any system user which is not attached to a user profile.
+        /// </summary>
+        public const string SYSTEM_USER_ID = "system";
+
+        public readonly Bindable<UserStatus> Status = new Bindable<UserStatus>();
+
         [JsonProperty("id")]
         public string Id { get; set; }
 
@@ -724,6 +734,9 @@ namespace osu.Game.Online.MisskeyAPI.Responses.Types
         [JsonProperty("host")]
         [CanBeNull]
         public string Host { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
         [JsonProperty("onlineStatus")] // 'online' | 'active' | 'offline' | 'unknown'
         public string OnlineStatus { get; set; }

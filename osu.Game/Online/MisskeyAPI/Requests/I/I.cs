@@ -8,12 +8,12 @@ using osu.Framework.IO.Network;
 namespace osu.Game.Online.MisskeyAPI.Requests
 {
 
-    public class I : APIRequest<MisskeyAPI.Requests.Responses.I>
+    public class User : APIRequest<MisskeyAPI.Responses.Types.User>
     {
 
         private string i;
 
-        public I(string i)
+        public User(string i)
         {
             this.i = i;
         }

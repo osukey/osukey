@@ -1,4 +1,4 @@
-﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
+// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
 #nullable disable
@@ -10,63 +10,63 @@ using System.Threading.Tasks;
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Extensions.IEnumerableExtensions;
-using osu.Framework.Localisation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Events;
+using osu.Framework.Localisation;
 using osu.Game.Audio;
 using osu.Game.Beatmaps.Drawables.Cards;
 using osu.Game.Graphics;
-using osu.Game.Graphics.Sprites;
 using osu.Game.Graphics.Containers;
+using osu.Game.Graphics.Sprites;
+using osu.Game.Graphics.UserInterface;
 using osu.Game.Online.API;
 using osu.Game.Online.API.Requests.Responses;
+using osu.Game.Online.MisskeyAPI.Requests.Notes;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
+using osu.Game.Overlays;
 using osu.Game.Overlays.BeatmapListing;
 using osu.Game.Resources.Localisation.Web;
+using osu.Game.Screens.Misskey.Components;
 using osuTK;
 using osuTK.Graphics;
 using ExpandedContentScrollContainer = osu.Game.Screens.Misskey.Components.Note.Cards.ExpandedContentScrollContainer;
+using IAPIProvider = osu.Game.Online.MisskeyAPI.IAPIProvider;
+using NoteCard = osu.Game.Screens.Misskey.Components.Note.Cards.NoteCard;
 
-namespace osu.Game.Overlays
+namespace osu.Game.Screens.Misskey
 {
-    public partial class BeatmapListingOverlay : OnlineOverlay<BeatmapListingHeader>
+    public partial class Timeline : OsuScreen
     {
+        // [Cached]
+        // protected readonly OsuScrollContainer ScrollFlow;
+
+        protected readonly LoadingLayer Loading;
+
         [Resolved]
         private PreviewTrackManager previewTrackManager { get; set; }
 
         [Resolved]
         private IAPIProvider api { get; set; }
 
-        private IBindable<APIUser> apiUser;
+        private OsuScrollContainer panelTarget;
+        private FillFlowContainer<NoteCard> foundContent;
 
-        private Container panelTarget;
-        private FillFlowContainer<BeatmapCard> foundContent;
-        private BeatmapListingFilterControl filterControl;
-
-        public BeatmapListingOverlay()
-            : base(OverlayColourScheme.Blue)
-        {
-        }
+        private int page = 0;
 
         [BackgroundDependencyLoader]
         private void load()
         {
-            Child = new FillFlowContainer
+            InternalChild = new FillFlowContainer
             {
-                RelativeSizeAxes = Axes.X,
-                AutoSizeAxes = Axes.Y,
+                Margin = new MarginPadding(10f),
+                RelativeSizeAxes = Axes.Both,
                 Direction = FillDirection.Vertical,
                 Children = new Drawable[]
                 {
-                    filterControl = new BeatmapListingFilterControl
-                    {
-                        TypingStarted = onTypingStarted,
-                        SearchStarted = onSearchStarted,
-                        SearchFinished = onSearchFinished,
-                    },
                     new Container
                     {
                         AutoSizeAxes = Axes.Y,
@@ -76,12 +76,15 @@ namespace osu.Game.Overlays
                             new Box
                             {
                                 RelativeSizeAxes = Axes.Both,
-                                Colour = ColourProvider.Background5,
+                                Colour = OsuColour.Gray(0.1f)
                             },
-                            panelTarget = new Container
+                            panelTarget = new OsuScrollContainer()
                             {
-                                AutoSizeAxes = Axes.Y,
-                                RelativeSizeAxes = Axes.X,
+                                Height = 750f,
+                                Width = 600f,
+                                Anchor = Anchor.TopCentre,
+                                Origin = Anchor.TopCentre,
+                                // RelativeSizeAxes = Axes.X,
                                 Masking = true,
                                 Padding = new MarginPadding { Horizontal = 20 },
                             }
@@ -91,41 +94,19 @@ namespace osu.Game.Overlays
             };
         }
 
+        private string lastNoteID;
+
         protected override void LoadComplete()
         {
             base.LoadComplete();
-            filterControl.CardSize.BindValueChanged(_ => onCardSizeChanged());
-
-            apiUser = api.LocalUser.GetBoundCopy();
-            apiUser.BindValueChanged(_ => Schedule(() =>
+            var req = new HybridTimeline(api.AccessToken);
+            req.Success += res =>
             {
-                if (api.IsLoggedIn)
-                    replaceResultsAreaContent(Drawable.Empty());
-            }));
-        }
-
-        public void ShowWithSearch(string query)
-        {
-            filterControl.Search(query);
-            Show();
-            ScrollFlow.ScrollToStart();
-        }
-
-        protected override BeatmapListingHeader CreateHeader() => new BeatmapListingHeader();
-
-        protected override Color4 BackgroundColour => ColourProvider.Background6;
-
-        private void onTypingStarted()
-        {
-            // temporary until the textbox/header is updated to always stay on screen.
-            ScrollFlow.ScrollToStart();
-        }
-
-        protected override void OnFocus(FocusEvent e)
-        {
-            base.OnFocus(e);
-
-            filterControl.TakeFocus();
+                onSearchFinished(res);
+                lastNoteID = res.Last().Id;
+            };
+            onSearchStarted();
+            api.Queue(req);
         }
 
         private CancellationTokenSource cancellationToken;
@@ -136,26 +117,17 @@ namespace osu.Game.Overlays
         {
             cancellationToken?.Cancel();
 
-            previewTrackManager.StopAnyPlaying(this);
-
-            if (panelTarget.Any())
-                Loading.Show();
+            // if (panelTarget.Any())
+            //     Loading.Show();
         }
 
-        private void onSearchFinished(BeatmapListingFilterControl.SearchResult searchResult)
+        private void onSearchFinished(Note[] searchResult)
         {
             cancellationToken?.Cancel();
 
-            if (searchResult.Type == BeatmapListingFilterControl.SearchResultType.SupporterOnlyFilters)
-            {
-                var supporterOnly = new SupporterRequiredDrawable(searchResult.SupporterOnlyFiltersUsed);
-                replaceResultsAreaContent(supporterOnly);
-                return;
-            }
+            var newCards = createCardsFor(searchResult);
 
-            var newCards = createCardsFor(searchResult.Results);
-
-            if (filterControl.CurrentPage == 0)
+            if (page == 0)
             {
                 //No matches case
                 if (!newCards.Any())
@@ -175,7 +147,7 @@ namespace osu.Game.Overlays
                 // see: https://github.com/ppy/osu-web/issues/9270
                 // todo: replace custom equality compraer with ExceptBy in net6.0
                 // newCards = newCards.ExceptBy(foundContent.Select(c => c.BeatmapSet.OnlineID), c => c.BeatmapSet.OnlineID);
-                newCards = newCards.Except(foundContent, BeatmapCardEqualityComparer.Default);
+                // newCards = newCards.Except(foundContent, BeatmapCardEqualityComparer.Default);
 
                 panelLoadTask = LoadComponentsAsync(newCards, loaded =>
                 {
@@ -186,17 +158,19 @@ namespace osu.Game.Overlays
             }
         }
 
-        private IEnumerable<BeatmapCard> createCardsFor(IEnumerable<APIBeatmapSet> beatmapSets) => beatmapSets.Select(set => BeatmapCard.Create(set, filterControl.CardSize.Value).With(c =>
-        {
-            c.Anchor = Anchor.TopCentre;
-            c.Origin = Anchor.TopCentre;
-        })).ToArray();
+        private IEnumerable<NoteCard> createCardsFor(Note[] notes) =>
+            notes.Select(set =>
+                NoteCard.Create(set, BeatmapCardSize.Normal).With(c =>
+                {
+                    c.Anchor = Anchor.TopCentre;
+                    c.Origin = Anchor.TopCentre;
+                })).ToArray();
 
-        private static ReverseChildIDFillFlowContainer<BeatmapCard> createCardContainerFor(IEnumerable<BeatmapCard> newCards)
+        private static ReverseChildIDFillFlowContainer<NoteCard> createCardContainerFor(IEnumerable<NoteCard> newCards)
         {
             // spawn new children with the contained so we only clear old content at the last moment.
             // reverse ID flow is required for correct Z-ordering of the cards' expandable content (last card should be front-most).
-            var content = new ReverseChildIDFillFlowContainer<BeatmapCard>
+            var content = new ReverseChildIDFillFlowContainer<NoteCard>
             {
                 RelativeSizeAxes = Axes.X,
                 AutoSizeAxes = Axes.Y,
@@ -216,31 +190,12 @@ namespace osu.Game.Overlays
 
         private void replaceResultsAreaContent(Drawable content)
         {
-            Loading.Hide();
+            // Loading.Hide();
             lastFetchDisplayedTime = Time.Current;
 
             panelTarget.Child = content;
 
             content.FadeInFromZero();
-        }
-
-        private void onCardSizeChanged()
-        {
-            if (foundContent?.IsAlive != true || !foundContent.Any())
-                return;
-
-            Loading.Show();
-
-            var newCards = createCardsFor(foundContent.Reverse().Select(card => card.BeatmapSet));
-
-            cancellationToken?.Cancel();
-
-            panelLoadTask = LoadComponentsAsync(newCards, cards =>
-            {
-                foundContent.Clear();
-                foundContent.AddRange(cards);
-                Loading.Hide();
-            }, (cancellationToken = new CancellationTokenSource()).Token);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -293,63 +248,6 @@ namespace osu.Game.Overlays
 
         // TODO: localisation requires Text/LinkFlowContainer support for localising strings with links inside
         // (https://github.com/ppy/osu-framework/issues/4530)
-        public partial class SupporterRequiredDrawable : CompositeDrawable
-        {
-            private LinkFlowContainer supporterRequiredText;
-
-            private readonly List<LocalisableString> filtersUsed;
-
-            public SupporterRequiredDrawable(List<LocalisableString> filtersUsed)
-            {
-                RelativeSizeAxes = Axes.X;
-                Height = 225;
-                Alpha = 0;
-
-                this.filtersUsed = filtersUsed;
-            }
-
-            [BackgroundDependencyLoader]
-            private void load(LargeTextureStore textures)
-            {
-                AddInternal(new FillFlowContainer
-                {
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    RelativeSizeAxes = Axes.Y,
-                    AutoSizeAxes = Axes.X,
-                    Direction = FillDirection.Horizontal,
-                    Children = new Drawable[]
-                    {
-                        new Sprite
-                        {
-                            Anchor = Anchor.Centre,
-                            Origin = Anchor.Centre,
-                            RelativeSizeAxes = Axes.Both,
-                            FillMode = FillMode.Fit,
-                            Texture = textures.Get(@"Online/supporter-required"),
-                        },
-                        supporterRequiredText = new LinkFlowContainer
-                        {
-                            Anchor = Anchor.Centre,
-                            Origin = Anchor.Centre,
-                            AutoSizeAxes = Axes.Both,
-                            Margin = new MarginPadding { Bottom = 10 },
-                        },
-                    }
-                });
-
-                supporterRequiredText.AddText(
-                    BeatmapsStrings.ListingSearchSupporterFilterQuoteDefault(string.Join(" and ", filtersUsed), "").ToString(),
-                    t =>
-                    {
-                        t.Font = OsuFont.GetFont(size: 16);
-                        t.Colour = Colour4.White;
-                    }
-                );
-
-                supporterRequiredText.AddLink(BeatmapsStrings.ListingSearchSupporterFilterQuoteLinkText.ToString(), @"/store/products/supporter-tag");
-            }
-        }
 
         private const double time_between_fetches = 500;
 
@@ -359,14 +257,31 @@ namespace osu.Game.Overlays
         {
             base.Update();
 
-            const int pagination_scroll_distance = 500;
+            const int pagination_scroll_distance = 200;
 
             bool shouldShowMore = panelLoadTask?.IsCompleted != false
                                   && Time.Current - lastFetchDisplayedTime > time_between_fetches
-                                  && (ScrollFlow.ScrollableExtent > 0 && ScrollFlow.IsScrolledToEnd(pagination_scroll_distance));
+                                  && (panelTarget.ScrollableExtent > 0 && panelTarget.IsScrolledToEnd(pagination_scroll_distance));
 
             if (shouldShowMore)
-                filterControl.FetchNextPage();
+                FetchNextPage();
+        }
+
+        private bool locked;
+        private void FetchNextPage()
+        {
+            if (locked)
+                return;
+            var req = new HybridTimeline(api.AccessToken, lastNoteID);
+            req.Success += res =>
+            {
+                lastNoteID = res.Last().Id;
+                page++;
+                onSearchFinished(res);
+                locked = false;
+            };
+            api.Queue(req);
+            locked = true;
         }
 
         private class BeatmapCardEqualityComparer : IEqualityComparer<BeatmapCard>

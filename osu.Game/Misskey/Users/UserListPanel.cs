@@ -11,6 +11,7 @@ using osuTK.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 using osuTK;
 using osu.Game.Overlays.Profile.Header.Components;
 
@@ -18,7 +19,7 @@ namespace osu.Game.Misskey.Users
 {
     public partial class UserListPanel : ExtendedUserPanel
     {
-        public UserListPanel(I user)
+        public UserListPanel(User user)
             : base(user)
         {
             RelativeSizeAxes = Axes.X;

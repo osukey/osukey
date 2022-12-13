@@ -13,7 +13,7 @@ using osu.Game.Online;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Overlays;
 
-namespace osu.Game.Screens.Misskey.Components
+namespace osu.Game.Screens.Misskey.Components.Note.Cards
 {
     public abstract partial class NoteCard : OsuClickableContainer
     {
@@ -24,38 +24,38 @@ namespace osu.Game.Screens.Misskey.Components
 
         public IBindable<bool> Expanded { get; }
 
-        public readonly APIBeatmapSet BeatmapSet;
+        public readonly Online.MisskeyAPI.Responses.Types.Note Note;
 
-        protected readonly Bindable<BeatmapSetFavouriteState> FavouriteState;
+        // protected readonly Bindable<BeatmapSetFavouriteState> FavouriteState;
 
         protected abstract Drawable IdleContent { get; }
         protected abstract Drawable DownloadInProgressContent { get; }
 
-        protected readonly BeatmapDownloadTracker DownloadTracker;
+        // protected readonly BeatmapDownloadTracker DownloadTracker;
 
-        protected NoteCard(APIBeatmapSet beatmapSet, bool allowExpansion = true)
+        protected NoteCard(Online.MisskeyAPI.Responses.Types.Note note, bool allowExpansion = true)
             : base(HoverSampleSet.Button)
         {
             Expanded = new BindableBool { Disabled = !allowExpansion };
 
-            BeatmapSet = beatmapSet;
-            FavouriteState = new Bindable<BeatmapSetFavouriteState>(new BeatmapSetFavouriteState(beatmapSet.HasFavourited, beatmapSet.FavouriteCount));
-            DownloadTracker = new BeatmapDownloadTracker(beatmapSet);
+            Note = note;
+            // FavouriteState = new Bindable<BeatmapSetFavouriteState>(new BeatmapSetFavouriteState(note.HasFavourited, note.FavouriteCount));
+            // DownloadTracker = new BeatmapDownloadTracker(note);
         }
 
         [BackgroundDependencyLoader(true)]
         private void load(BeatmapSetOverlay? beatmapSetOverlay)
         {
-            Action = () => beatmapSetOverlay?.FetchAndShowBeatmapSet(BeatmapSet.OnlineID);
+            // Action = () => beatmapSetOverlay?.FetchAndShowBeatmapSet(Note.OnlineID);
 
-            AddInternal(DownloadTracker);
+            // AddInternal(DownloadTracker);
         }
 
         protected override void LoadComplete()
         {
             base.LoadComplete();
 
-            DownloadTracker.State.BindValueChanged(_ => UpdateState());
+            // DownloadTracker.State.BindValueChanged(_ => UpdateState());
             Expanded.BindValueChanged(_ => UpdateState(), true);
             FinishTransforms(true);
         }
@@ -74,24 +74,24 @@ namespace osu.Game.Screens.Misskey.Components
 
         protected virtual void UpdateState()
         {
-            bool showProgress = DownloadTracker.State.Value == DownloadState.Downloading || DownloadTracker.State.Value == DownloadState.Importing;
-
-            IdleContent.FadeTo(showProgress ? 0 : 1, TRANSITION_DURATION, Easing.OutQuint);
-            DownloadInProgressContent.FadeTo(showProgress ? 1 : 0, TRANSITION_DURATION, Easing.OutQuint);
+            // bool showProgress = DownloadTracker.State.Value == DownloadState.Downloading || DownloadTracker.State.Value == DownloadState.Importing;
+            //
+            // IdleContent.FadeTo(showProgress ? 0 : 1, TRANSITION_DURATION, Easing.OutQuint);
+            // DownloadInProgressContent.FadeTo(showProgress ? 1 : 0, TRANSITION_DURATION, Easing.OutQuint);
         }
 
         /// <summary>
-        /// Creates a beatmap card of the given <paramref name="size"/> for the supplied <paramref name="beatmapSet"/>.
+        /// Creates a beatmap card of the given <paramref name="size"/> for the supplied <paramref name="note"/>.
         /// </summary>
-        public static BeatmapCard Create(APIBeatmapSet beatmapSet, BeatmapCardSize size, bool allowExpansion = true)
+        public static NoteCard Create(Online.MisskeyAPI.Responses.Types.Note note, BeatmapCardSize size, bool allowExpansion = true)
         {
             switch (size)
             {
                 case BeatmapCardSize.Normal:
-                    return new BeatmapCardNormal(beatmapSet, allowExpansion);
+                    return new NoteCardNormal(note, allowExpansion);
 
-                case BeatmapCardSize.Extra:
-                    return new BeatmapCardExtra(beatmapSet, allowExpansion);
+                // case BeatmapCardSize.Extra:
+                //     return new BeatmapCardExtra(note, allowExpansion);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(size), size, @"Unsupported card size");

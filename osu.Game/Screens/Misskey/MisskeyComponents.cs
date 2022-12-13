@@ -20,7 +20,7 @@ namespace osu.Game.Screens.Misskey
     public partial class MisskeyComponents : OsuScreen
     {
         private Container contentContainer;
-        private Drawable avatar;
+        // private Drawable avatar;
 
         [Resolved]
         private OsuColour colours { get; set; }
@@ -44,23 +44,23 @@ namespace osu.Game.Screens.Misskey
                         Colour = Color4.Black,
                         Alpha = 0.6f,
                     },
-                    new Container
-                    {
-                        // RelativeSizeAxes = Axes.Both,
-                        // AutoSizeAxes = Axes.Y,
-                        Size = new Vector2(200),
-                        Masking = true,
-                        CornerRadius = 100,
-                        AutoSizeEasing = Easing.OutQuint,
-                        Children = new Drawable[]
-                        {
-                            avatar = new DelayedLoadWrapper(
-                                new Avatar()
-                                {
-                                    RelativeSizeAxes = Axes.Both,
-                                })
-                        },
-                    }
+                    // new Container
+                    // {
+                    //     // RelativeSizeAxes = Axes.Both,
+                    //     // AutoSizeAxes = Axes.Y,
+                    //     Size = new Vector2(200),
+                    //     Masking = true,
+                    //     CornerRadius = 100,
+                    //     AutoSizeEasing = Easing.OutQuint,
+                    //     Children = new Drawable[]
+                    //     {
+                    //         avatar = new DelayedLoadWrapper(
+                    //             new Avatar()
+                    //             {
+                    //                 RelativeSizeAxes = Axes.Both,
+                    //             })
+                    //     },
+                    // }
                 }
             };
         }

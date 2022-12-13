@@ -13,17 +13,25 @@ namespace osu.Game.Online.MisskeyAPI.Requests.Notes
     {
         private string text;
         private string i;
+        private string? cw;
 
         public Create(string i, string Text)
         {
-            this.text = Text;
             this.i = i;
+            this.text = Text;
+        }
+        public Create(string i, string Text, string cw)
+        {
+            this.i = i;
+            this.text = Text;
+            this.cw = cw;
         }
 
         private class ReqBody
         {
             public string? text;
             public string? i;
+            public string? cw;
         };
         protected override WebRequest CreateWebRequest()
         {
@@ -34,6 +42,10 @@ namespace osu.Game.Online.MisskeyAPI.Requests.Notes
                 text = text,
                 i = i
             };
+            if (cw != null)
+            {
+                body.cw = cw;
+            }
             var json = JsonConvert.SerializeObject(body);
             Logger.Log(json, LoggingTarget.Network, LogLevel.Debug);
             req.AddRaw(json);

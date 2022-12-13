@@ -9,19 +9,20 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 
 namespace osu.Game.Misskey.Users.Drawables
 {
     [LongRunningLoad]
     public partial class DrawableAvatar : Sprite
     {
-        private readonly I user;
+        private readonly User user;
 
         /// <summary>
         /// A simple, non-interactable avatar sprite for the specified user.
         /// </summary>
         /// <param name="user">The user. A null value will get a placeholder avatar.</param>
-        public DrawableAvatar(I user = null)
+        public DrawableAvatar(User user = null)
         {
             this.user = user;
 

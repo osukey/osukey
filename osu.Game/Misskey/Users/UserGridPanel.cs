@@ -8,6 +8,7 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 using osu.Game.Overlays.Profile.Header.Components;
 using osuTK;
 
@@ -17,7 +18,7 @@ namespace osu.Game.Misskey.Users
     {
         private const int margin = 10;
 
-        public UserGridPanel(I user)
+        public UserGridPanel(User user)
             : base(user)
         {
             Height = 120;

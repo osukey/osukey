@@ -147,7 +147,7 @@ namespace osu.Game.Screens.Misskey
                                 Origin = Anchor.TopCentre,
                                 Margin = new MarginPadding(100),
                                 Width = 400f,
-                                Text = "Misskey.io は、地球で生まれた分散マイクロブログSNSです。Fediverse（様々なSNSで構成される宇宙）の中に存在するため、他のSNSと相互に繋がっています。\n暫し都会の喧騒から離れて、新しいインターネットにダイブしてみませんか。",
+                                Text = "Misskey.。Fediverse（様々なSNSで構成される宇宙）の中に存在するため、他のSNSと相互に繋がっています。\n暫し都会の喧騒から離れて、新しいインターネットにダイブしてみませんか。",
                                 Font = new FontUsage(size: 20),
                                 Colour = Colour4.White,
                             },

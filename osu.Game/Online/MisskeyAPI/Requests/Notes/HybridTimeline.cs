@@ -6,26 +6,30 @@ using System.Net.Http;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using osu.Framework.IO.Network;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 using Realms;
 
 namespace osu.Game.Online.MisskeyAPI.Requests.Notes
 {
-    public class HybridTimeline : APIRequest<MisskeyAPI.Requests.Responses.Notes.HybridTimeline>
+    public class HybridTimeline : APIRequest<Note[]>
     {
         private readonly string i;
 
-        private readonly string sinceId;
-        private readonly string untilId;
+        // private readonly string? sinceId;
+        private readonly string? untilId;
 
         public HybridTimeline(
             string i,
-            string sinceId = "",
             string untilId = ""
         )
         {
             this.i = i;
-            this.sinceId = sinceId;
             this.untilId = untilId;
+        }
+
+        public HybridTimeline(string i)
+        {
+            this.i = i;
         }
 
         protected override WebRequest CreateWebRequest()
@@ -33,14 +37,15 @@ namespace osu.Game.Online.MisskeyAPI.Requests.Notes
             var req = base.CreateWebRequest();
             req.Method = HttpMethod.Post;
 
-            var body = new Dictionary<string, string>
+            var body = new Dictionary<string, object>
             {
                 { "i", i },
+                { "limit", 30 },
             };
 
-            if (sinceId != "")
-                body.Add("sinceId", sinceId);
-            if (untilId != "")
+            // if (sinceId != null)
+            //     body.Add("sinceId", sinceId);
+            if (untilId != null)
                 body.Add("untilId", untilId);
 
             req.AddRaw(JsonConvert.SerializeObject(body));

@@ -17,12 +17,13 @@ using osu.Game.Graphics.Containers;
 using JetBrains.Annotations;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 
 namespace osu.Game.Misskey.Users
 {
     public abstract partial class UserPanel : OsuClickableContainer, IHasContextMenu
     {
-        public readonly I User;
+        public readonly User User;
 
         /// <summary>
         /// Perform an action in addition to showing the user's profile.
@@ -34,7 +35,7 @@ namespace osu.Game.Misskey.Users
 
         protected Drawable Background { get; private set; }
 
-        protected UserPanel(I user)
+        protected UserPanel(User user)
             : base(HoverSampleSet.Button)
         {
             if (user == null)

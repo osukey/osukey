@@ -18,6 +18,7 @@ using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Overlays.Rankings.Tables;
 using osu.Game.Rulesets;
 using osuTK;
+using ExpandedContentScrollContainer = osu.Game.Screens.Misskey.Components.Note.Cards.ExpandedContentScrollContainer;
 
 namespace osu.Game.Overlays.Rankings
 {

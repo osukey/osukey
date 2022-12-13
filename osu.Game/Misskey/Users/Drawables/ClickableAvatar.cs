@@ -11,6 +11,7 @@ using osu.Framework.Localisation;
 using osu.Game.Graphics.Containers;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 
 namespace osu.Game.Misskey.Users.Drawables
 {
@@ -35,7 +36,7 @@ namespace osu.Game.Misskey.Users.Drawables
             set => clickableArea.TooltipText = value ? (user?.Username ?? string.Empty) : default_tooltip_text;
         }
 
-        private readonly I user;
+        private readonly User user;
 
         [Resolved(CanBeNull = true)]
         private OsuGame game { get; set; }
@@ -47,7 +48,7 @@ namespace osu.Game.Misskey.Users.Drawables
         /// If <see cref="OpenOnClick"/> is <c>true</c>, clicking will open the user's profile.
         /// </summary>
         /// <param name="user">The user. A null value will get a placeholder avatar.</param>
-        public ClickableAvatar(I user = null)
+        public ClickableAvatar(User user = null)
         {
             this.user = user;
 
@@ -64,6 +65,11 @@ namespace osu.Game.Misskey.Users.Drawables
         private void load()
         {
             LoadComponentAsync(new DrawableAvatar(user), clickableArea.Add);
+        }
+
+        protected override void LoadComplete()
+        {
+            CornerRadius = DrawHeight / 2;
         }
 
         private void openProfile()

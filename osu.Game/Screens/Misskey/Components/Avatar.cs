@@ -13,26 +13,30 @@ using osu.Game.Graphics.Containers;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
+using osuTK;
 
 namespace osu.Game.Screens.Misskey.Components
 {
+
     [LongRunningLoad]
     public partial class Avatar : Sprite
     {
         // private readonly APIUser user;
+        private Online.MisskeyAPI.Responses.Types.Note note;
 
         /// <summary>
         /// A simple, non-interactable avatar sprite for the specified user.
         /// </summary>
         ///// <param name="user">The user. A null value will get a placeholder avatar.</param>
-        public Avatar()
+        public Avatar(Online.MisskeyAPI.Responses.Types.Note note)
         {
             // this.user = user;
-
-            RelativeSizeAxes = Axes.Both;
+            // RelativeSizeAxes = Axes.Both;
+            Size = new Vector2(10f);
             FillMode = FillMode.Fit;
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
+            this.note = note;
         }
 
         [BackgroundDependencyLoader]
@@ -43,7 +47,7 @@ namespace osu.Game.Screens.Misskey.Components
             //     // in remaining cases where this is required (chat tabs, local leaderboard), at which point this should be removed.
             //     Texture = textures.Get(user.AvatarUrl ?? $@"https://a.ppy.sh/{user.Id}");
 
-            Texture ??= textures.Get(@"https://simkey.net/files/thumbnail-328eb27f-f06f-4454-ad52-a79d5f780a6b");
+            Texture ??= textures.Get(note.User.AvatarUrl);
         }
 
         protected override void LoadComplete()

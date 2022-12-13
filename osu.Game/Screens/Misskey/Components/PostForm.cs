@@ -6,6 +6,7 @@ using osu.Framework.Allocation;
 using osu.Framework.Extensions.LocalisationExtensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Input.Events;
 using osu.Game.Configuration;
@@ -16,6 +17,7 @@ using osu.Game.Online.MisskeyAPI;
 using osu.Game.Misskey.Overlays.Settings;
 using osu.Game.Online.MisskeyAPI.Requests.Notes;
 using osu.Game.Overlays;
+using osu.Game.Overlays.Notifications;
 using osu.Game.Overlays.OSD;
 using osu.Game.Resources.Localisation.Web;
 using osu.Game.Screens.Misskey;
@@ -26,6 +28,8 @@ namespace osu.Game.Screens.Misskey.Components
     public partial class PostForm : FillFlowContainer
     {
         private OnScreenDisplay? onScreenDisplay { get; set; }
+        [Resolved(CanBeNull = true)]
+        private INotificationOverlay? notifications { get; set; }
         private partial class ResToast : Toast
         {
             public ResToast(string value, string desc)
@@ -57,11 +61,20 @@ namespace osu.Game.Screens.Misskey.Components
             {
                 textBox.Text = string.Empty;
                 cwBox.Text = string.Empty;
-                onScreenDisplay?.Display(new ResToast("投稿しました", createReq.CompletionState.ToString()));
+                notifications?.Post(new SimpleNotification
+                {
+                    Text = "投稿しました",
+                    Icon = FontAwesome.Solid.Check,
+                });
             };
 
             api.Queue(createReq);
-            onScreenDisplay?.Display(new ResToast("送信しています", ""));
+            notifications?.Post(new SimpleNotification
+            {
+                Text = "送信しています",
+                Icon = FontAwesome.Solid.PaperPlane,
+            });
+
         }
 
         [BackgroundDependencyLoader(permitNulls: true)]
@@ -128,15 +141,14 @@ namespace osu.Game.Screens.Misskey.Components
                         }
                     }
                 },
-                // new SettingsButton
-                // {
-                //     Text = "Register",
-                //     Action = () =>
-                //     {
-                //         RequestHide?.Invoke();
-                //         accountCreation.Show();
-                //     }
-                // }
+                new SettingsButton
+                {
+                    Text = "test",
+                    Action = () =>
+                    {
+                        onScreenDisplay?.Display(new ResToast("送信しています", ""));
+                    }
+                }
             };
 
             // forgottenPaswordLink.AddLink(LayoutStrings.PopupLoginLoginForgot, $"https://simkey.net/about");

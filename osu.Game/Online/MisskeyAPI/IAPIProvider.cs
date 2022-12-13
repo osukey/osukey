@@ -7,6 +7,7 @@ using System;
 using System.Threading.Tasks;
 using osu.Framework.Bindables;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 using osu.Game.Users;
 
 namespace osu.Game.Online.MisskeyAPI
@@ -17,7 +18,7 @@ namespace osu.Game.Online.MisskeyAPI
         /// The local user.
         /// This is not thread-safe and should be scheduled locally if consumed from a drawable component.
         /// </summary>
-        IBindable<Requests.Responses.I> LocalUser { get; }
+        IBindable<User> LocalUser { get; }
 
         /// <summary>
         /// The current user's activity.
