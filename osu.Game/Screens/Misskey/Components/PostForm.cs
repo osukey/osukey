@@ -2,10 +2,14 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using System.IO;
 using osu.Framework.Allocation;
+using osu.Framework.Bindables;
+using osu.Framework.Extensions;
 using osu.Framework.Extensions.LocalisationExtensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Cursor;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Input.Events;
@@ -13,6 +17,7 @@ using osu.Game.Configuration;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.UserInterface;
+using osu.Game.Graphics.UserInterfaceV2;
 using osu.Game.Online.MisskeyAPI;
 using osu.Game.Misskey.Overlays.Settings;
 using osu.Game.Online.MisskeyAPI.Requests.Notes;
@@ -25,11 +30,13 @@ using osuTK;
 
 namespace osu.Game.Screens.Misskey.Components
 {
-    public partial class PostForm : FillFlowContainer
+    public partial class PostForm : FillFlowContainer, IHasPopover
     {
         private OnScreenDisplay? onScreenDisplay { get; set; }
+
         [Resolved(CanBeNull = true)]
         private INotificationOverlay? notifications { get; set; }
+
         private partial class ResToast : Toast
         {
             public ResToast(string value, string desc)
@@ -41,6 +48,10 @@ namespace osu.Game.Screens.Misskey.Components
         private TextBox cwBox = null!;
         private TextBox textBox = null!;
         private ShakeContainer shakeSignIn = null!;
+        private bool toggleCw = false;
+        private Bindable<FileInfo?> file = null!;
+        private string[] fileTypes = new string[] { ".jpg", ".jpeg", ".png" };
+        private string choosePath = "";
 
         [Resolved]
         private IAPIProvider api { get; set; } = null!;
@@ -74,7 +85,6 @@ namespace osu.Game.Screens.Misskey.Components
                 Text = "送信しています",
                 Icon = FontAwesome.Solid.PaperPlane,
             });
-
         }
 
         [BackgroundDependencyLoader(permitNulls: true)]
@@ -94,7 +104,7 @@ namespace osu.Game.Screens.Misskey.Components
                 {
                     PlaceholderText = "CW",
                     RelativeSizeAxes = Axes.X,
-                    TabbableContentContainer = this
+                    TabbableContentContainer = this,
                 },
                 textBox = new OsuTextBox
                 {
@@ -148,12 +158,60 @@ namespace osu.Game.Screens.Misskey.Components
                     {
                         onScreenDisplay?.Display(new ResToast("送信しています", ""));
                     }
+                },
+                new FillFlowContainer<IconButton>
+                {
+                    // Direction = FillDirection.Horizontal,
+                    Spacing = new Vector2(20),
+                    // Origin = Anchor.Centre,
+                    // Anchor = Anchor.Centre,
+                    Size = new Vector2(500, 200),
+                    Children = new[]
+                    {
+                        new IconButton
+                        {
+                            Icon = FontAwesome.Solid.Image,
+                            Size = new Vector2(30),
+                            Action = () => this.ShowPopover()
+                        },
+                        new IconButton
+                        {
+                            Icon = FontAwesome.Solid.PollH,
+                            Size = new Vector2(30),
+                            Action = () => toggleCw = !toggleCw
+                        },
+                        new IconButton
+                        {
+                            Icon = FontAwesome.Solid.EyeSlash,
+                            Size = new Vector2(30),
+                            Action = () => toggleCw = !toggleCw
+                        },
+                        new IconButton
+                        {
+                            Icon = FontAwesome.Solid.At,
+                            Size = new Vector2(30),
+                            Action = () => toggleCw = !toggleCw
+                        },
+                        new IconButton
+                        {
+                            Icon = FontAwesome.Solid.Hashtag,
+                            Size = new Vector2(30),
+                            Action = () => toggleCw = !toggleCw
+                        },
+                        new IconButton
+                        {
+                            Icon = FontAwesome.Solid.LaughSquint,
+                            Size = new Vector2(30),
+                            Action = () => cwBox.Show()
+                        },
+                    }
                 }
             };
 
             // forgottenPaswordLink.AddLink(LayoutStrings.PopupLoginLoginForgot, $"https://simkey.net/about");
 
             textBox.OnCommit += (_, _) => post();
+            cwBox.Hide();
 
             if (api.LastLoginError?.Message is string error)
                 errorText.AddErrors(new[] { error });
@@ -161,11 +219,15 @@ namespace osu.Game.Screens.Misskey.Components
 
         public override bool AcceptsFocus => true;
 
+
+        public Popover GetPopover() => new FilePickerPopover(choosePath, fileTypes, file);
+
         protected override bool OnClick(ClickEvent e) => true;
 
-        // protected override void OnFocus(FocusEvent e)
-        // {
-        //     Schedule(() => { GetContainingInputManager().ChangeFocus(string.IsNullOrEmpty(username.Text) ? username : password); });
-        // }
+        protected override void OnFocus(FocusEvent e)
+        {
+            Schedule(() => { GetContainingInputManager().ChangeFocus(textBox); });
+        }
     }
+
 }

@@ -6,9 +6,11 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Cursor;
 using osu.Game.Graphics;
 using osuTK.Graphics;
 using osu.Framework.Graphics.Shapes;
+using osu.Framework.Input.Events;
 using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.Cursor;
 using osu.Game.Misskey.Overlays.Login;
@@ -55,7 +57,7 @@ namespace osu.Game.Screens.Misskey
                         Colour = Color4.Black,
                         Alpha = 0.6f,
                     },
-                    new Container
+                    new PopoverContainer
                     {
                         RelativeSizeAxes = Axes.X,
                         AutoSizeAxes = Axes.Y,
@@ -82,6 +84,10 @@ namespace osu.Game.Screens.Misskey
                     }
                 }
             };
+        }
+        protected override void OnFocus(FocusEvent e)
+        {
+            Schedule(() => { GetContainingInputManager().ChangeFocus(form); });
         }
     }
 }

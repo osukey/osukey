@@ -5,13 +5,17 @@
 
 using System.Net.Http;
 using osu.Framework.IO.Network;
+using osu.Game.Online.MisskeyAPI.Responses.Types;
 
 namespace osu.Game.Online.MisskeyAPI.Requests
 {
-    public class Meta : APIRequest
+    public class Meta : APIRequest<InstanceMetadata>
     {
-        public Meta()
+
+        private readonly string endpoint;
+        public Meta(string endpoint)
         {
+            this.endpoint = endpoint;
         }
 
         protected override WebRequest CreateWebRequest()
@@ -21,7 +25,7 @@ namespace osu.Game.Online.MisskeyAPI.Requests
             return req;
         }
 
-        protected override string Uri => $@"https://misskey.io/api/meta";
-        protected override string Target => @"meta";
+        protected override string Uri => $@"https://{endpoint}/api/meta";
+        protected override string Target => @"";
     }
 }

@@ -53,6 +53,6 @@ namespace osu.Game.Online.MisskeyAPI.Requests.Notes
             return req;
         }
 
-        protected override string Target => @"notes/hybrid-timeline";
+        protected override string Target => @"notes/local-timeline";
     }
 }

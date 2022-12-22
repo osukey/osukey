@@ -29,15 +29,17 @@ namespace osu.Game.Screens.Misskey
     {
         private Container contentContainer;
 
-        private SeekLimitedSearchTextBox searchTextBox;
+        private SearchTextBox searchTextBox;
         // private OsuButton submitButton;
 
         // private string instanceName = String.Empty;
 
-        // [Resolved]
-        private IAPIProvider api { get; set; }
+        private OsuSpriteText instanceNameText;
+        private OsuSpriteText instanceVersionText;
+        private OsuSpriteText instanceDescriptionText;
 
-        private Online.MisskeyAPI.Requests.Meta request;
+        [Resolved]
+        private IAPIProvider api { get; set; }
 
         [Resolved]
         private INotificationOverlay notificationOverlay { get; set; }
@@ -49,7 +51,7 @@ namespace osu.Game.Screens.Misskey
         [BackgroundDependencyLoader(true)]
         private void load(IAPIProvider api, INotificationOverlay notifications)
         {
-            InternalChild = contentContainer = new Container
+            InternalChild = contentContainer = new Container()
             {
                 Masking = true,
                 CornerRadius = 10,
@@ -82,7 +84,7 @@ namespace osu.Game.Screens.Misskey
                                 Colour = colours.Yellow,
                                 Alpha = 1,
                             },
-                            searchTextBox = new SeekLimitedSearchTextBox()
+                            searchTextBox = new SearchTextBox()
                             {
                                 RelativeSizeAxes = Axes.X,
                                 Origin = Anchor.TopCentre,
@@ -101,20 +103,38 @@ namespace osu.Game.Screens.Misskey
                             }
                         }
                     },
+                    new FillFlowContainer()
+                    {
+                        X = 10,
+                        Children = new Drawable[]
+                        {
+                            instanceNameText = new OsuSpriteText(),
+                            instanceVersionText = new OsuSpriteText(),
+                            instanceDescriptionText = new OsuSpriteText()
+                        }
+                    }
                 }
             };
 
             // insetanceFetch();
-            //
-            // searchTextBox.Current.ValueChanged += _ => insetanceFetch();
+            // //
+            // searchTextBox.Current.BindValueChanged(_ => insetanceFetch(), true);
         }
 
         private void insetanceFetch()
         {
-            request = new Meta();
+            var request = new Meta(searchTextBox.Text);
 
-            request.Success += () =>
+            request.Success += e =>
             {
+                notificationOverlay?.Post(new SimpleNotification
+                {
+                    Text = e.Name,
+                    Icon = FontAwesome.Solid.Check,
+                });
+                instanceNameText.Text = e.Name;
+                instanceVersionText.Text = e.Version;
+                instanceDescriptionText.Text = e.Description;
             };
 
             request.Failure += e =>

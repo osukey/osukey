@@ -45,7 +45,7 @@ namespace osu.Game.Screens.Misskey
                 RelativeSizeAxes = Axes.Both,
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Size = new Vector2(0.5f, 0.4f),
+                Size = new Vector2(0.5f, 0.5f),
                 Children = new Drawable[]
                 {
                     new Box
