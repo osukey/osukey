@@ -14,6 +14,7 @@ using osu.Game.Graphics;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Graphics.Containers;
 using osu.Game.Overlays.Dashboard.Friends;
+using osu.Game.Overlays.Settings;
 using osuTK;
 using osuTK.Graphics;
 
@@ -66,7 +67,7 @@ namespace osu.Game.Screens.Misskey
                                     Size = new Vector2(1000f),
                                     Children = new Drawable[]
                                     {
-                                        new OsuButton()
+                                        new SettingsButton()
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
@@ -74,7 +75,7 @@ namespace osu.Game.Screens.Misskey
                                             Text = "MisskeyInstanceSelect",
                                             Action = () => this.Push(new MisskeyInstanceSelect())
                                         },
-                                        new OsuButton()
+                                        new SettingsButton()
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
@@ -82,7 +83,7 @@ namespace osu.Game.Screens.Misskey
                                             Text = "Welcome",
                                             Action = () => this.Push(new Welcome())
                                         },
-                                        new OsuButton()
+                                        new SettingsButton()
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
@@ -90,7 +91,7 @@ namespace osu.Game.Screens.Misskey
                                             Text = "Components",
                                             Action = () => this.Push(new MisskeyComponents())
                                         },
-                                        new OsuButton()
+                                        new SettingsButton()
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
@@ -98,7 +99,7 @@ namespace osu.Game.Screens.Misskey
                                             Text = "MisskeyLogin",
                                             Action = () => this.Push(new MisskeyLogin())
                                         },
-                                        new OsuButton()
+                                        new SettingsButton()
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
@@ -106,7 +107,7 @@ namespace osu.Game.Screens.Misskey
                                             Text = "Timeline",
                                             Action = () => this.Push(new Timeline())
                                         },
-                                        new OsuButton()
+                                        new SettingsButton()
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,

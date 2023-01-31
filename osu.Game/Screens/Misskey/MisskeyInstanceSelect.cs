@@ -20,6 +20,7 @@ using osu.Game.Online.MisskeyAPI.Requests;
 using osu.Game.Online.MisskeyAPI.Requests.Responses;
 using osu.Game.Overlays;
 using osu.Game.Overlays.Notifications;
+using osu.Game.Overlays.Settings;
 using osuTK;
 using Meta = osu.Game.Online.MisskeyAPI.Requests.Meta;
 
@@ -91,7 +92,7 @@ namespace osu.Game.Screens.Misskey
                                 Anchor = Anchor.TopCentre,
                                 Text = "misskey.io"
                             },
-                            new OsuButton()
+                            new SettingsButton()
                             {
                                 Text = "Submit",
                                 Anchor = Anchor.Centre,

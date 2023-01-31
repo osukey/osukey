@@ -18,6 +18,7 @@ using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.Sprites;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Overlays;
+using osu.Game.Overlays.Settings;
 using osu.Game.Screens.Misskey.Components;
 using osu.Game.Screens.Select;
 using osuTK;
@@ -165,7 +166,7 @@ namespace osu.Game.Screens.Misskey
                                 {
                                     new Drawable[]
                                     {
-                                        new OsuButton()
+                                        new SettingsButton()
                                         {
                                             Name = "SignUpButton",
                                             Anchor = Anchor.TopCentre,
@@ -173,7 +174,7 @@ namespace osu.Game.Screens.Misskey
                                             Width = 100f,
                                             Text = "新規登録"
                                         },
-                                        new OsuButton()
+                                        new SettingsButton()
                                         {
                                             Name = "SignInButton",
                                             Anchor = Anchor.TopCentre,

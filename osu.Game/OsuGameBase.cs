@@ -362,9 +362,7 @@ namespace osu.Game
             base.Content.Add(metadataClient);
             base.Content.Add(soloStatisticsWatcher);
 
-            AddInternal(spectatorClient);
-            AddInternal(MultiplayerClient);
-            AddInternal(metadataClient);
+            base.Content.Add(rulesetConfigCache);
 
             PreviewTrackManager previewTrackManager;
             dependencies.Cache(previewTrackManager = new PreviewTrackManager(BeatmapManager.BeatmapTrackStore));
