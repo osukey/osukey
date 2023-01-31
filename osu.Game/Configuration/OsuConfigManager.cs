@@ -58,7 +58,11 @@ namespace osu.Game.Configuration
 
             SetDefault(OsuSetting.BeatmapListingCardSize, BeatmapCardSize.Normal);
 
+            SetDefault(OsuSetting.ProfileCoverExpanded, true);
+
             SetDefault(OsuSetting.ToolbarClockDisplayMode, ToolbarClockDisplayMode.Full);
+
+            SetDefault(OsuSetting.SongSelectBackgroundBlur, true);
 
             // Online settings
             SetDefault(OsuSetting.Username, string.Empty);
@@ -341,6 +345,7 @@ namespace osu.Game.Configuration
         ChatDisplayHeight,
         BeatmapListingCardSize,
         ToolbarClockDisplayMode,
+        SongSelectBackgroundBlur,
         Version,
         ShowFirstRunSetup,
         ShowConvertedBeatmaps,
@@ -377,6 +382,7 @@ namespace osu.Game.Configuration
         LastProcessedMetadataId,
         SafeAreaConsiderations,
         ComboColourNormalisationAmount,
+        ProfileCoverExpanded,
         MisskeyToken,
     }
 }
