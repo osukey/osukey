@@ -71,7 +71,7 @@ namespace osu.Game.Screens.Misskey
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
-                                            Size = new Vector2(500f, 50f),
+                                            Size = new Vector2(1f, 50f),
                                             Text = "MisskeyInstanceSelect",
                                             Action = () => this.Push(new MisskeyInstanceSelect())
                                         },
@@ -79,7 +79,7 @@ namespace osu.Game.Screens.Misskey
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
-                                            Size = new Vector2(500f, 50f),
+                                            Size = new Vector2(1f, 50f),
                                             Text = "Welcome",
                                             Action = () => this.Push(new Welcome())
                                         },
@@ -87,7 +87,7 @@ namespace osu.Game.Screens.Misskey
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
-                                            Size = new Vector2(500f, 50f),
+                                            Size = new Vector2(1f, 50f),
                                             Text = "Components",
                                             Action = () => this.Push(new MisskeyComponents())
                                         },
@@ -95,7 +95,7 @@ namespace osu.Game.Screens.Misskey
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
-                                            Size = new Vector2(500f, 50f),
+                                            Size = new Vector2(1f, 50f),
                                             Text = "MisskeyLogin",
                                             Action = () => this.Push(new MisskeyLogin())
                                         },
@@ -103,7 +103,7 @@ namespace osu.Game.Screens.Misskey
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
-                                            Size = new Vector2(500f, 50f),
+                                            Size = new Vector2(1f, 50f),
                                             Text = "Timeline",
                                             Action = () => this.Push(new Timeline())
                                         },
@@ -111,7 +111,7 @@ namespace osu.Game.Screens.Misskey
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
-                                            Size = new Vector2(500f, 50f),
+                                            Size = new Vector2(1f, 50f),
                                             Text = "MisskeyPost",
                                             Action = () => this.Push(new MisskeyPost())
                                         },
