@@ -1,14 +1,29 @@
-<p align="center">
-  <img width="500" alt="osu! logo" src="assets/lazer.png">
-</p>
+[//]: # (<p align="center">)
+
+[//]: # (  <img width="500" alt="osu! logo" src="assets/lazer.png">)
+
+[//]: # (</p>)
+
+# osukey(development)
+
+
+## osukey is a misskey client based on osu!lazer
+
+## !IMPORTANT!: osukey project is restarted! 
+**osukey is restarted, so old version is in old branch.**
+
 
 # osu!
 
-[![Build status](https://github.com/ppy/osu/actions/workflows/ci.yml/badge.svg?branch=master&event=push)](https://github.com/ppy/osu/actions/workflows/ci.yml)
-[![GitHub release](https://img.shields.io/github/release/ppy/osu.svg)](https://github.com/ppy/osu/releases/latest)
-[![CodeFactor](https://www.codefactor.io/repository/github/ppy/osu/badge)](https://www.codefactor.io/repository/github/ppy/osu)
-[![dev chat](https://discordapp.com/api/guilds/188630481301012481/widget.png?style=shield)](https://discord.gg/ppy)
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/osu-web/localized.svg)](https://crowdin.com/project/osu-web)
+[//]: # ([![Build status]&#40;https://github.com/ppy/osu/actions/workflows/ci.yml/badge.svg?branch=master&event=push&#41;]&#40;https://github.com/ppy/osu/actions/workflows/ci.yml&#41;)
+
+[//]: # ([![GitHub release]&#40;https://img.shields.io/github/release/ppy/osu.svg&#41;]&#40;https://github.com/ppy/osu/releases/latest&#41;)
+
+[//]: # ([![CodeFactor]&#40;https://www.codefactor.io/repository/github/ppy/osu/badge&#41;]&#40;https://www.codefactor.io/repository/github/ppy/osu&#41;)
+
+[//]: # ([![dev chat]&#40;https://discordapp.com/api/guilds/188630481301012481/widget.png?style=shield&#41;]&#40;https://discord.gg/ppy&#41;)
+
+[//]: # ([![Crowdin]&#40;https://d322cqt584bo4o.cloudfront.net/osu-web/localized.svg&#41;]&#40;https://crowdin.com/project/osu-web&#41;)
 
 A free-to-win rhythm game. Rhythm is just a *click* away!
 
